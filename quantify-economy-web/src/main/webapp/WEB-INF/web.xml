@@ -22,7 +22,7 @@
   	
   	<filter>  
         <filter-name>character</filter-name>  
-        <filter-class>com.flyonsky.quantify.filter.RequestCharacterEncodingFilter</filter-class>  
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
         <init-param>  
             <param-name>encoding</param-name>  
             <param-value>UTF-8</param-value>  
