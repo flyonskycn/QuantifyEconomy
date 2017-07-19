@@ -16,7 +16,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         ">
 
-	<context:property-placeholder location="classpath:wristband.properties,classpath:weixin.properties" ignore-unresolvable="true" />
+	<context:property-placeholder location="classpath:quantify.properties" ignore-unresolvable="true" />
 	
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" > 
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> 
