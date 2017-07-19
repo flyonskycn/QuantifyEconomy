@@ -40,21 +40,3 @@ captures/
 
 # project file
 /.settings
-/.project
-ActionEnter.java
-ConfigManager.java
-Encoder.java
-PathFormat.java
-ActionMap.java
-ActionState.java
-AppInfo.java
-BaseState.java
-FileType.java
-MIMEType.java
-MultiState.java
-State.java
-ImageHunter.java
-Base64Uploader.java
-BinaryUploader.java
-StorageManager.java
-Uploader.java
