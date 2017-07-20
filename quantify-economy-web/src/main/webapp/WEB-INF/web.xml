@@ -8,7 +8,7 @@
   	<!-- 配置spring资源 -->
   	<context-param>
 	  	<param-name>contextConfigLocation</param-name>
-	  	<param-value>classpath:applicationContext.xml,classpath:applicationContext-service.xml</param-value>
+	  	<param-value>classpath:applicationContext.xml</param-value>
   	</context-param>
   	
 	<!-- 配置spring -->
@@ -47,4 +47,10 @@
      	</init-param>
      	<load-on-startup>1</load-on-startup>
     </servlet> 
+    
+   	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.co</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

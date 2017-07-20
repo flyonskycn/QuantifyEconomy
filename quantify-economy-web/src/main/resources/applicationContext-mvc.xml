@@ -28,63 +28,35 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
 	    <property name="maxUploadSize" value="104857600" />  
 	</bean>
-	
+    
+    <bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+      	<property name="simpleDateFormat" value="yyyy-MM-dd HH:mm:ss" />
+    </bean>
 
-	<mvc:annotation-driven conversion-service="conversionService">  
-        <mvc:message-converters>  
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
-                <property name="objectMapper" ref="jsonObjectMapper"></property>  
-            </bean>  
-        </mvc:message-converters>  
-        <mvc:argument-resolvers>
-        	<bean class="com.coco.wristband.convert.QueryInfoResolver" />
-        </mvc:argument-resolvers>        
-    </mvc:annotation-driven>
+	<bean id="xmlMapper" parent="objectMapper">
+		<property name="createXmlMapper" value="true" />
+	</bean>
    
     <!-- 第二步： 创建convertion-Service ，并注入dateConvert-->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <ref bean="dateConvert"/>
-            </set>
+        <property name="formatters">
+        	<set>
+        		<bean class="com.flyonsky.quantify.format.DateFormat"></bean>
+        	</set>
         </property>
     </bean>
-    <!-- 第一步:  创建自定义日期转换规则 -->   
-    <bean id="dateConvert" class="com.coco.wristband.convert.DateConvert"/>
-     
-    <bean id="defDateFormat" class="java.text.SimpleDateFormat">
-    	<constructor-arg value="yyyy-MM-dd HH:mm:ss"></constructor-arg>
-    </bean>  
-     
-    <bean id="jsonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
-    	<property name="DateFormat" ref="defDateFormat"></property>
-    </bean>  
+	
+	<mvc:annotation-driven conversion-service="conversionService">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <property name="objectMapper" ref="objectMapper"/>
+	        </bean>
+	        <bean class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter">
+	            <property name="objectMapper" ref="xmlMapper"/>
+	        </bean>
+		</mvc:message-converters>
+    </mvc:annotation-driven>
     
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/page/**"/>
-			<mvc:mapping path="/paytest/pub*"/>
-			<mvc:mapping path="/pubv2/pub*"/>
-			<ref bean="loginInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/admin/**"/>
-			<mvc:exclude-mapping path="/admin/login.co"/>
-			<mvc:exclude-mapping path="/admin/chklogin.co"/>
-			<mvc:exclude-mapping path="/admin/invalid.co"/>
-			<mvc:exclude-mapping path="/admin/logout.co"/>
-			<ref bean="adminInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<ref bean="logInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	
-	<bean id="loginInterceptor" class="com.coco.wristband.interceptor.LoginInterceptor"></bean>
-	<bean id="adminInterceptor" class="com.coco.wristband.interceptor.AdminInterceptor"></bean>
-	<bean id="logInterceptor" class="com.coco.wristband.interceptor.LogInterceptor"></bean>
-	
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 	
 	<context:component-scan base-package="com.flyonsky.quantify.control" />
