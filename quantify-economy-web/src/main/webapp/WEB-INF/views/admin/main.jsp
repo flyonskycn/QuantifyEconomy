@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +26,25 @@
   	<!-- jQuery 2.2.0 -->
 	<script src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"></script>
 </head>
-<body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+<body class="hold-transition skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
 	<div class="wrapper" style="height: auto; min-height: 100%;">
 		<!-- Main header -->
 		<div class="main-header">
-		
+		    <!-- Logo -->
+		    <a href="main.co" class="logo">
+		      <!-- mini logo for sidebar mini 50x50 pixels -->
+		      <span class="logo-mini"><b>SKY</b></span>
+		      <!-- logo for regular state and mobile devices -->
+		      <span class="logo-lg"><b>FLYONSKY</b></span>
+		    </a>
+		    
+		    <!-- Header Navbar: style can be found in header.less -->
+    		<nav class="navbar navbar-static-top">
+    			<!-- Sidebar toggle button-->
+   				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        			<span class="sr-only">Toggle navigation</span>
+     	 		</a>
+    		</nav>
 		</div>
 		
 		<!-- Left side column. contains the logo and sidebar -->
@@ -44,9 +59,9 @@
   		
   		<footer class="main-footer">
   			<div class="pull-right hidden-xs">
-				<b>Version</b> 2.4.0
+				<b>Version</b> 4.0.0
     		</div>
-    		<strong>Copyright © 2014-2016 <a href="https://adminlte.io/">Almsaeed Studio</a>.</strong> All rights reserved.
+    		<strong>Copyright © 2014-2016 <a href="https://www.flyonskycn.com/">flyonsky</a>.</strong> All rights reserved.
 		</footer>
 		
 		<!-- The Right Sidebar -->
