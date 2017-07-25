@@ -206,5 +206,7 @@
   </properties>
   <modules>
   	<module>quantify-economy-web</module>
+  	<module>quantify-economy-service</module>
+  	<module>quantify-economy-dao</module>
   </modules>
 </project>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.AdminLogMapper" >
+  <resultMap id="BaseResultMap" type="com.flyonsky.quantify.entity.AdminLog" >
+    <id column="logid" property="logid" jdbcType="BIGINT" />
+    <result column="uId" property="uid" jdbcType="BIGINT" />
+    <result column="adminId" property="adminid" jdbcType="BIGINT" />
+    <result column="adminname" property="adminname" jdbcType="VARCHAR" />
+    <result column="opstart" property="opstart" jdbcType="TIMESTAMP" />
+    <result column="optime" property="optime" jdbcType="INTEGER" />
+    <result column="putitle" property="putitle" jdbcType="VARCHAR" />
+    <result column="utitle" property="utitle" jdbcType="VARCHAR" />
+    <result column="opcontent" property="opcontent" jdbcType="VARCHAR" />
+    <result column="opstatus" property="opstatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    logid, uId, adminId, adminname, opstart, optime, putitle, utitle, opcontent, opstatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.flyonsky.quantify.entity.AdminLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp_admin_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_admin_log
+    where logid = #{logid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cp_admin_log
+    where logid = #{logid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.flyonsky.quantify.entity.AdminLogExample" >
+    delete from cp_admin_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.flyonsky.quantify.entity.AdminLog" >
+    insert into cp_admin_log (logid, uId, adminId, 
+      adminname, opstart, optime, 
+      putitle, utitle, opcontent, 
+      opstatus)
+    values (#{logid,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{adminid,jdbcType=BIGINT}, 
+      #{adminname,jdbcType=VARCHAR}, #{opstart,jdbcType=TIMESTAMP}, #{optime,jdbcType=INTEGER}, 
+      #{putitle,jdbcType=VARCHAR}, #{utitle,jdbcType=VARCHAR}, #{opcontent,jdbcType=VARCHAR}, 
+      #{opstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyonsky.quantify.entity.AdminLog" >
+    insert into cp_admin_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="adminid != null" >
+        adminId,
+      </if>
+      <if test="adminname != null" >
+        adminname,
+      </if>
+      <if test="opstart != null" >
+        opstart,
+      </if>
+      <if test="optime != null" >
+        optime,
+      </if>
+      <if test="putitle != null" >
+        putitle,
+      </if>
+      <if test="utitle != null" >
+        utitle,
+      </if>
+      <if test="opcontent != null" >
+        opcontent,
+      </if>
+      <if test="opstatus != null" >
+        opstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=BIGINT},
+      </if>
+      <if test="adminname != null" >
+        #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="opstart != null" >
+        #{opstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=INTEGER},
+      </if>
+      <if test="putitle != null" >
+        #{putitle,jdbcType=VARCHAR},
+      </if>
+      <if test="utitle != null" >
+        #{utitle,jdbcType=VARCHAR},
+      </if>
+      <if test="opcontent != null" >
+        #{opcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="opstatus != null" >
+        #{opstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.flyonsky.quantify.entity.AdminLogExample" resultType="java.lang.Integer" >
+    select count(*) from cp_admin_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_admin_log
+    <set >
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uId = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminid != null" >
+        adminId = #{record.adminid,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminname != null" >
+        adminname = #{record.adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opstart != null" >
+        opstart = #{record.opstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.optime != null" >
+        optime = #{record.optime,jdbcType=INTEGER},
+      </if>
+      <if test="record.putitle != null" >
+        putitle = #{record.putitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.utitle != null" >
+        utitle = #{record.utitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opcontent != null" >
+        opcontent = #{record.opcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opstatus != null" >
+        opstatus = #{record.opstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_admin_log
+    set logid = #{record.logid,jdbcType=BIGINT},
+      uId = #{record.uid,jdbcType=BIGINT},
+      adminId = #{record.adminid,jdbcType=BIGINT},
+      adminname = #{record.adminname,jdbcType=VARCHAR},
+      opstart = #{record.opstart,jdbcType=TIMESTAMP},
+      optime = #{record.optime,jdbcType=INTEGER},
+      putitle = #{record.putitle,jdbcType=VARCHAR},
+      utitle = #{record.utitle,jdbcType=VARCHAR},
+      opcontent = #{record.opcontent,jdbcType=VARCHAR},
+      opstatus = #{record.opstatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyonsky.quantify.entity.AdminLog" >
+    update cp_admin_log
+    <set >
+      <if test="uid != null" >
+        uId = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="adminid != null" >
+        adminId = #{adminid,jdbcType=BIGINT},
+      </if>
+      <if test="adminname != null" >
+        adminname = #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="opstart != null" >
+        opstart = #{opstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="optime != null" >
+        optime = #{optime,jdbcType=INTEGER},
+      </if>
+      <if test="putitle != null" >
+        putitle = #{putitle,jdbcType=VARCHAR},
+      </if>
+      <if test="utitle != null" >
+        utitle = #{utitle,jdbcType=VARCHAR},
+      </if>
+      <if test="opcontent != null" >
+        opcontent = #{opcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="opstatus != null" >
+        opstatus = #{opstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where logid = #{logid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyonsky.quantify.entity.AdminLog" >
+    update cp_admin_log
+    set uId = #{uid,jdbcType=BIGINT},
+      adminId = #{adminid,jdbcType=BIGINT},
+      adminname = #{adminname,jdbcType=VARCHAR},
+      opstart = #{opstart,jdbcType=TIMESTAMP},
+      optime = #{optime,jdbcType=INTEGER},
+      putitle = #{putitle,jdbcType=VARCHAR},
+      utitle = #{utitle,jdbcType=VARCHAR},
+      opcontent = #{opcontent,jdbcType=VARCHAR},
+      opstatus = #{opstatus,jdbcType=VARCHAR}
+    where logid = #{logid,jdbcType=BIGINT}
+  </update>
+</mapper>

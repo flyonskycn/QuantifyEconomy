@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.AdminRoleUserMapper" >
+  <resultMap id="BaseResultMap" type="com.flyonsky.quantify.entity.AdminRoleUser" >
+    <id column="urid" property="urid" jdbcType="BIGINT" />
+    <result column="adminId" property="adminid" jdbcType="BIGINT" />
+    <result column="roleId" property="roleid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    urid, adminId, roleId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.flyonsky.quantify.entity.AdminRoleUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp_admin_role_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_admin_role_user
+    where urid = #{urid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cp_admin_role_user
+    where urid = #{urid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.flyonsky.quantify.entity.AdminRoleUserExample" >
+    delete from cp_admin_role_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.flyonsky.quantify.entity.AdminRoleUser" >
+    insert into cp_admin_role_user (urid, adminId, roleId
+      )
+    values (#{urid,jdbcType=BIGINT}, #{adminid,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyonsky.quantify.entity.AdminRoleUser" >
+    insert into cp_admin_role_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="urid != null" >
+        urid,
+      </if>
+      <if test="adminid != null" >
+        adminId,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="urid != null" >
+        #{urid,jdbcType=BIGINT},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.flyonsky.quantify.entity.AdminRoleUserExample" resultType="java.lang.Integer" >
+    select count(*) from cp_admin_role_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_admin_role_user
+    <set >
+      <if test="record.urid != null" >
+        urid = #{record.urid,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminid != null" >
+        adminId = #{record.adminid,jdbcType=BIGINT},
+      </if>
+      <if test="record.roleid != null" >
+        roleId = #{record.roleid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_admin_role_user
+    set urid = #{record.urid,jdbcType=BIGINT},
+      adminId = #{record.adminid,jdbcType=BIGINT},
+      roleId = #{record.roleid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyonsky.quantify.entity.AdminRoleUser" >
+    update cp_admin_role_user
+    <set >
+      <if test="adminid != null" >
+        adminId = #{adminid,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where urid = #{urid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyonsky.quantify.entity.AdminRoleUser" >
+    update cp_admin_role_user
+    set adminId = #{adminid,jdbcType=BIGINT},
+      roleId = #{roleid,jdbcType=BIGINT}
+    where urid = #{urid,jdbcType=BIGINT}
+  </update>
+</mapper>

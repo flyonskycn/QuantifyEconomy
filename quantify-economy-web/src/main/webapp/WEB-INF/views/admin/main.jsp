@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,16 +48,101 @@
         			<span class="sr-only">Toggle navigation</span>
      	 		</a>
     		</nav>
+    		
+ 		  <!-- Navbar Right Menu -->
+	      <div class="navbar-custom-menu">
+	        <ul class="nav navbar-nav">
+	          <!-- User Account: style can be found in dropdown.less -->
+	          <li class="dropdown user user-menu">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	              <img src="${user.headerpic }" class="user-image" alt="User Image">
+	              <span class="hidden-xs">${user.admindesc!=null?user.admindesc:user.adminName }</span>
+	            </a>
+	            <ul class="dropdown-menu">
+	              <!-- User image -->
+	              <li class="user-header">
+	                <img src="${user.headerpic }" class="img-circle" alt="User Image">
+					<p>
+	                  	<small>上一次登录：<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${user.logintime}"/></small>
+	                </p>
+	                <p>
+	                	<small>登录地点：${user.location}</small>
+	                </p>
+	              </li>
+	              <!-- Menu Footer-->
+	              <li class="user-footer">
+	                <div class="pull-left">
+	                  <a href="updatePwd.co" class="btn btn-default btn-flat" id="updatePwd" title="修改密码">修改密码</a>
+	                </div>
+	                <div class="pull-right">
+	                  <a href="logout.co" class="btn btn-default btn-flat">退出系统</a>
+	                </div>
+	              </li>
+	            </ul>
+	          </li>
+	
+	        </ul>
+	      </div>
+      
 		</div>
 		
 		<!-- Left side column. contains the logo and sidebar -->
 		<aside class="main-sidebar">
-			
+			<!-- sidebar: style can be found in sidebar.less -->
+		    <section class="sidebar">
+		      <!-- Sidebar user panel -->
+		      <div class="user-panel">
+		        <div class="pull-left image">
+		          <img src="${user.headerpic }" class="img-circle" alt="User Image">
+		        </div>
+		        <div class="pull-left info">
+		          <p>${user.nickname!=null?user.nickname:user.adminName }</p>
+		          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+		        </div>
+		      </div>
+		      <!-- search form -->
+		      <form action="#" method="get" class="sidebar-form">
+		        <div class="input-group">
+		          <input type="text" id="q" name="q" class="form-control" placeholder="菜单名称...">
+		              <span class="input-group-btn">
+		                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+		                </button>
+		              </span>
+		        </div>
+		      </form>
+		      <!-- /.search form -->
+		      <!-- sidebar menu: : style can be found in sidebar.less -->
+		      <ul class="sidebar-menu">
+		        <li class="headerx"> 
+			        <a href="/admin/index.co" target="contentfrm">
+			        	<i class="fa fa-home"></i><span>首页</span>
+			        </a>
+		        </li>
+		        <c:forEach items="${tree.childrens }" var="item" varStatus="var">        
+		        <li class="<c:if test="${var.first }">active</c:if> treeview">
+		          <a href="#">
+		            <i class="fa ${item.value.ucsscls }"></i> <span>${item.value.utitle }</span> 
+		            <i class="fa fa-angle-left pull-right"></i>
+		            <small class="label pull-right bg-green ">${fn:length(item.childrens) }</small>
+		          </a>
+		          <ul class="treeview-menu">
+		          	<c:forEach items="${item.childrens }" var="item2" varStatus="var2">  
+		            <li><a href="${item2.value.url}" title="${item2.value.utitle}" value="${item2.value.url}" ${ item2.value.uname}>
+		            <i class="fa fa-circle-o ${item2.value.ucsscls }"></i> ${item2.value.utitle }
+		            <c:if test="${var2.last }"> <small class="label pull-right bg-green">new</small></c:if>
+		            </a></li>
+		            </c:forEach>
+		          </ul>
+		        </li>
+		        </c:forEach>
+		      </ul>
+		    </section>
+		    <!-- /.sidebar -->
 		</aside>
 		
 		<!-- Content Wrapper. Contains page content -->
   		<div class="content-wrapper" style="min-height: 916px;">
-  			
+  			<iframe src="/admin/index.co" class="contentfrm tab-pane fade in active" id="contentfrm" frameborder="0" name="contentfrm" style="width:100%;height:650px;"></iframe>
   		</div>
   		
   		<footer class="main-footer">
@@ -90,5 +178,6 @@
 	<!-- ChartJS 1.0.1 -->
 	<script src="<s:url value="/" />ext/chartjs/Chart.min.js"></script>
 	<script type="text/javascript" src="<s:url value="/" />ext/jquery.toaster.js"> </script>
+	<script src="<s:url value="/" />js/main.js"></script>
 </body>
 </html>

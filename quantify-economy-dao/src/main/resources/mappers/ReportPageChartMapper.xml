@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.ReportPageChartMapper" >
+  <resultMap id="BaseResultMap" type="com.flyonsky.quantify.entity.ReportPageChart" >
+    <id column="pcid" property="pcid" jdbcType="BIGINT" />
+    <result column="chartid" property="chartid" jdbcType="INTEGER" />
+    <result column="pageid" property="pageid" jdbcType="INTEGER" />
+    <result column="sortid" property="sortid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pcid, chartid, pageid, sortid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.flyonsky.quantify.entity.ReportPageChartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp_report_pagechart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_report_pagechart
+    where pcid = #{pcid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cp_report_pagechart
+    where pcid = #{pcid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.flyonsky.quantify.entity.ReportPageChartExample" >
+    delete from cp_report_pagechart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.flyonsky.quantify.entity.ReportPageChart" >
+    insert into cp_report_pagechart (pcid, chartid, pageid, 
+      sortid)
+    values (#{pcid,jdbcType=BIGINT}, #{chartid,jdbcType=INTEGER}, #{pageid,jdbcType=INTEGER}, 
+      #{sortid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyonsky.quantify.entity.ReportPageChart" >
+    insert into cp_report_pagechart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pcid != null" >
+        pcid,
+      </if>
+      <if test="chartid != null" >
+        chartid,
+      </if>
+      <if test="pageid != null" >
+        pageid,
+      </if>
+      <if test="sortid != null" >
+        sortid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pcid != null" >
+        #{pcid,jdbcType=BIGINT},
+      </if>
+      <if test="chartid != null" >
+        #{chartid,jdbcType=INTEGER},
+      </if>
+      <if test="pageid != null" >
+        #{pageid,jdbcType=INTEGER},
+      </if>
+      <if test="sortid != null" >
+        #{sortid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.flyonsky.quantify.entity.ReportPageChartExample" resultType="java.lang.Integer" >
+    select count(*) from cp_report_pagechart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_report_pagechart
+    <set >
+      <if test="record.pcid != null" >
+        pcid = #{record.pcid,jdbcType=BIGINT},
+      </if>
+      <if test="record.chartid != null" >
+        chartid = #{record.chartid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pageid != null" >
+        pageid = #{record.pageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortid != null" >
+        sortid = #{record.sortid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_report_pagechart
+    set pcid = #{record.pcid,jdbcType=BIGINT},
+      chartid = #{record.chartid,jdbcType=INTEGER},
+      pageid = #{record.pageid,jdbcType=INTEGER},
+      sortid = #{record.sortid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyonsky.quantify.entity.ReportPageChart" >
+    update cp_report_pagechart
+    <set >
+      <if test="chartid != null" >
+        chartid = #{chartid,jdbcType=INTEGER},
+      </if>
+      <if test="pageid != null" >
+        pageid = #{pageid,jdbcType=INTEGER},
+      </if>
+      <if test="sortid != null" >
+        sortid = #{sortid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pcid = #{pcid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyonsky.quantify.entity.ReportPageChart" >
+    update cp_report_pagechart
+    set chartid = #{chartid,jdbcType=INTEGER},
+      pageid = #{pageid,jdbcType=INTEGER},
+      sortid = #{sortid,jdbcType=INTEGER}
+    where pcid = #{pcid,jdbcType=BIGINT}
+  </update>
+</mapper>

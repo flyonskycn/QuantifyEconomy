@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.ConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.flyonsky.quantify.entity.Config" >
+    <id column="cfgkey" property="cfgkey" jdbcType="VARCHAR" />
+    <result column="cfgpkey" property="cfgpkey" jdbcType="VARCHAR" />
+    <result column="cfgname" property="cfgname" jdbcType="VARCHAR" />
+    <result column="cfgvalue" property="cfgvalue" jdbcType="VARCHAR" />
+    <result column="cfgtype" property="cfgtype" jdbcType="VARCHAR" />
+    <result column="cfgdesc" property="cfgdesc" jdbcType="VARCHAR" />
+    <result column="cfgregex" property="cfgregex" jdbcType="VARCHAR" />
+    <result column="cfglist" property="cfglist" jdbcType="VARCHAR" />
+    <result column="cfgsort" property="cfgsort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cfgkey, cfgpkey, cfgname, cfgvalue, cfgtype, cfgdesc, cfgregex, cfglist, cfgsort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.flyonsky.quantify.entity.ConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_config
+    where cfgkey = #{cfgkey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cp_config
+    where cfgkey = #{cfgkey,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.flyonsky.quantify.entity.ConfigExample" >
+    delete from cp_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.flyonsky.quantify.entity.Config" >
+    insert into cp_config (cfgkey, cfgpkey, cfgname, 
+      cfgvalue, cfgtype, cfgdesc, 
+      cfgregex, cfglist, cfgsort
+      )
+    values (#{cfgkey,jdbcType=VARCHAR}, #{cfgpkey,jdbcType=VARCHAR}, #{cfgname,jdbcType=VARCHAR}, 
+      #{cfgvalue,jdbcType=VARCHAR}, #{cfgtype,jdbcType=VARCHAR}, #{cfgdesc,jdbcType=VARCHAR}, 
+      #{cfgregex,jdbcType=VARCHAR}, #{cfglist,jdbcType=VARCHAR}, #{cfgsort,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyonsky.quantify.entity.Config" >
+    insert into cp_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cfgkey != null" >
+        cfgkey,
+      </if>
+      <if test="cfgpkey != null" >
+        cfgpkey,
+      </if>
+      <if test="cfgname != null" >
+        cfgname,
+      </if>
+      <if test="cfgvalue != null" >
+        cfgvalue,
+      </if>
+      <if test="cfgtype != null" >
+        cfgtype,
+      </if>
+      <if test="cfgdesc != null" >
+        cfgdesc,
+      </if>
+      <if test="cfgregex != null" >
+        cfgregex,
+      </if>
+      <if test="cfglist != null" >
+        cfglist,
+      </if>
+      <if test="cfgsort != null" >
+        cfgsort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cfgkey != null" >
+        #{cfgkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgpkey != null" >
+        #{cfgpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgname != null" >
+        #{cfgname,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgvalue != null" >
+        #{cfgvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgtype != null" >
+        #{cfgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgdesc != null" >
+        #{cfgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgregex != null" >
+        #{cfgregex,jdbcType=VARCHAR},
+      </if>
+      <if test="cfglist != null" >
+        #{cfglist,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgsort != null" >
+        #{cfgsort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.flyonsky.quantify.entity.ConfigExample" resultType="java.lang.Integer" >
+    select count(*) from cp_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_config
+    <set >
+      <if test="record.cfgkey != null" >
+        cfgkey = #{record.cfgkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgpkey != null" >
+        cfgpkey = #{record.cfgpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgname != null" >
+        cfgname = #{record.cfgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgvalue != null" >
+        cfgvalue = #{record.cfgvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgtype != null" >
+        cfgtype = #{record.cfgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgdesc != null" >
+        cfgdesc = #{record.cfgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgregex != null" >
+        cfgregex = #{record.cfgregex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfglist != null" >
+        cfglist = #{record.cfglist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgsort != null" >
+        cfgsort = #{record.cfgsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_config
+    set cfgkey = #{record.cfgkey,jdbcType=VARCHAR},
+      cfgpkey = #{record.cfgpkey,jdbcType=VARCHAR},
+      cfgname = #{record.cfgname,jdbcType=VARCHAR},
+      cfgvalue = #{record.cfgvalue,jdbcType=VARCHAR},
+      cfgtype = #{record.cfgtype,jdbcType=VARCHAR},
+      cfgdesc = #{record.cfgdesc,jdbcType=VARCHAR},
+      cfgregex = #{record.cfgregex,jdbcType=VARCHAR},
+      cfglist = #{record.cfglist,jdbcType=VARCHAR},
+      cfgsort = #{record.cfgsort,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyonsky.quantify.entity.Config" >
+    update cp_config
+    <set >
+      <if test="cfgpkey != null" >
+        cfgpkey = #{cfgpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgname != null" >
+        cfgname = #{cfgname,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgvalue != null" >
+        cfgvalue = #{cfgvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgtype != null" >
+        cfgtype = #{cfgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgdesc != null" >
+        cfgdesc = #{cfgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgregex != null" >
+        cfgregex = #{cfgregex,jdbcType=VARCHAR},
+      </if>
+      <if test="cfglist != null" >
+        cfglist = #{cfglist,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgsort != null" >
+        cfgsort = #{cfgsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cfgkey = #{cfgkey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyonsky.quantify.entity.Config" >
+    update cp_config
+    set cfgpkey = #{cfgpkey,jdbcType=VARCHAR},
+      cfgname = #{cfgname,jdbcType=VARCHAR},
+      cfgvalue = #{cfgvalue,jdbcType=VARCHAR},
+      cfgtype = #{cfgtype,jdbcType=VARCHAR},
+      cfgdesc = #{cfgdesc,jdbcType=VARCHAR},
+      cfgregex = #{cfgregex,jdbcType=VARCHAR},
+      cfglist = #{cfglist,jdbcType=VARCHAR},
+      cfgsort = #{cfgsort,jdbcType=INTEGER}
+    where cfgkey = #{cfgkey,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.AdminUserMapper" >
+  <resultMap id="BaseResultMap" type="com.flyonsky.quantify.entity.AdminUser" >
+    <id column="adminId" property="adminid" jdbcType="BIGINT" />
+    <result column="adminEmail" property="adminemail" jdbcType="VARCHAR" />
+    <result column="adminPwd" property="adminpwd" jdbcType="VARCHAR" />
+    <result column="adminName" property="adminname" jdbcType="VARCHAR" />
+    <result column="headerpic" property="headerpic" jdbcType="VARCHAR" />
+    <result column="admindesc" property="admindesc" jdbcType="VARCHAR" />
+    <result column="adminJoin" property="adminjoin" jdbcType="TIMESTAMP" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    adminId, adminEmail, adminPwd, adminName, headerpic, admindesc, adminJoin, loginTime, 
+    location
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.flyonsky.quantify.entity.AdminUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp_admin_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_admin_user
+    where adminId = #{adminid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cp_admin_user
+    where adminId = #{adminid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.flyonsky.quantify.entity.AdminUserExample" >
+    delete from cp_admin_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.flyonsky.quantify.entity.AdminUser" >
+    insert into cp_admin_user (adminId, adminEmail, adminPwd, 
+      adminName, headerpic, admindesc, 
+      adminJoin, loginTime, location
+      )
+    values (#{adminid,jdbcType=BIGINT}, #{adminemail,jdbcType=VARCHAR}, #{adminpwd,jdbcType=VARCHAR}, 
+      #{adminname,jdbcType=VARCHAR}, #{headerpic,jdbcType=VARCHAR}, #{admindesc,jdbcType=VARCHAR}, 
+      #{adminjoin,jdbcType=TIMESTAMP}, #{logintime,jdbcType=TIMESTAMP}, #{location,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyonsky.quantify.entity.AdminUser" >
+    insert into cp_admin_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminid != null" >
+        adminId,
+      </if>
+      <if test="adminemail != null" >
+        adminEmail,
+      </if>
+      <if test="adminpwd != null" >
+        adminPwd,
+      </if>
+      <if test="adminname != null" >
+        adminName,
+      </if>
+      <if test="headerpic != null" >
+        headerpic,
+      </if>
+      <if test="admindesc != null" >
+        admindesc,
+      </if>
+      <if test="adminjoin != null" >
+        adminJoin,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminid != null" >
+        #{adminid,jdbcType=BIGINT},
+      </if>
+      <if test="adminemail != null" >
+        #{adminemail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminpwd != null" >
+        #{adminpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="adminname != null" >
+        #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerpic != null" >
+        #{headerpic,jdbcType=VARCHAR},
+      </if>
+      <if test="admindesc != null" >
+        #{admindesc,jdbcType=VARCHAR},
+      </if>
+      <if test="adminjoin != null" >
+        #{adminjoin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.flyonsky.quantify.entity.AdminUserExample" resultType="java.lang.Integer" >
+    select count(*) from cp_admin_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_admin_user
+    <set >
+      <if test="record.adminid != null" >
+        adminId = #{record.adminid,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminemail != null" >
+        adminEmail = #{record.adminemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminpwd != null" >
+        adminPwd = #{record.adminpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminname != null" >
+        adminName = #{record.adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerpic != null" >
+        headerpic = #{record.headerpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admindesc != null" >
+        admindesc = #{record.admindesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminjoin != null" >
+        adminJoin = #{record.adminjoin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logintime != null" >
+        loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_admin_user
+    set adminId = #{record.adminid,jdbcType=BIGINT},
+      adminEmail = #{record.adminemail,jdbcType=VARCHAR},
+      adminPwd = #{record.adminpwd,jdbcType=VARCHAR},
+      adminName = #{record.adminname,jdbcType=VARCHAR},
+      headerpic = #{record.headerpic,jdbcType=VARCHAR},
+      admindesc = #{record.admindesc,jdbcType=VARCHAR},
+      adminJoin = #{record.adminjoin,jdbcType=TIMESTAMP},
+      loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      location = #{record.location,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyonsky.quantify.entity.AdminUser" >
+    update cp_admin_user
+    <set >
+      <if test="adminemail != null" >
+        adminEmail = #{adminemail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminpwd != null" >
+        adminPwd = #{adminpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="adminname != null" >
+        adminName = #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerpic != null" >
+        headerpic = #{headerpic,jdbcType=VARCHAR},
+      </if>
+      <if test="admindesc != null" >
+        admindesc = #{admindesc,jdbcType=VARCHAR},
+      </if>
+      <if test="adminjoin != null" >
+        adminJoin = #{adminjoin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where adminId = #{adminid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyonsky.quantify.entity.AdminUser" >
+    update cp_admin_user
+    set adminEmail = #{adminemail,jdbcType=VARCHAR},
+      adminPwd = #{adminpwd,jdbcType=VARCHAR},
+      adminName = #{adminname,jdbcType=VARCHAR},
+      headerpic = #{headerpic,jdbcType=VARCHAR},
+      admindesc = #{admindesc,jdbcType=VARCHAR},
+      adminJoin = #{adminjoin,jdbcType=TIMESTAMP},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      location = #{location,jdbcType=VARCHAR}
+    where adminId = #{adminid,jdbcType=BIGINT}
+  </update>
+</mapper>
