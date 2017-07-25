@@ -33,13 +33,6 @@ public interface AdminService {
 	VAdminUser getAdminUser(Long adminId);
 	
 	/**
-	 * 通过用户ID获取管理员用户信息
-	 * @param userid 用户ID
-	 * @return
-	 */
-	VAdminUser getAdminUserByUserid(Long userid);
-	
-	/**
 	 * 通过管理员用户名获取管理员用户信息
 	 * @param adminName 管理员用户名获
 	 * @return

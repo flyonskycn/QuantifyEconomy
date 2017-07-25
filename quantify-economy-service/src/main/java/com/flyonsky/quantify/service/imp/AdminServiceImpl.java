@@ -120,18 +120,6 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return list.size()>0?list.get(0):null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminUserByUserid(java.lang.Long)
-	 */
-	@Override
-	public VAdminUser getAdminUserByUserid(Long userid) {
-		VAdminUserExample example=new VAdminUserExample();
-		example.createCriteria().andUseridEqualTo(userid);
-		List<VAdminUser> list=vauMapper.selectByExample(example);
-		return list.size()>0?list.get(0):null;
-	}
-	
-
 	@Override
 	public VAdminUser getAdminUser(String adminName) {
 		VAdminUserExample example=new VAdminUserExample();
@@ -202,11 +190,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		VAdminUserExample example=new VAdminUserExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(vauMapper.countByExample(example));
+		grid.setTotalRows(vauMapper.countByExample(example));
 		
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(vauMapper.selectByExample(example));
+		grid.setPageData(vauMapper.selectByExample(example));
 		return grid;
 	}
 
@@ -219,11 +207,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		AdminRoleExample example=new AdminRoleExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(arMapper.countByExample(example));
+		grid.setTotalRows(arMapper.countByExample(example));
 		
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(arMapper.selectByExample(example));
+		grid.setPageData(arMapper.selectByExample(example));
 		return grid;
 	}
 
@@ -236,11 +224,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		AdminUrlExample example=new AdminUrlExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(auMapper.countByExample(example));
+		grid.setTotalRows(auMapper.countByExample(example));
 		
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(auMapper.selectByExample(example));
+		grid.setPageData(auMapper.selectByExample(example));
 		return grid;
 	}
 
@@ -253,11 +241,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		VAdminRoleUserExample example=new VAdminRoleUserExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(varuMapper.countByExample(example));
+		grid.setTotalRows(varuMapper.countByExample(example));
 		
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(varuMapper.selectByExample(example));
+		grid.setPageData(varuMapper.selectByExample(example));
 		return grid;
 	}
 
@@ -270,11 +258,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		AdminRoleUrlExample example=new AdminRoleUrlExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(arurlMapper.countByExample(example));
+		grid.setTotalRows(arurlMapper.countByExample(example));
 		
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(arurlMapper.selectByExample(example));
+		grid.setPageData(arurlMapper.selectByExample(example));
 		return grid;
 	}
 
@@ -287,10 +275,10 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		VAdminUserUrlExample example=new VAdminUserUrlExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(vauuMapper.countByExample(example));
+		grid.setTotalRows(vauuMapper.countByExample(example));
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(vauuMapper.selectByExample(example));
+		grid.setPageData(vauuMapper.selectByExample(example));
 		return grid;
 	}
 
@@ -304,10 +292,6 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		if(user.getAdminname()==null 
 				|| user.getAdminname().isEmpty()){
 			throw new ServiceException(90, "管理用户名不能为空");
-		}
-		
-		if(user.getUserid()!=null && userMapper.selectByPrimaryKey(user.getUserid())==null){
-			throw new ServiceException(98, "前端用户ID不存在");
 		}
 		
 		AdminUserExample example=new AdminUserExample();
@@ -343,7 +327,6 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 			}
 			old.setAdminname(user.getAdminname());
 			old.setAdminemail(user.getAdminemail());
-			old.setUserid(user.getUserid());
 			if(user.getAdminpwd()!=null 
 					&& !user.getAdminpwd().isEmpty()){
 				// 加密存储密码
@@ -456,10 +439,10 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		AdminLogExample example=new AdminLogExample();
 		example.setOrderByClause(query.getOrderByClause());
 		example.setCustomWhere(query.getQueryFilter());
-		grid.setTotal_rows(logMapper.countByExample(example));
+		grid.setTotalRows(logMapper.countByExample(example));
 		example.setLimitStart(query.getPage()*query.getPageSize());
 		example.setLimitEnd(query.getPageSize());
-		grid.setPage_data(logMapper.selectByExample(example));
+		grid.setPageData(logMapper.selectByExample(example));
 		return grid;
 	}
 

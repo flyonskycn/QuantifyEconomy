@@ -41,6 +41,9 @@
         </if>
       </foreach>
     </where>
+    <if test="customWhere != null" >
+       #{customWhere} 
+    </if>
   </sql>
   <sql id="Update_By_Example_Where_Clause" >
     <where >
@@ -70,6 +73,9 @@
         </if>
       </foreach>
     </where>
+    <if test="customWhere != null" >
+       #{customWhere} 
+    </if>
   </sql>
   <sql id="Base_Column_List" >
     uId, url, uName, uTitle, uParentId, uType, uCsscls, roleId, roleName, ruId

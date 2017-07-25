@@ -10,6 +10,8 @@ public class VAdminRoleAllUrlExample {
 
     protected List<Criteria> oredCriteria;
 
+    protected String customWhere;
+
     protected Integer limitStart;
 
     protected Integer limitEnd;
@@ -65,6 +67,14 @@ public class VAdminRoleAllUrlExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setCustomWhere(String customWhere) {
+        this.customWhere=customWhere;
+    }
+
+    public String getCustomWhere() {
+        return customWhere;
     }
 
     public void setLimitStart(Integer limitStart) {

@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 /**
  * 表格列头类型
- * @author andy
- * @date 2016年7月26日
+ * @author luowg
+ * @date 2017年7月25日
  */
 public class GridHeader  implements Serializable {
 
@@ -20,7 +20,21 @@ public class GridHeader  implements Serializable {
 	 */
 	private static final long serialVersionUID = -3003331656424476611L;
 
-
+	//{field: "devid", header: "设备序号", visible: "yes"},
+	/**
+	 * 字段名
+	 */
+	private String field;
+	
+	/**
+	 * 字段头名称
+	 */
+	private String header;
+	
+	/**
+	 * 字段可见性：yes|no
+	 */
+	private String visible;
 
 	/**
 	 * @return the field
@@ -63,20 +77,4 @@ public class GridHeader  implements Serializable {
 	public void setVisible(String visible) {
 		this.visible = visible;
 	}
-
-	//{field: "devid", header: "设备序号", visible: "yes"},
-	/**
-	 * 字段名
-	 */
-	String field;
-	
-	/**
-	 * 字段头名称
-	 */
-	String header;
-	
-	/**
-	 * 字段可见性：yes|no
-	 */
-	String visible;
 }

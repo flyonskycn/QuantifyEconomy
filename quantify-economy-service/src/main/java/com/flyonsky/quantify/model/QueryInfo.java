@@ -3,8 +3,8 @@ package com.flyonsky.quantify.model;
 
 /**
  * 基础查询信息
- * @author andy
- * @date 2016年5月9日
+ * @author luowg
+ * @date 2017年7月25日
  */
 public class QueryInfo {
 
