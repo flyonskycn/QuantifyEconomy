@@ -208,5 +208,6 @@
   	<module>quantify-economy-web</module>
   	<module>quantify-economy-service</module>
   	<module>quantify-economy-dao</module>
+  	<module>quantify-economy-util</module>
   </modules>
 </project>
