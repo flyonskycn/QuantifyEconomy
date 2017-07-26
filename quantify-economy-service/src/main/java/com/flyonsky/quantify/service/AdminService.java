@@ -20,8 +20,8 @@ import com.flyonsky.quantify.model.QueryInfo;
 
 /**
  * 管理基础接口服务
- * @author andy
- * @date 2016年5月20日
+ * @author luowg
+ * @date 2017年7月26日
  */
 public interface AdminService {
 

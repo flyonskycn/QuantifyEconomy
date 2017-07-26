@@ -9,7 +9,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>量化经济</title>
+	<title>量化</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.6 -->
@@ -47,42 +47,50 @@
    				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         			<span class="sr-only">Toggle navigation</span>
      	 		</a>
+     	 		
+     	 		<div class="nav navbar-nav">
+		      		<ul class="nav nav-tabs my-tabs" style="margin-top:10px">
+						<li class="active"><a href="#contentfrm" data-toggle="tab">
+							首页</a>
+						</li>
+					</ul>
+		      	</div>
+     	 		
+     	 		<!-- Navbar Right Menu -->
+     	 		<div class="navbar-custom-menu">
+			        <ul class="nav navbar-nav">
+			          <!-- User Account: style can be found in dropdown.less -->
+			          <li class="dropdown user user-menu">
+			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			              <img src="${user.headerpic }" class="user-image" alt="User Image">
+			              <span class="hidden-xs">${user.admindesc!=null?user.admindesc:user.adminName }</span>
+			            </a>
+			            <ul class="dropdown-menu">
+			              <!-- User image -->
+			              <li class="user-header">
+			                <img src="${user.headerpic }" class="img-circle" alt="User Image">
+							<p>
+			                  	<small>上一次登录：<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${user.logintime}"/></small>
+			                </p>
+			                <p>
+			                	<small>登录地点：${user.location}</small>
+			                </p>
+			              </li>
+			              <!-- Menu Footer-->
+			              <li class="user-footer">
+			                <div class="pull-left">
+			                  <a href="updatePwd.co" class="btn btn-default btn-flat" id="updatePwd" title="修改密码">修改密码</a>
+			                </div>
+			                <div class="pull-right">
+			                  <a href="logout.co" class="btn btn-default btn-flat">退出系统</a>
+			                </div>
+			              </li>
+			            </ul>
+			          </li>
+			
+			        </ul>
+		        </div>
     		</nav>
-    		
- 		  <!-- Navbar Right Menu -->
-	      <div class="navbar-custom-menu">
-	        <ul class="nav navbar-nav">
-	          <!-- User Account: style can be found in dropdown.less -->
-	          <li class="dropdown user user-menu">
-	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	              <img src="${user.headerpic }" class="user-image" alt="User Image">
-	              <span class="hidden-xs">${user.admindesc!=null?user.admindesc:user.adminName }</span>
-	            </a>
-	            <ul class="dropdown-menu">
-	              <!-- User image -->
-	              <li class="user-header">
-	                <img src="${user.headerpic }" class="img-circle" alt="User Image">
-					<p>
-	                  	<small>上一次登录：<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${user.logintime}"/></small>
-	                </p>
-	                <p>
-	                	<small>登录地点：${user.location}</small>
-	                </p>
-	              </li>
-	              <!-- Menu Footer-->
-	              <li class="user-footer">
-	                <div class="pull-left">
-	                  <a href="updatePwd.co" class="btn btn-default btn-flat" id="updatePwd" title="修改密码">修改密码</a>
-	                </div>
-	                <div class="pull-right">
-	                  <a href="logout.co" class="btn btn-default btn-flat">退出系统</a>
-	                </div>
-	              </li>
-	            </ul>
-	          </li>
-	
-	        </ul>
-	      </div>
       
 		</div>
 		
@@ -96,7 +104,7 @@
 		          <img src="${user.headerpic }" class="img-circle" alt="User Image">
 		        </div>
 		        <div class="pull-left info">
-		          <p>${user.nickname!=null?user.nickname:user.adminName }</p>
+		          <p>${user.admindesc!=null?user.admindesc:user.adminName }</p>
 		          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 		        </div>
 		      </div>
@@ -141,7 +149,7 @@
 		</aside>
 		
 		<!-- Content Wrapper. Contains page content -->
-  		<div class="content-wrapper" style="min-height: 916px;">
+  		<div class="content-wrapper tab-content" style="min-height: 916px;">
   			<iframe src="/admin/index.co" class="contentfrm tab-pane fade in active" id="contentfrm" frameborder="0" name="contentfrm" style="width:100%;height:650px;"></iframe>
   		</div>
   		

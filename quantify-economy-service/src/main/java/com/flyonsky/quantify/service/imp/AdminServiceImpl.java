@@ -66,8 +66,8 @@ import com.flyonsky.quantify.util.MDEncode;
 import net.sf.json.JSONObject;
 
 /**
- * @author andy
- * @date 2016年5月25日
+ * @author luowg
+ * @date 2017年7月26日
  */
 @Service
 public class AdminServiceImpl extends AbstractService implements AdminService {

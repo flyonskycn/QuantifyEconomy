@@ -7,7 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -36,17 +35,15 @@ import com.flyonsky.quantify.util.MDEncode;
 
 /**
  * 管理框架
- * @author andy
- * @date 2016年5月25日
+ * @author luowg
+ * @date 2017年7月26日
  */
 @Controller
-@RequestMapping(AdminController.path)
-@SessionAttributes({AdminController.adminKey,AdminController.adminUrlKey})
-public class AdminController {
-	public final static String path="admin";
+@RequestMapping(AdminController.PATH)
+@SessionAttributes({AbstractAdminController.ADMINKEY,AbstractAdminController.ADMINURLKEY})
+public class AdminController extends AbstractAdminController{
 	
-	public final static String adminKey="adminUser";
-	public final static String adminUrlKey="adminUrl";
+	public final static String PATH = "admin";
 	
 	@Autowired
 	private AdminService admin;
@@ -65,6 +62,8 @@ public class AdminController {
 	        "REMOTE_ADDR",
 	        "X-Real-IP"
 	 };
+	
+	
 	/**
 	 * 登录页面
 	 * @param model
@@ -74,33 +73,30 @@ public class AdminController {
 	public String login(Model model,HttpSession session,HttpServletRequest request,
 			String url,
 			@CookieValue(value="remember",required=false) String remember){	
-		VAdminUser user=(VAdminUser) session.getAttribute(adminKey);
+		VAdminUser user=(VAdminUser) session.getAttribute(ADMINKEY);
 		if(user!=null){
-			
 			return "redirect:main.co";
 		}
 		if(remember!=null && remember.contains(":")){
 			String[] arr=remember.split(":");
 			Long adminId=Long.parseLong(arr[0]);
-			//String encode=arr[1];
 			user=admin.getAdminUser(adminId);
 			if(user!=null){
 				String encode=MDEncode.md5Encode(user.getAdminjoin().getTime() +"\n"+ user.getAdminpwd());
 				if(encode.equals(arr[1])){
-					model.addAttribute(adminKey, user);
+					model.addAttribute(ADMINKEY, user);
 					String ip=getClientIpAddress(request);
 					admin.updateUserLogin(user,ip);
 					adminLog(user,"自动登录","成功");
 					
 					List<VAdminUserUrl> urls=admin.getAdminUserUrls(user.getAdminid());					
 					CTree<Long, VAdminUserUrl> tree = loadTree(urls);
-					model.addAttribute(adminUrlKey, tree);
+					model.addAttribute(ADMINURLKEY, tree);
 					if(url!=null && !url.isEmpty()){
 						try {
 							return "redirect:"+URLDecoder.decode(url, "utf-8");
 						} catch (UnsupportedEncodingException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							LOG.error(e.getMessage());
 						}
 					}
 					return "redirect:main.co";
@@ -108,7 +104,7 @@ public class AdminController {
 			}
 		}
 		
-		return path+"/login";
+		return PATH+"/login";
 	}
 	
 	/**
@@ -141,7 +137,6 @@ public class AdminController {
 
 			@Override
 			public String getName(VAdminUserUrl item) {
-	
 				return item.getUtitle();
 			}
 
@@ -161,8 +156,7 @@ public class AdminController {
 	 */
 	@RequestMapping("invalid")
 	public String invalid(Model model){	
-		
-		return path+"/invalid";
+		return PATH+"/invalid";
 	}
 	
 	/**
@@ -176,7 +170,6 @@ public class AdminController {
 	@ResponseBody
 	public ResponseCode chklogin(Model model,String adminName,String adminPwd,Boolean remember,
 			HttpServletResponse	 response, HttpServletRequest request){	
-
 		ResponseCode res=new ResponseCode();
 		if(adminName==null||adminName.trim().isEmpty()){
 			res.setErroCode(-1);
@@ -201,7 +194,6 @@ public class AdminController {
 				res.setErroCode(2);
 				res.setMessage("管理用户或密码错误");
 			}else{
-				
 				if(remember!=null&&remember){					
 					String encode=MDEncode.md5Encode(user.getAdminjoin().getTime() +"\n"+ adminPwd);
 					encode=user.getAdminid() +":"+encode;
@@ -210,11 +202,11 @@ public class AdminController {
 					cookie.setMaxAge(3600*24*30);//记住一个月
 					response.addCookie(cookie);
 				}
-				model.addAttribute(adminKey, user);
+				model.addAttribute(ADMINKEY, user);
 				
 				List<VAdminUserUrl> urls=admin.getAdminUserUrls(user.getAdminid());					
 				CTree<Long, VAdminUserUrl> tree = loadTree(urls);
-				model.addAttribute(adminUrlKey, tree);
+				model.addAttribute(ADMINURLKEY, tree);
 				
 				String ip=getClientIpAddress(request);
 				admin.updateUserLogin(user,ip);
@@ -250,7 +242,7 @@ public class AdminController {
 	@RequestMapping("logout")
 	public String logout(Model model,HttpServletResponse response,
 			HttpSession session,SessionStatus status){
-		VAdminUser user=(VAdminUser) session.getAttribute(adminKey);
+		VAdminUser user=(VAdminUser) session.getAttribute(ADMINKEY);
 		if(user!=null){
 			adminLog(user,"登出","成功");
 		}
@@ -259,7 +251,6 @@ public class AdminController {
 		cookie.setMaxAge(0);//记住一个月
 		response.addCookie(cookie);
 		status.setComplete();
-		//session.setMaxInactiveInterval(1);
 		return "redirect:login.co";
 	}
 	
@@ -271,20 +262,19 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("main")
-	public String main(Model model,@ModelAttribute(adminKey) VAdminUser user, HttpServletRequest request){
+	public String main(Model model,@ModelAttribute(ADMINKEY) VAdminUser user, HttpServletRequest request){
 		model.addAttribute("user", user);
-		//model.addAttribute("urls", urls);
 		
 		List<VAdminUserUrl> urls=admin.getAdminUserUrls(user.getAdminid());
 		CTree<Long, VAdminUserUrl> tree = loadTree(urls);
-		model.addAttribute(adminUrlKey, tree);
+		model.addAttribute(ADMINURLKEY, tree);
 
 		model.addAttribute("tree", tree);
 		model.addAttribute("uname", "");
 		model.addAttribute("page", "index");
 		
 		model.addAttribute("delCount",0);
-		return path+"/main";
+		return PATH+"/main";
 	}
 	
 	/**
@@ -294,9 +284,9 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("updatePwd")
-	public String updatePwd(Model model,@ModelAttribute(adminKey) VAdminUser user){
+	public String updatePwd(Model model,@ModelAttribute(ADMINKEY) VAdminUser user){
 		model.addAttribute("user", user);
-		return path+"/updatePwd";
+		return PATH+"/updatePwd";
 	}
 	
 	/**

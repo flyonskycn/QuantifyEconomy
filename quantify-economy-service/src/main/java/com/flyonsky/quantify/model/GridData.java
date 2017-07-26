@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 表格数据
  * @author luowg
@@ -17,14 +19,19 @@ public class GridData<T>  implements Serializable{
 	 */
 	private static final long serialVersionUID = -2384491580988798153L;
 
+	@JsonProperty("page_data")
 	private List<T> pageData;
 	
+	@JsonProperty("total_rows")
 	private int totalRows;
 	
+	@JsonProperty("error")
 	private String error;
 	
+	@JsonProperty("debug_message")
 	private List<String> debugMessage=new ArrayList<String>();
 	
+	@JsonProperty("filter_error")
 	private List<String> filterError=new ArrayList<String>();
 
 	public String getError() {

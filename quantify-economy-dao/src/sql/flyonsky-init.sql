@@ -7,4 +7,20 @@ insert into cp_admin_user(adminId,adminPwd,headerpic,adminName,admindesc,adminJo
 insert into cp_admin_role values(1,'administrators');
 insert into cp_admin_role_user values(1,1,1);
 	
-	
+
+
+insert into cp_admin_url values(99,null,'ADMIN','系统管理',0,1,'fa-user-secret text-gray'),
+(9901,'/admin/role/index.co','ADMIN.ROLE','角色管理',99,0,''),
+	(99011,'/admin/role/query.co','ADMIN.ROLE.QUERY','角色查询',9901,2,''),
+	(99012,'/admin/role/info.co','ADMIN.ROLE.INFO','角色编辑',9901,2,''),
+	(99013,'/admin/role/save.co','ADMIN.ROLE.SAVE','角色保存',9901,2,''),
+(9903,'/admin/user/index.co','ADMIN.USER','管理员用户列表',99,1,''),
+	(99031,'/admin/user/query.co','ADMIN.USER.QUERY','用户查询',9903,2,''),
+	(99032,'/admin/user/info.co','ADMIN.USER.INFO','用户编辑',9903,2,''),
+	(99033,'/admin/user/save.co','ADMIN.USER.SAVE','用户保存',9903,2,''),
+	(99152,'/admin/user/getUrls.co','URLS','查询角色组的权限树',9903,2,''),
+(9912,'/admin/log/index.co','ADMIN.OPLOG','管理日志',99,0,''),
+	(99121,'/admin/log/query.co','ADMIN.OPLOG.QUERY','日志查询',9912,2,''),
+	(99122,'/admin/log/export.co','ADMIN.OPLOG.EXPORT','日志导出',9912,2,'');
+insert into cp_admin_role_url(uid,roleid) select uid,1 from cp_admin_url;
+
