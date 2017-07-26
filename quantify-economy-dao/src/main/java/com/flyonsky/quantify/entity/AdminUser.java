@@ -1,8 +1,9 @@
 package com.flyonsky.quantify.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AdminUser {
+public class AdminUser implements Serializable {
     private Long adminid;
 
     private String adminemail;
@@ -20,6 +21,8 @@ public class AdminUser {
     private Date logintime;
 
     private String location;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getAdminid() {
         return adminid;

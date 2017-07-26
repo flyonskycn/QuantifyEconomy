@@ -32,10 +32,10 @@
           </trim>
         </if>
       </foreach>
+      <if test="customWhere != null" >
+         ${customWhere} 
+      </if>
     </where>
-    <if test="customWhere != null" >
-       #{customWhere} 
-    </if>
   </sql>
   <sql id="Update_By_Example_Where_Clause" >
     <where >
@@ -64,10 +64,10 @@
           </trim>
         </if>
       </foreach>
+      <if test="customWhere != null" >
+         ${customWhere} 
+      </if>
     </where>
-    <if test="customWhere != null" >
-       #{customWhere} 
-    </if>
   </sql>
   <sql id="Base_Column_List" >
     roleId, roleName

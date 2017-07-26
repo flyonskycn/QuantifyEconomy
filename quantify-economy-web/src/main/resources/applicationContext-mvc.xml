@@ -55,6 +55,9 @@
 	            <property name="objectMapper" ref="xmlMapper"/>
 	        </bean>
 		</mvc:message-converters>
+        <mvc:argument-resolvers>
+        	<bean class="com.flyonsky.quantify.convert.QueryInfoResolver" />
+        </mvc:argument-resolvers> 
     </mvc:annotation-driven>
     
    	<mvc:interceptors>

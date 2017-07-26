@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.entity;
 
-public class VAdminRoleUrl {
+import java.io.Serializable;
+
+public class VAdminRoleUrl implements Serializable {
     private Long uid;
 
     private String url;
@@ -20,6 +22,8 @@ public class VAdminRoleUrl {
     private String rolename;
 
     private Long ruid;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getUid() {
         return uid;

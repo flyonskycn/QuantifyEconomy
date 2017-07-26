@@ -1,9 +1,13 @@
 package com.flyonsky.quantify.entity;
 
-public class AdminRole {
+import java.io.Serializable;
+
+public class AdminRole implements Serializable {
     private Long roleid;
 
     private String rolename;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getRoleid() {
         return roleid;

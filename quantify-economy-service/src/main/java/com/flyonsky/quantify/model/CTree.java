@@ -1,13 +1,9 @@
 package com.flyonsky.quantify.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CTree<K,V>  {
-	
-	private Map<K,V> map=new HashMap<K, V>();
 	
 	private List<CTreeNode<K,V>> childrens=new ArrayList<CTreeNode<K,V>>();
 	

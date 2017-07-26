@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.entity;
 
-public class AdminUrl {
+import java.io.Serializable;
+
+public class AdminUrl implements Serializable {
     private Long uid;
 
     private String url;
@@ -14,6 +16,8 @@ public class AdminUrl {
     private Integer utype;
 
     private String ucsscls;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getUid() {
         return uid;

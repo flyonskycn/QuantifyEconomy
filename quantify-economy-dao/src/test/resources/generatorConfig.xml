@@ -5,6 +5,7 @@
 <generatorConfiguration>
     <context id="DB2Tables" targetRuntime="MyBatis3">
     	<property name="mergeable" value="false"></property>
+    	<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
     	<plugin type="com.flyonsky.generator.plugin.CustomWherePlugin"/>
         <plugin type="com.flyonsky.generator.plugin.PaginationPlugin"/>
         <commentGenerator>

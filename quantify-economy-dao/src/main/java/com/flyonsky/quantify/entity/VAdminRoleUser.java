@@ -1,8 +1,9 @@
 package com.flyonsky.quantify.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class VAdminRoleUser {
+public class VAdminRoleUser implements Serializable {
     private Long adminid;
 
     private String adminpwd;
@@ -16,6 +17,8 @@ public class VAdminRoleUser {
     private String rolename;
 
     private Long urid;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getAdminid() {
         return adminid;

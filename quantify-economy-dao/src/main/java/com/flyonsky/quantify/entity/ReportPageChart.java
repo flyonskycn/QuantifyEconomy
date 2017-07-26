@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.entity;
 
-public class ReportPageChart {
+import java.io.Serializable;
+
+public class ReportPageChart implements Serializable {
     private Long pcid;
 
     private Integer chartid;
@@ -8,6 +10,8 @@ public class ReportPageChart {
     private Integer pageid;
 
     private Integer sortid;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getPcid() {
         return pcid;

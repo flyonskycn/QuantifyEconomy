@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.entity;
 
-public class ReportChart {
+import java.io.Serializable;
+
+public class ReportChart implements Serializable {
     private Integer chartid;
 
     private String chartname;
@@ -16,6 +18,8 @@ public class ReportChart {
     private String vitems;
 
     private String yitems;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getChartid() {
         return chartid;

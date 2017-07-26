@@ -1,11 +1,15 @@
 package com.flyonsky.quantify.entity;
 
-public class ReportPage {
+import java.io.Serializable;
+
+public class ReportPage implements Serializable {
     private Integer pageid;
 
     private String pagetitle;
 
     private String pagedesc;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getPageid() {
         return pageid;

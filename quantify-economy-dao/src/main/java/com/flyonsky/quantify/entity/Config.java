@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.entity;
 
-public class Config {
+import java.io.Serializable;
+
+public class Config implements Serializable {
     private String cfgkey;
 
     private String cfgpkey;
@@ -18,6 +20,8 @@ public class Config {
     private String cfglist;
 
     private Integer cfgsort;
+
+    private static final long serialVersionUID = 1L;
 
     public String getCfgkey() {
         return cfgkey;
