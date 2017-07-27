@@ -80,7 +80,7 @@ public class AdminController extends AbstractAdminController{
 		if(remember!=null && remember.contains(":")){
 			String[] arr=remember.split(":");
 			Long adminId=Long.parseLong(arr[0]);
-			user=admin.getAdminUser(adminId);
+			user=admin.findAdminUser(adminId);
 			if(user!=null){
 				String encode=MDEncode.md5Encode(user.getAdminjoin().getTime() +"\n"+ user.getAdminpwd());
 				if(encode.equals(arr[1])){
@@ -89,7 +89,7 @@ public class AdminController extends AbstractAdminController{
 					admin.updateUserLogin(user,ip);
 					adminLog(user,"自动登录","成功");
 					
-					List<VAdminUserUrl> urls=admin.getAdminUserUrls(user.getAdminid());					
+					List<VAdminUserUrl> urls=admin.queryAdminUserUrls(user.getAdminid());					
 					CTree<Long, VAdminUserUrl> tree = loadTree(urls);
 					model.addAttribute(ADMINURLKEY, tree);
 					if(url!=null && !url.isEmpty()){
@@ -183,7 +183,7 @@ public class AdminController extends AbstractAdminController{
 			return res;
 		}
 		
-		VAdminUser user=admin.getAdminUser(adminName);
+		VAdminUser user=admin.findAdminUser(adminName);
 		if(user==null){
 			res.setErroCode(1);
 			res.setMessage("管理用户不存在");
@@ -204,7 +204,7 @@ public class AdminController extends AbstractAdminController{
 				}
 				model.addAttribute(ADMINKEY, user);
 				
-				List<VAdminUserUrl> urls=admin.getAdminUserUrls(user.getAdminid());					
+				List<VAdminUserUrl> urls=admin.queryAdminUserUrls(user.getAdminid());					
 				CTree<Long, VAdminUserUrl> tree = loadTree(urls);
 				model.addAttribute(ADMINURLKEY, tree);
 				
@@ -265,7 +265,7 @@ public class AdminController extends AbstractAdminController{
 	public String main(Model model,@ModelAttribute(ADMINKEY) VAdminUser user, HttpServletRequest request){
 		model.addAttribute("user", user);
 		
-		List<VAdminUserUrl> urls=admin.getAdminUserUrls(user.getAdminid());
+		List<VAdminUserUrl> urls=admin.queryAdminUserUrls(user.getAdminid());
 		CTree<Long, VAdminUserUrl> tree = loadTree(urls);
 		model.addAttribute(ADMINURLKEY, tree);
 
@@ -304,7 +304,7 @@ public class AdminController extends AbstractAdminController{
 			res.setMessage("请输入您的旧密码");
 			return res;
 		}
-		VAdminUser user=admin.getAdminUser(adminName);
+		VAdminUser user=admin.findAdminUser(adminName);
 		adminPwd=MDEncode.md5Encode(user.getAdminjoin().getTime() +"\n"+ adminPwd);
 		user.setAdminpwd(adminPwd);
 		try {
@@ -325,7 +325,7 @@ public class AdminController extends AbstractAdminController{
 	@ResponseBody
 	public ResponseCode save(HttpServletRequest request, VAdminUser user, HttpServletResponse response, SessionStatus status){
 		ResponseCode res=new ResponseCode();
-		VAdminUser vu=admin.getAdminUser(user.getAdminname());
+		VAdminUser vu=admin.findAdminUser(user.getAdminname());
 		vu.setAdminpwd(MDEncode.md5Encode(vu.getAdminjoin().getTime() +"\n"+ user.getAdminpwd()));
 		try {
 			admin.save(vu);

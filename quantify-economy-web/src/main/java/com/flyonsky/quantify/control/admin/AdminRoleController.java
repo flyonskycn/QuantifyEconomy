@@ -59,8 +59,8 @@ public class AdminRoleController extends AbstractAdminController{
 	 */
 	@RequestMapping("query")
 	@ResponseBody
-	public GridData<AdminRole> query(Model model, AdminRole role, QueryInfo query){
-		GridData<AdminRole> grid=admin.getAdminRoles(role, query);
+	public GridData<AdminRole> query(Model model, QueryInfo query){
+		GridData<AdminRole> grid=admin.queryAdminRoles(query);
 		return grid;
 	}
 	
@@ -73,13 +73,13 @@ public class AdminRoleController extends AbstractAdminController{
 	@RequestMapping("info")
 	public String info(Model model, Long roleid){	
 		AdminRole role=new AdminRole();
-		List<VAdminRoleAllUrl> urls=admin.getAdminRoleAllUrls(1l);
-		List<VAdminRoleAllUser> users=admin.getAdminRoleAllUsers(1l);
+		List<VAdminRoleAllUrl> urls=admin.queryAdminRoleAllUrls(1l);
+		List<VAdminRoleAllUser> users=admin.queryAdminRoleAllUsers(1l);
 		CTree<Long, VAdminRoleAllUrl> utree=new CTree<Long, VAdminRoleAllUrl>();
 		if(roleid!=null){
-			role = admin.getAdminRole(roleid);
-			urls=admin.getAdminRoleAllUrls(roleid);
-			users=admin.getAdminRoleAllUsers(roleid);
+			role = admin.findAdminRole(roleid);
+			urls=admin.queryAdminRoleAllUrls(roleid);
+			users=admin.queryAdminRoleAllUsers(roleid);
 		}
 		
 		LoadHandle<Long, VAdminRoleAllUrl> handle=new LoadHandle<Long, VAdminRoleAllUrl>() {

@@ -30,14 +30,14 @@ public interface AdminService {
 	 * @param adminId 管理员ID
 	 * @return
 	 */
-	VAdminUser getAdminUser(Long adminId);
+	VAdminUser findAdminUser(Long adminId);
 	
 	/**
 	 * 通过管理员用户名获取管理员用户信息
 	 * @param adminName 管理员用户名获
 	 * @return
 	 */
-	VAdminUser getAdminUser(String adminName);
+	VAdminUser findAdminUser(String adminName);
 	
 	
 	/**
@@ -45,35 +45,35 @@ public interface AdminService {
 	 * @param roleid 角色ID
 	 * @return
 	 */
-	AdminRole getAdminRole(Long roleid);
+	AdminRole findAdminRole(Long roleid);
 	
 	/**
 	 * 获取管理员的用户资源列表
 	 * @param adminId 管理员ID
 	 * @return
 	 */
-	List<VAdminUserUrl> getAdminUserUrls(Long adminId);
+	List<VAdminUserUrl> queryAdminUserUrls(Long adminId);
 	
 	/**
 	 * 获取角色用户列表
 	 * @param roleId 角色ID
 	 * @return
 	 */
-	List<VAdminRoleUser> getAdminRoleUsers(Long roleId);
+	List<VAdminRoleUser> queryAdminRoleUsers(Long roleId);
 	
 	/**
 	 * 获取角色url资源列表
 	 * @param roleId 角色ID
 	 * @return
 	 */
-	List<AdminRoleUrl> getAdminRoleUrls(Long roleId);
+	List<AdminRoleUrl> queryAdminRoleUrls(Long roleId);
 	
 	/**
 	 * 获取角色和所有用户的关系，如果没有关系urid=null
 	 * @param roleId 角色ID
 	 * @return
 	 */
-	List<VAdminRoleAllUser> getAdminRoleAllUsers(Long roleId);
+	List<VAdminRoleAllUser> queryAdminRoleAllUsers(Long roleId);
 	
 
 	/**
@@ -81,28 +81,28 @@ public interface AdminService {
 	 * @param adminid
 	 * @return
 	 */
-	List<VAdminRoleUser> getAdminRolesByAdminid(Long adminid);
+	List<VAdminRoleUser> queryAdminRolesByAdminid(Long adminid);
 	
 	/**
 	 * 获取角色和所有资源的关系，如果没有关系ruid=null
 	 * @param roleId
 	 * @return
 	 */
-	List<VAdminRoleAllUrl> getAdminRoleAllUrls(Long roleId);
+	List<VAdminRoleAllUrl> queryAdminRoleAllUrls(Long roleId);
 	
 	/**
 	 * 获取多个角色与所有资源的关系
 	 * @param roles
 	 * @return
 	 */
-	List<VAdminRoleAllUrl> getAdminRolesAllUrls(String roles);
+	List<VAdminRoleAllUrl> queryAdminRolesAllUrls(String roles);
 	/**
 	 * 分页查询用户列表
 	 * @param user
 	 * @param query 查询信息
 	 * @return
 	 */
-	GridData<VAdminUser> getAdminUsers(VAdminUser user,QueryInfo query);
+	GridData<VAdminUser> queryAdminUsers(QueryInfo query);
 	
 	/**
 	 * 分页查询角色列表
@@ -110,7 +110,7 @@ public interface AdminService {
 	 * @param query 查询信息
 	 * @return
 	 */
-	GridData<AdminRole> getAdminRoles(AdminRole role,QueryInfo query);
+	GridData<AdminRole> queryAdminRoles(QueryInfo query);
 	
 	/**
 	 * 分页查询资源列表
@@ -118,7 +118,7 @@ public interface AdminService {
 	 * @param query
 	 * @return
 	 */
-	GridData<AdminUrl> getAdminUrls(AdminUrl url,QueryInfo query);
+	GridData<AdminUrl> queryAdminUrls(QueryInfo query);
 	
 	/**
 	 * 分页查询角色用户关系
@@ -126,7 +126,7 @@ public interface AdminService {
 	 * @param query
 	 * @return
 	 */
-	GridData<VAdminRoleUser> getAdminRoleUsers(VAdminRoleUser roleUser,QueryInfo query);
+	GridData<VAdminRoleUser> queryAdminRoleUsers(QueryInfo query);
 	
 	/**
 	 * 分页查询角色资源关系
@@ -134,7 +134,7 @@ public interface AdminService {
 	 * @param query
 	 * @return
 	 */
-	GridData<AdminRoleUrl> getAdminRoleUrls(AdminRoleUrl roleUrl,QueryInfo query);
+	GridData<AdminRoleUrl> queryAdminRoleUrls(QueryInfo query);
 	
 	/**
 	 * 分页查询用户资源关系
@@ -142,7 +142,7 @@ public interface AdminService {
 	 * @param query
 	 * @return
 	 */
-	GridData<VAdminUserUrl> getAdminUserUrls(VAdminUserUrl userUrl,QueryInfo query);
+	GridData<VAdminUserUrl> queryAdminUserUrls(QueryInfo query);
 	
 	/**
 	 * 分页查询管理用户日志
@@ -150,7 +150,7 @@ public interface AdminService {
 	 * @param query
 	 * @return 分页数据
 	 */
-	GridData<AdminLog> getAdminLogs(AdminLog adminLog,QueryInfo query);
+	GridData<AdminLog> queryAdminLogs(QueryInfo query);
 	
 	/**
 	 * 保存管理用户信息
