@@ -60,8 +60,8 @@ public class AdminUserController extends AbstractAdminController {
 	 */
 	@RequestMapping("query")
 	@ResponseBody
-	public GridData<VAdminUser> query(Model model, VAdminUser user, QueryInfo query){
-		GridData<VAdminUser> grid=admin.getAdminUsers(user, query);
+	public GridData<VAdminUser> query(Model model, QueryInfo query){
+		GridData<VAdminUser> grid=admin.queryAdminUsers(query);
 		return grid;
 	}
 	
@@ -72,16 +72,16 @@ public class AdminUserController extends AbstractAdminController {
 	 * @return
 	 */
 	@RequestMapping("info")
-	public String info(Model model, Long adminid,AdminRole role,QueryInfo query){	
+	public String info(Model model, Long adminid,QueryInfo query){	
 		VAdminUser item=new VAdminUser();
 		//查询出所有角色
-		GridData<AdminRole> grid=admin.getAdminRoles(role, query);
+		GridData<AdminRole> grid=admin.queryAdminRoles(query);
 		List<AdminRole> ar=grid.getPageData();
 		List<VAdminRoleUser> vr=null;
 		if(adminid!=null){
-			item=admin.getAdminUser(adminid);
+			item=admin.findAdminUser(adminid);
 			//查询出当前admin所拥有的角色
-			vr=admin.getAdminRolesByAdminid(adminid);
+			vr=admin.queryAdminRolesByAdminid(adminid);
 		}
 		
 		model.addAttribute("item", item);
@@ -125,10 +125,10 @@ public class AdminUserController extends AbstractAdminController {
 	@ResponseBody
 	public String urls(String roles,Model model){
 		boolean flag=false;
-		List<VAdminRoleAllUrl> urls=admin.getAdminRoleAllUrls(1l);
+		List<VAdminRoleAllUrl> urls=admin.queryAdminRoleAllUrls(1l);
 		CTree<Long, VAdminRoleAllUrl> utree=new CTree<Long, VAdminRoleAllUrl>();
 		if(roles !=null && !roles.equals("")){
-			urls=admin.getAdminRolesAllUrls(roles);
+			urls=admin.queryAdminRolesAllUrls(roles);
 			flag=true;
 		}
 		LoadHandle<Long, VAdminRoleAllUrl> handle=new LoadHandle<Long, VAdminRoleAllUrl>() {

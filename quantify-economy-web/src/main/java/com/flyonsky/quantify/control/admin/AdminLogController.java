@@ -41,14 +41,13 @@ public class AdminLogController extends AbstractAdminController{
 	/**
 	 * 用户列表数据
 	 * @param model
-	 * @param role 
 	 * @param query 
 	 * @return
 	 */
 	@RequestMapping("query")
 	@ResponseBody
-	public GridData<AdminLog> query(Model model, AdminLog log, QueryInfo query){
-		GridData<AdminLog> grid = admin.getAdminLogs(log, query);
+	public GridData<AdminLog> query(Model model, QueryInfo query){
+		GridData<AdminLog> grid = admin.queryAdminLogs(query);
 		return grid;
 	}
 }

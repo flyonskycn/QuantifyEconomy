@@ -108,12 +108,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 	@Autowired
 	private AdminLogMapper logMapper;
 	
-
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminUser(java.lang.Long)
-	 */
 	@Override
-	public VAdminUser getAdminUser(Long adminId) {
+	public VAdminUser findAdminUser(Long adminId) {
 		VAdminUserExample example=new VAdminUserExample();
 		example.createCriteria().andAdminidEqualTo(adminId);		
 		List<VAdminUser> list=vauMapper.selectByExample(example);
@@ -121,46 +117,37 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 	}
 
 	@Override
-	public VAdminUser getAdminUser(String adminName) {
+	public VAdminUser findAdminUser(String adminName) {
 		VAdminUserExample example=new VAdminUserExample();
 		example.createCriteria().andAdminnameEqualTo(adminName);
 		List<VAdminUser> list=vauMapper.selectByExample(example);
 		return list.size()>0?list.get(0):null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminUserUrls(java.lang.Long)
-	 */
 	@Override
-	public List<VAdminUserUrl> getAdminUserUrls(Long adminId) {
+	public List<VAdminUserUrl> queryAdminUserUrls(Long adminId) {
 		VAdminUserUrlExample example=new VAdminUserUrlExample();
 		example.createCriteria().andAdminidEqualTo(adminId);
 		example.setOrderByClause("uParentId,uId");
 		return vauuMapper.selectByExample(example);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminRoleUsers(java.lang.Long)
-	 */
 	@Override
-	public List<VAdminRoleUser> getAdminRoleUsers(Long roleId) {
+	public List<VAdminRoleUser> queryAdminRoleUsers(Long roleId) {
 		VAdminRoleUserExample example=new VAdminRoleUserExample();
 		example.createCriteria().andRoleidEqualTo(roleId);
 		return varuMapper.selectByExample(example);
 	}
 	
 	@Override
-	public List<VAdminRoleUser> getAdminRolesByAdminid(Long adminid) {
+	public List<VAdminRoleUser> queryAdminRolesByAdminid(Long adminid) {
 		VAdminRoleUserExample example=new VAdminRoleUserExample();
 		example.createCriteria().andAdminidEqualTo(adminid);
 		return varuMapper.selectByExample(example);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminRoleUrls(java.lang.Long)
-	 */
 	@Override
-	public List<AdminRoleUrl> getAdminRoleUrls(Long roleId) {
+	public List<AdminRoleUrl> queryAdminRoleUrls(Long roleId) {
 		AdminRoleUrlExample example=new AdminRoleUrlExample();
 		example.createCriteria().andRoleidEqualTo(roleId);
 		return arurlMapper.selectByExample(example);
@@ -168,24 +155,21 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 	
 
 	@Override
-	public List<VAdminRoleAllUser> getAdminRoleAllUsers(Long roleId) {
+	public List<VAdminRoleAllUser> queryAdminRoleAllUsers(Long roleId) {
 		VAdminRoleAllUserExample example=new VAdminRoleAllUserExample();
 		example.createCriteria().andRoleidEqualTo(roleId);
 		return alluserMapper.selectByExample(example);
 	}
 
 	@Override
-	public List<VAdminRoleAllUrl> getAdminRoleAllUrls(Long roleId) {
+	public List<VAdminRoleAllUrl> queryAdminRoleAllUrls(Long roleId) {
 		VAdminRoleAllUrlExample example=new VAdminRoleAllUrlExample();
 		example.createCriteria().andRoleidEqualTo(roleId);
 		return allurlMapper.selectByExample(example);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminUsers(com.flyonsky.quantify.entity.VAdminUser, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<VAdminUser> getAdminUsers(VAdminUser user, QueryInfo query) {
+	public GridData<VAdminUser> queryAdminUsers(QueryInfo query) {
 		GridData<VAdminUser> grid=new GridData<VAdminUser>();
 		VAdminUserExample example=new VAdminUserExample();
 		example.setOrderByClause(query.getOrderByClause());
@@ -198,11 +182,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return grid;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminRoles(com.flyonsky.quantify.entity.AdminRole, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<AdminRole> getAdminRoles(AdminRole role, QueryInfo query) {
+	public GridData<AdminRole> queryAdminRoles(QueryInfo query) {
 		GridData<AdminRole> grid=new GridData<AdminRole>();
 		AdminRoleExample example=new AdminRoleExample();
 		example.setOrderByClause(query.getOrderByClause());
@@ -215,11 +196,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return grid;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminUrls(com.flyonsky.quantify.entity.AdminUrl, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<AdminUrl> getAdminUrls(AdminUrl url, QueryInfo query) {
+	public GridData<AdminUrl> queryAdminUrls(QueryInfo query) {
 		GridData<AdminUrl> grid=new GridData<AdminUrl>();
 		AdminUrlExample example=new AdminUrlExample();
 		example.setOrderByClause(query.getOrderByClause());
@@ -232,11 +210,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return grid;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminRoleUsers(com.flyonsky.quantify.entity.VAdminRoleUser, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<VAdminRoleUser> getAdminRoleUsers(VAdminRoleUser roleUser, QueryInfo query) {
+	public GridData<VAdminRoleUser> queryAdminRoleUsers(QueryInfo query) {
 		GridData<VAdminRoleUser> grid=new GridData<VAdminRoleUser>();
 		VAdminRoleUserExample example=new VAdminRoleUserExample();
 		example.setOrderByClause(query.getOrderByClause());
@@ -249,11 +224,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return grid;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminRoleUrls(com.flyonsky.quantify.entity.AdminRoleUrl, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<AdminRoleUrl> getAdminRoleUrls(AdminRoleUrl roleUrl, QueryInfo query) {
+	public GridData<AdminRoleUrl> queryAdminRoleUrls(QueryInfo query) {
 		GridData<AdminRoleUrl> grid=new GridData<AdminRoleUrl>();
 		AdminRoleUrlExample example=new AdminRoleUrlExample();
 		example.setOrderByClause(query.getOrderByClause());
@@ -266,11 +238,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return grid;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminUserUrls(com.flyonsky.quantify.entity.VAdminUserUrl, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<VAdminUserUrl> getAdminUserUrls(VAdminUserUrl userUrl, QueryInfo query) {
+	public GridData<VAdminUserUrl> queryAdminUserUrls(QueryInfo query) {
 		GridData<VAdminUserUrl> grid=new GridData<VAdminUserUrl>();
 		VAdminUserUrlExample example=new VAdminUserUrlExample();
 		example.setOrderByClause(query.getOrderByClause());
@@ -283,7 +252,7 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 	}
 
 	@Override
-	public AdminRole getAdminRole(Long roleid) {
+	public AdminRole findAdminRole(Long roleid) {
 		return arMapper.selectByPrimaryKey(roleid);
 	}
 
@@ -429,11 +398,8 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#getAdminLogs(com.flyonsky.quantify.entity.AdminLog, com.flyonsky.quantify.query.QueryInfo)
-	 */
 	@Override
-	public GridData<AdminLog> getAdminLogs(AdminLog adminLog, QueryInfo query) {
+	public GridData<AdminLog> queryAdminLogs(QueryInfo query) {
 		
 		GridData<AdminLog> grid=new GridData<AdminLog>();
 		AdminLogExample example=new AdminLogExample();
@@ -446,16 +412,13 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
 		return grid;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.flyonsky.quantify.service.AdminService#saveLog(com.flyonsky.quantify.entity.AdminLog)
-	 */
 	@Override
 	public void saveLog(AdminLog log) {
 		logMapper.insert(log);		
 	}
 
 	@Override
-	public List<VAdminRoleAllUrl> getAdminRolesAllUrls(String roles) {
+	public List<VAdminRoleAllUrl> queryAdminRolesAllUrls(String roles) {
 		String[] arr=roles.split(",");
 		List<Long> list=new ArrayList<Long>();
 		for(String s:arr){
