@@ -11,13 +11,11 @@
 	<link href="/ext/jquery-ui/jquery-ui.css" rel="stylesheet">
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	
-
-
-    <script type="text/javascript" charset="utf-8" src="/script/jquery-1.12.3.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/ext/jquery/jQuery-2.2.0.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="/ext/jquery-ui/jquery-ui.js"> </script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/ext/jquery.toaster.js"> </script>
-	<script type="text/javascript" charset="utf-8" src="/js/wristband-admin.js"> </script>
+	<script type="text/javascript" charset="utf-8" src="/js/flyonsky-admin.js"> </script>
 	<script src="<s:url value="/ext/bootstrap-treeview/js/bootstrap-treeview.js" />"></script>
 
     <style type="text/css">
@@ -34,10 +32,9 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1>发布内容</h1>
+    <h1>编辑用户</h1>
     <div class="" id="form">
 	    	<input type="hidden" id="adminid" name="adminid" value="${item.adminid }" />
-	    	<input type="hidden" id="userid" name="userid" value="${item.userid }" />
 		    <div class="input-group form-group">
 			  <span class="input-group-addon">&nbsp;&nbsp; 管理用户名  &nbsp;&nbsp; </span>
 			  <input type="text" id="adminname" name="adminname" class="form-control" placeholder="请输入2-50长度名称" aria-describedby="basic-addon1"  value="${item.adminname }">
@@ -45,12 +42,6 @@
 			<div class="input-group form-group">
 			  <span class="input-group-addon">&nbsp;&nbsp; 工作邮箱  &nbsp;&nbsp; </span>
 			  <input type="text" id="adminemail" name="adminemail" class="form-control" placeholder="请输入正确的邮箱地址" aria-describedby="basic-addon1"  value="${item.adminemail }">
-			</div>
-			<div class="input-group form-group">
-			  <span class="input-group-addon">平台用户信息 </span>
-			  <c:set var="mobile" value="(${item.mobile})"></c:set>   
-			  <input type="text" id="nickname" name="nickname" class="form-control ui-autocomplete ui-autocomplete-input" placeholder="请输入昵称或手机号关键字自动匹配" aria-describedby="basic-addon1"  
-			  value="${item.nickname }${item.mobile!=null? mobile:'' }">
 			</div>
 			<div class="input-group form-group">
 			  <span class="input-group-addon">管理密码</span>
@@ -149,51 +140,6 @@
 	 }
 	 
 	 $(function(){
-		 if($('#userid').val()){
-			 $('#nickname').prop('disabled',true);
-		 }else{
-			 $( "#nickname" )
-		     // 当选择一个条目时不离开文本域
-		     .bind( "keydown", function( event ) {
-		       if ( event.keyCode === $.ui.keyCode.TAB &&
-		           $( this ).data( "ui-autocomplete" ).menu.active ) {
-		         event.preventDefault();
-		       }
-		     })
-		     .autocomplete({
-		        source: function( request, response ) {
-		          $.getJSON( "/dealer/admin/finduser.co", {
-		            keyword: extractLast( request.term )
-		          }, response );
-		        },
-		        search: function() {
-		          // 自定义最小长度
-		          //var term = extractLast( this.value );
-		          if ( this.value.length < 0 ) {
-		            return false;
-		          }
-		        },
-		        focus: function() {
-		          // 防止在获得焦点时插入值
-		          return false;
-		        },
-		        select: function( event, ui ) {
-
-		          this.value = ui.item.nickname+'('+ ui.item.mobile+')';
-		          $('#userid').val(ui.item.userid);
-		          return false;
-		        }
-		      }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-		    	 // if(item.id == '0') {
-		    		  return jQuery( "<li></li>" )
-		    		   .data( "item.autocomplete", item )
-		    		   .append( "<img class='head' src='"+ item.headerpic + "'  />" )
-		    		   .append( "<span class='no-result'>"+ item.nickname + "("+ item.mobile + ")</span>" )
-		    		   .appendTo( ul );
-		    	 // }
-		     };
-		 }
-		
 		 //当前admin和角色
 		 <c:forEach items="${vr}" var="v">
 		 	$("#${v.roleid}").attr({"checked":"checked"});
