@@ -13,7 +13,7 @@
   	<link rel="stylesheet" href="<s:url value="/ext/bootstrap/css/bootstrap.min.css" />">
   	<link rel="stylesheet" href="<s:url value="/ext/bootstrap-treeview/css/bootstrap-treeview.css" />">
   	
-  	<script type="text/javascript" charset="utf-8" src="/script/jquery-1.12.3.js"> </script>
+  	<script type="text/javascript" charset="utf-8" src="/ext/jquery/jQuery-2.2.0.min.js"> </script>
 	<script src="<s:url value="/ext/bootstrap/js/bootstrap.min.js" />"></script>
 	<script src="<s:url value="/ext/bootstrap-treeview/js/bootstrap-treeview.js" />"></script>
 	

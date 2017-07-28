@@ -11,7 +11,7 @@
 
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	
-    <script type="text/javascript" charset="utf-8" src="<s:url value="/" />script/jquery-1.12.3.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"> </script>
     
     <link rel="stylesheet" type="text/css" href="/ext/jquery-ui/jquery-ui.min.css">
 	<script type="text/javascript" src="<s:url value="/" />ext/jquery-ui/jquery-ui.min.js"></script>

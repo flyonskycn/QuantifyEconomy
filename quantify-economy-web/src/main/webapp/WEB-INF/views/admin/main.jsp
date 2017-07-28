@@ -29,8 +29,8 @@
   	<!-- jQuery 2.2.0 -->
 	<script src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"></script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
-	<div class="wrapper" style="height: auto; min-height: 100%;">
+<body class="hold-transition skin-blue sidebar-mini" style="overflow-y: hidden;">
+	<div class="wrapper">
 		<!-- Main header -->
 		<div class="main-header">
 		    <!-- Logo -->

@@ -9,7 +9,7 @@
     <title>日志列表</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     	
-    <script type="text/javascript" charset="utf-8" src="<s:url value="/" />script/jquery-1.12.3.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"> </script>
     
     <link rel="stylesheet" type="text/css" href="/ext/bootstrap/css/bootstrap.css">	
 	<script src="/ext/bootstrap/js/bootstrap.js"></script>
@@ -74,33 +74,15 @@ var columns=[
              {field: "opcontent", header: "操作描述", visible: "no"},
              {field: "opstatus", header: "操作状态"},
              {field: "optime", header: "操作耗时(毫秒)"},
-         	];
-    function excel(status){    	
-    	var cols=[];
-    	$.each(columns,function(){
-    		cols.push({field:this.field,header:this.header});
-    	});
-    	//location.href="export.co?head="+JSON.stringify(cols)+"&status="+(status||'');
-    	
-    	$('#head').val(JSON.stringify(cols));    	
-    	$('#downfom').attr('action',"export.co?status="+status).submit();
-    }   
+         	];   
     
     
 $(function() {	 
 
     // 加载表格
     $("#datagird").bs_grid({
-        ajaxFetchDataURL: "listdata.co",
+        ajaxFetchDataURL: "query.co",
         row_primary_key: columns[0].field,
-        customTools:[
-         			{tagName: "a", id: "export",href:'javascript:void(0)', title: "导出记录",label:"导出",iconClass:"glyphicon glyphicon-export",
-         				subs:[
-							{tagName: "a", id: "export1",href:'javascript:excel(0)', label: "当前记录",iconClass:"glyphicon glyphicon-export"},
-							{tagName: "a", id: "export1",href:'javascript:excel(1)', label: "所有记录",iconClass:"glyphicon glyphicon-export"}
-         				    ]
-         			}                 
-         			],
         columns: columns,
         sorting: sorting(columns),
 
