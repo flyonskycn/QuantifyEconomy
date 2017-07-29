@@ -36,6 +36,8 @@
      					if(data.erroCode == 0){
      						$.toaster("上传成功");
      						$('form').clearForm();
+     					}else{
+     						$.toaster(data.message);
      					}
      				}
      			});
