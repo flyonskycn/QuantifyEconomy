@@ -2,9 +2,6 @@ package com.flyonsky.quantify.util;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +14,6 @@ public class EntityIdGenerator {
 	//  41        |10         |  12
    private final long sequenceBits = 12;
    private final long datacenterIdBits = 10L;
-   private final long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
 
    private final long datacenterIdShift = sequenceBits;
    private final long timestampLeftShift = sequenceBits + datacenterIdBits;
@@ -32,9 +28,6 @@ public class EntityIdGenerator {
    private static volatile EntityIdGenerator instance;
    
    private static Object lock = new Object();
-   
-   private final static SimpleDateFormat dformat=new SimpleDateFormat("yyyyMMddHHmmssSSS");
-   private long lastId=0;
    
    private EntityIdGenerator(){
 	   datacenterId = getDatacenterId();
@@ -52,30 +45,20 @@ public class EntityIdGenerator {
    }
    
    public synchronized long generateLongId(){
-//       long timestamp = System.currentTimeMillis();
-//       if (lastTimestamp == timestamp) {
-//           sequence = (sequence + 1) % sequenceMax;
-//           if (sequence == 0) {
-//               timestamp = tilNextMillis(lastTimestamp);
-//           }
-//       } else {
-//           sequence = 0;
-//       }
-//       lastTimestamp = timestamp;
-//       long id = (((timestamp - twepoch) << timestampLeftShift) |
-//               (datacenterId << datacenterIdShift) |
-//               sequence) & 0x00FFFFFFFFFFFl;
-//       return id;
-	   
-	   Date cur=new Date();
-	 //long timestamp=cur.getTime();
-	   long timestamp=Long.parseLong(dformat.format(cur).substring(2));
-	   if(timestamp>lastId){
-		   lastId=timestamp;
-	   }else{
-		   lastId++;
-	   }
-	   return lastId;
+       long timestamp = System.currentTimeMillis();
+       if (lastTimestamp == timestamp) {
+           sequence = (sequence + 1) % sequenceMax;
+           if (sequence == 0) {
+               timestamp = tilNextMillis(lastTimestamp);
+           }
+       } else {
+           sequence = 0;
+       }
+       lastTimestamp = timestamp;
+       long id = (((timestamp - twepoch) << timestampLeftShift) |
+               (datacenterId << datacenterIdShift) |
+               sequence) & 0x00FFFFFFFFFFFl;
+       return id;
    }
    
    protected long tilNextMillis(long lastTimestamp) {
