@@ -12,7 +12,6 @@ create or replace view v_admin_role_user
 as
 SELECT
 a.adminId,
-a.userid,
 a.adminPwd,
 a.adminName,
 a.adminJoin,
@@ -50,7 +49,6 @@ create or replace view v_admin_role_alluser
 as
 SELECT
 a.adminId,
-a.userid,
 a.adminPwd,
 a.adminName,
 a.adminJoin,
