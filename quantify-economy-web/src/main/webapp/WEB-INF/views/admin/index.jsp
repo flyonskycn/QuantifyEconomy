@@ -12,7 +12,7 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<a class="media" href="/pdf/601599/n/601599_2011_n.pdf">PDF File</a>
+	<a class="media" href="/601599/2011/601599_2011_n.pdf">PDF File</a>
 	
 	
 	<script type="text/javascript">

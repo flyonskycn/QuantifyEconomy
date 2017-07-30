@@ -25,6 +25,12 @@
 	      		<httpConnector>
           			<port>80</port>
         		</httpConnector>
+        		<webApp>
+        			<contextPath>/</contextPath>
+    				<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+     					<resourcesAsCSV>src/main/webapp,K:/quantity-pdf</resourcesAsCSV>
+    				</baseResource>
+        		</webApp>
         	</configuration>
 	    </plugin>
 	    <plugin>

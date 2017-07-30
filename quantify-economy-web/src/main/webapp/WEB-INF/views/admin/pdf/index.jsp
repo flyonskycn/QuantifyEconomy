@@ -17,20 +17,28 @@
 </head>
 <body>
 	<div class="container-fluid" style="margin-top: 1.75rem;">
-     <form class="form-inline" method="post" action="/admin/pdf/upload.co" enctype="multipart/form-data">
+     <form class="form-inline upload" method="post" action="/admin/pdf/upload.co" enctype="multipart/form-data">
      	<div class="form-group">
     		<label for="file">年报</label>
     		<input type="file" class="form-control" name="file" id="file">
   		</div>
 		<div class="form-group">
-			<a type="submit" class="btn btn-default">上传</a>
+			<a type="submit" class="btn btn-default btn-commit">上传</a>
 		</div>
      </form>
+     <div class="form-group">
+     	<label for="pdfurl">PDF URL</label>
+     	<input type="text" class="form-control" id="pdfurl" placeholder="PDF URL">
+     </div>
+     <div class="form-group">
+     	<a href="#" class="btn btn-default btn-url">URL上传</a>
+	  </div>
+     
 	</div>
      <script type="text/javascript">
      	$(function(){
-     		$(".btn-default").click(function(){
-     			$('form').ajaxSubmit({
+     		$(".btn-commit").click(function(){
+     			$('.upload').ajaxSubmit({
      				dataType:"json",
      				success:function(data){
      					if(data.erroCode == 0){
@@ -41,6 +49,23 @@
      					}
      				}
      			});
+     		});
+     		
+     		$(".btn-url").click(function(){
+     			$.ajax({
+         			data:{'url':$("#pdfurl").val()},
+         			url:'/admin/pdf/downloadpdf.co',
+         			type:'POST',
+         			dataType:'json',
+         			success:function(data){
+         				if(data.erroCode == 0){
+     						$.toaster("上传成功");
+     						$("#pdfurl").val('');
+     					}else{
+     						$.toaster(data.message);
+     					}
+         			}
+     			})
      		});
      	});
      </script>
