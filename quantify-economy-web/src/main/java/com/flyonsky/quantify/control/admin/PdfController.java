@@ -27,7 +27,7 @@ public class PdfController extends AbstractAdminController{
 	private String uploadDir;
 	
 	/**
-	 * PDF管理首页
+	 * PDF文件上传
 	 * @param model
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public class PdfController extends AbstractAdminController{
         if (!file.isEmpty()) {
             try {
             	String fileName = file.getOriginalFilename();
-            	Pattern p = Pattern.compile("^(\\d{1,})_\\d{1,}_(\\w{1,})\\.pdf$");
+            	Pattern p = Pattern.compile("^(\\d{1,})_(\\d{1,})_(\\w{1,})\\.pdf$");
             	Matcher m = p.matcher(fileName);
             	if(m.matches()){
             		String dirPath = MessageFormat.format("{0}{1}/{2}", this.getUploadDir(),m.group(1),m.group(2));
@@ -57,20 +57,20 @@ public class PdfController extends AbstractAdminController{
                 		if(nFile.createNewFile()){
                     		file.transferTo(nFile);
                 		}else{
-                			result.set(4, "上传失败");
+                			result.set(4, "文件上传失败");
                 		}
                 	}else{
                 		result.set(2, "文件已存在");
                 	}
             	}else{
-            		result.set(3, "上传失败");
+            		result.set(3, "文件非法");
             	}
 			} catch (IOException e) {
-				result.set(1, "上传失败");
+				result.set(1, "文件上传失败");
 				LOG.error(e.getMessage());
 			}
        } else {
-    	   result.set(1, "上传失败");
+    	   result.set(1, "文件上传失败");
        }
        return result;
     }
