@@ -258,7 +258,7 @@
   			</resources>
   		</build>
   	</profile>
-  	  	<profile>
+  	<profile>
   		<id>home</id>
   		<build>
   			<resources>
