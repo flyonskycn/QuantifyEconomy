@@ -258,5 +258,18 @@
   			</resources>
   		</build>
   	</profile>
+  	  	<profile>
+  		<id>home</id>
+  		<build>
+  			<resources>
+  				<resource>
+  					<directory>src/profile/home</directory>
+  					<includes>
+  						<include>*.properties</include>
+  					</includes>
+  				</resource>
+  			</resources>
+  		</build>
+  	</profile>
   </profiles>
 </project>
