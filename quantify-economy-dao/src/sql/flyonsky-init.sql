@@ -10,7 +10,9 @@ insert into cp_admin_role_user values(1,1,1);
 
 insert into cp_admin_url values(10,null,'ANALYZE','数据分析',0,1,'fa-user-secret text-gray'),
 (1001,'/admin/pdf/index.co','ANALYZE.PDF','年报PDF管理',10,0,''),
-	(10011,'/admin/pdf/upload.co','ADMIN.PDF.UPLOAD','年报文件上传',1001,2,'');
+	(10011,'/admin/pdf/upload.co','ADMIN.PDF.UPLOAD','年报文件上传',1001,2,''),
+(1002,'/admin/annual/index.co','ANALYZE.ANNUAL','年报处理',10,0,''),
+	(10021,'/admin/annual/review.co','ANALYZE.ANNUAL.REVIEW','年报编辑',1002,2,'');
 	
 
 insert into cp_admin_url values(99,null,'ADMIN','系统管理',0,1,'fa-user-secret text-gray'),
