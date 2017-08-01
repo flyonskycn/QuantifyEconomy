@@ -1,5 +1,7 @@
 package com.flyonsky.quantify.service;
 
+import java.util.List;
+
 public interface FileService {
 
 	/**
@@ -9,4 +11,12 @@ public interface FileService {
 	 * @return
 	 */
 	boolean downLoadN(String url, String targetDir);
+	
+	/**
+	 * 获取指定目录下的满足条件文件的URL
+	 * @param isAnnualReport 是否为年报
+	 * @param dir 目录
+	 * @return
+	 */
+	List<String> recursive(boolean isAnnualReport, String dir);
 }

@@ -3,6 +3,7 @@ package com.flyonsky.quantify.control.admin;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.flyonsky.quantify.model.ResponseCode;
+import com.flyonsky.quantify.model.ResponseData;
 import com.flyonsky.quantify.service.FileService;
 
 @Controller
@@ -90,6 +92,15 @@ public class PdfController extends AbstractAdminController{
     	}
         return result;
     }
+	
+	@RequestMapping(value="annualReport",produces="application/json")
+	@ResponseBody
+	public ResponseData<List<String>> annualReport(){
+		ResponseData<List<String>> data = new ResponseData<List<String>>();
+		List<String> fs = this.getFileService().recursive(true, this.getUploadDir());
+		data.setData(fs);
+		return data;
+	}
 
 	public String getUploadDir() {
 		return uploadDir;

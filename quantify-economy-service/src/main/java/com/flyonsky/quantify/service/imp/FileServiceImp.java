@@ -1,9 +1,12 @@
 package com.flyonsky.quantify.service.imp;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,6 +67,41 @@ public class FileServiceImp implements FileService{
 			}
 		}
 		return flag;
+	}
+
+	@Override
+	public List<String> recursive(boolean isAnnualReport, String dir) {
+		List<String> list = new ArrayList<String>();
+		File fd = new File(dir);
+		File[] fs = fd.listFiles(new FileFilter(){
+
+			@Override
+			public boolean accept(File pathname) {
+				if(pathname.isDirectory()){
+					list.addAll(recursive(isAnnualReport,pathname.getAbsolutePath()));
+					return false;
+				}else{
+					if(isAnnualReport){
+						Pattern p = Pattern.compile("^(\\d{1,})_(\\d{1,4})_(\\w{1,})\\.pdf$");
+				    	Matcher m = p.matcher(pathname.getName());
+				    	if(m.matches()){
+				    		return true;
+				    	}
+				    	return false;
+					}
+					return true;
+				}
+			}
+			
+		});
+		for(File f : fs){
+			Pattern p = Pattern.compile("^(\\d{1,})_(\\d{1,4})_(\\w{1,})\\.pdf$");
+	    	Matcher m = p.matcher(f.getName());
+	    	if(m.matches()){
+	    		list.add(MessageFormat.format("/{0}/{1}/{2}", m.group(1),m.group(2),m.group(0)));
+	    	}
+		}
+		return list;
 	}
 
 }
