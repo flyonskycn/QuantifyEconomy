@@ -55,6 +55,7 @@
          <table tableName="v_admin_role_alluser" domainObjectName="VAdminRoleAllUser"></table>
          <table tableName="v_admin_role_allurl" domainObjectName="VAdminRoleAllUrl"></table>
          <table tableName="v_admin_user_url" domainObjectName="VAdminUserUrl"></table>
+         <table tableName="cp_annualreport" domainObjectName="AnnualReport"></table>
        
     </context>
 </generatorConfiguration>
