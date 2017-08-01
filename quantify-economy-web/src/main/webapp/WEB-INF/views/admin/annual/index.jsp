@@ -118,7 +118,7 @@
      			<div class="col-xs-8">
      				<div class="form-group">
      					<label for="remark">备注</label>
-					    <textarea class="form-control" id="remark" rows="10"">
+					    <textarea class="form-control" id="remark" rows="10">
 						</textarea>
 				  	</div>
      			</div>
