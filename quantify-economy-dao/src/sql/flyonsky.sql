@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/7/25 15:21:03                           */
+/* Created on:     2017/8/1 17:24:36                            */
 /*==============================================================*/
 
 
@@ -15,6 +15,8 @@ drop table if exists cp_admin_role_user;
 drop table if exists cp_admin_url;
 
 drop table if exists cp_admin_user;
+
+drop table if exists cp_annualreport;
 
 drop table if exists cp_config;
 
@@ -119,6 +121,30 @@ create table cp_admin_user
 );
 
 alter table cp_admin_user comment '后台用户关系';
+
+/*==============================================================*/
+/* Table: cp_annualreport                                       */
+/*==============================================================*/
+create table cp_annualreport
+(
+   id                   int not null auto_increment,
+   code                 varchar(32) not null comment '股票代码',
+   year                 int not null comment '年',
+   revenue              decimal(20,2) comment '营业收入',
+   operprofit           decimal(20,2) comment '营业利润 ',
+   totalprofit          decimal(20,2) comment '利润总额',
+   netprofit            decimal(20,2) comment '净利润',
+   shnetprofit          decimal(20,2) comment '归属于本行股东的净利润',
+   deshnetprofit        decimal(20,2) comment '扣除非经常性损益后归属于股东的净利润
+            ',
+   netcashflow          decimal(20,2) comment '经营活动产生的现金流量净额',
+   totalassets          decimal(20,2) comment '总资产',
+   totalliability       decimal(20,2),
+   shequity             decimal(20,2) comment '股东权益',
+   totalshares          bigint comment '股份总数',
+   remark               varchar(256) comment '备注',
+   primary key (id)
+);
 
 /*==============================================================*/
 /* Table: cp_config                                             */
