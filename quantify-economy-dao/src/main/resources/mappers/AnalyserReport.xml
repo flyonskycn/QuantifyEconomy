@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.AnalyserReportMapper" >
+  <resultMap id="AnalyserReportMap" type="com.flyonsky.quantify.entity.AnalyserReport" >
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="revenuerate" property="revenuerate" jdbcType="DECIMAL" />
+    <result column="operprofitrate" property="operprofitrate" jdbcType="DECIMAL" />
+    <result column="totalprofitrate" property="totalprofitrate" jdbcType="DECIMAL" />
+    <result column="netprofitrate" property="netprofitrate" jdbcType="DECIMAL" />
+    <result column="shnetprofitrate" property="shnetprofitrate" jdbcType="DECIMAL" />
+    <result column="deshnetprofitrate" property="deshnetprofitrate" jdbcType="DECIMAL" />
+    <result column="netcashflowrate" property="netcashflowrate" jdbcType="DECIMAL" />
+    <result column="totalassetsrate" property="totalassetsrate" jdbcType="DECIMAL" />
+    <result column="totalliabilityrate" property="totalliabilityrate" jdbcType="DECIMAL" />
+    <result column="shequityrate" property="shequityrate" jdbcType="DECIMAL" />
+    <result column="persharerate" property="persharerate" jdbcType="DECIMAL" />
+  </resultMap>
+  <select id="query" resultMap="AnalyserReportMap" parameterType="java.lang.String">
+	select a.code,a.year, (a.revenue - b.revenue)/b.revenue as revenuerate,
+	(a.operprofit - b.operprofit)/b.operprofit as operprofitrate,
+	(a.totalprofit - b.totalprofit)/b.totalprofit as totalprofitrate,
+	(a.netprofit - b.netprofit)/b.netprofit as netprofitrate,
+	(a.shnetprofit - b.shnetprofit)/b.shnetprofit as shnetprofitrate,
+	(a.deshnetprofit - b.deshnetprofit)/b.deshnetprofit as deshnetprofitrate,
+	(a.netcashflow - b.netcashflow)/b.netcashflow as netcashflowrate,
+	(a.totalassets - b.totalassets)/b.totalassets as totalassetsrate,
+	(a.totalliability - b.totalliability)/b.totalliability as totalliabilityrate,
+	(a.shequity - b.shequity)/b.shequity as shequityrate,
+	(a.deshnetprofit/a.totalshares - b.deshnetprofit/b.totalshares)/(b.deshnetprofit/b.totalshares) as persharerate
+	 from 
+	(select * from cp_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
+	where a.year = b.rateyear and a.code = b.code and a.code = #{code}
+  </select>
+</mapper>
