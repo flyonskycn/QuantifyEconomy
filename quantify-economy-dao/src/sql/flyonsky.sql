@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/1 17:27:49                            */
+/* Created on:     2017/8/2 15:22:15                            */
 /*==============================================================*/
 
 
@@ -138,7 +138,7 @@ create table cp_annualreport
    deshnetprofit        decimal(20,2) comment '扣除非经常性损益后归属于股东的净利润',
    netcashflow          decimal(20,2) comment '经营活动产生的现金流量净额',
    totalassets          decimal(20,2) comment '总资产',
-   totalliability       decimal(20,2),
+   totalliability       decimal(20,2) comment '总负债',
    shequity             decimal(20,2) comment '股东权益',
    totalshares          bigint comment '股份总数',
    remark               varchar(256) comment '备注',
