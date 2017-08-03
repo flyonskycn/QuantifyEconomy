@@ -1,8 +1,6 @@
 package com.flyonsky.quantify.service;
 
-import java.util.List;
-
-import com.flyonsky.quantify.entity.AnalyserReport;
+import com.flyonsky.quantify.model.YearOnYearData;
 
 public interface AnalyserService {
 
@@ -11,5 +9,5 @@ public interface AnalyserService {
 	 * @param code 股票代码
 	 * @return
 	 */
-	List<AnalyserReport> query(String code);
+	YearOnYearData query(String code);
 }

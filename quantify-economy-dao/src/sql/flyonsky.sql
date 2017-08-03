@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/2 15:22:15                            */
+/* Created on:     2017/8/3 14:21:26                            */
 /*==============================================================*/
 
 
@@ -131,7 +131,7 @@ create table cp_annualreport
    code                 varchar(32) not null comment '股票代码',
    year                 int not null comment '年',
    revenue              decimal(20,2) comment '营业收入',
-   operprofit           decimal(20,2) comment '营业利润 ',
+   operprofit           decimal(20,2) comment '营业利润',
    totalprofit          decimal(20,2) comment '利润总额',
    netprofit            decimal(20,2) comment '净利润',
    shnetprofit          decimal(20,2) comment '归属于本行股东的净利润',

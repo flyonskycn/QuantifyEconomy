@@ -30,6 +30,6 @@
 	(a.deshnetprofit/a.totalshares - b.deshnetprofit/b.totalshares)/(b.deshnetprofit/b.totalshares) as persharerate
 	 from 
 	(select * from cp_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
-	where a.year = b.rateyear and a.code = b.code and a.code = #{code}
+	where a.year = b.rateyear and a.code = b.code and a.code = #{code} order by a.year 
   </select>
 </mapper>

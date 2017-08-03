@@ -48,20 +48,84 @@
         			        // 指定图表的配置项和数据
         			        var option = {
         			            title: {
-        			                text: 'ECharts 入门示例'
+        			                text: data.data.securitiesName + '同比曲线'
         			            },
         			            tooltip: {},
         			            legend: {
-        			                data:['销量']
+        			                data:['营业收入','营业利润','利润总额','净利润','归属股东净利润','归属股东净利润(扣非)','现金流量净额','总资产','总负债','股东权益','每股收益']
         			            },
         			            xAxis: {
-        			                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        			                type: 'category',
+        			                splitLine: {
+        			                    show: false
+        			                },
+        			                data:data.data.category
         			            },
-        			            yAxis: {},
+        			            yAxis: {
+        			            	name:'同比增长率(%)',
+        			                type: 'value',
+        			                boundaryGap: [0, '100%'],
+        			                splitLine: {
+        			                    show: false
+        			                },
+        			                interval:0.2,
+        			                min:-1,
+        			                max:3.6
+        			            },
         			            series: [{
-        			                name: '销量',
-        			                type: 'bar',
-        			                data: [5, 20, 36, 10, 10, 20]
+        			                name: '营业收入',
+        			                type: 'line',
+        			                data: data.data.revenuerateMap
+        			            },
+        			            {
+        			                name: '营业利润',
+        			                type: 'line',
+        			                data: data.data.operprofitrateMap
+        			            },
+        			            {
+        			                name: '利润总额',
+        			                type: 'line',
+        			                data: data.data.totalprofitrateMap
+        			            },
+        			            {
+        			                name: '净利润',
+        			                type: 'line',
+        			                data: data.data.netprofitrateMap
+        			            },
+        			            {
+        			                name: '归属股东净利润',
+        			                type: 'line',
+        			                data: data.data.shnetprofitrateMap
+        			            },
+        			            {
+        			                name: '归属股东净利润(扣非)',
+        			                type: 'line',
+        			                data: data.data.deshnetprofitrateMap
+        			            },
+        			            {
+        			                name: '现金流量净额',
+        			                type: 'line',
+        			                data: data.data.netcashflowrateMap
+        			            },
+        			            {
+        			                name: '总资产',
+        			                type: 'line',
+        			                data: data.data.totalassetsrateMap
+        			            },
+        			            {
+        			                name: '总负债',
+        			                type: 'line',
+        			                data: data.data.totalliabilityrateMap
+        			            },
+        			            {
+        			                name: '股东权益',
+        			                type: 'line',
+        			                data: data.data.shequityrateMap
+        			            },
+        			            {
+        			                name: '每股收益',
+        			                type: 'line',
+        			                data: data.data.persharerateMap
         			            }]
         			        };
 
