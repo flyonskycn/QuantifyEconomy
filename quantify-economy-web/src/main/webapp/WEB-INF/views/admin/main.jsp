@@ -150,7 +150,7 @@
 		
 		<!-- Content Wrapper. Contains page content -->
   		<div class="content-wrapper tab-content" style="min-height: 916px;">
-  			<iframe src="/admin/index.co" class="contentfrm tab-pane fade in active" id="contentfrm" frameborder="0" name="contentfrm" style="width:100%;height:650px;"></iframe>
+  			<iframe src="/admin/index.co" class="contentfrm tab-pane fade in active" id="contentfrm" frameborder="0" name="contentfrm" style="width:100%;height: 846px;"></iframe>
   		</div>
   		
   		<footer class="main-footer">

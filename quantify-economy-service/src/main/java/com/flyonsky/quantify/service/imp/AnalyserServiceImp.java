@@ -1,6 +1,5 @@
 package com.flyonsky.quantify.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.AnalyserReportMapper;
 import com.flyonsky.quantify.entity.AnalyserReport;
-import com.flyonsky.quantify.model.YearOnYearData;
+import com.flyonsky.quantify.entity.SecuritiesLineData;
+import com.flyonsky.quantify.model.chart.LineChartData;
+import com.flyonsky.quantify.model.chart.YearOnYearData;
 import com.flyonsky.quantify.service.AbstractService;
 import com.flyonsky.quantify.service.AnalyserService;
 
@@ -23,77 +24,57 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		List<AnalyserReport> list = this.getAnalyserMapper().query(code);
 		YearOnYearData data = new YearOnYearData();
 		data.setSecuritiesName(code);
-		
-		// 条目
-		List<Integer> category = new ArrayList<Integer>();
-		// 营业收入同比增长率
-		List<Double> revenuerateMap = new ArrayList<Double>();
-		
-		// 营业利润同比增长率
-		List<Double> operprofitrateMap = new ArrayList<Double>();
-		
-		// 总利润同比增长率
-		List<Double> totalprofitrateMap = new ArrayList<Double>();
-		
-		// 净利润同比增长率
-		List<Double> netprofitrateMap = new ArrayList<Double>();
-		
-		// 归属股东净利润同比增长率
-		List<Double> shnetprofitrateMap = new ArrayList<Double>();
-		
-		// 扣非后归属股东净利润同比增长率
-		List<Double> deshnetprofitrateMap = new ArrayList<Double>();
-		
-		// 经营活动产生现金净额同比增长率
-		List<Double> netcashflowrateMap = new ArrayList<Double>();
-		
-		// 总资长同比增长率
-		List<Double> totalassetsrateMap = new ArrayList<Double>();
-		
-		// 总负债同比增长率
-		List<Double> totalliabilityrateMap = new ArrayList<Double>();
-		
-		// 归属股东权益同比增长率
-		List<Double> shequityrateMap = new ArrayList<Double>();
-		
-		// 每股收益同比增长率
-		List<Double> persharerateMap = new ArrayList<Double>();
 		for(AnalyserReport report : list){
-			category.add(report.getYear());
-			revenuerateMap.add(report.getRevenuerate());
+			data.addCategory(report.getYear());
+			data.addRevenuerate(report.getRevenuerate());
 			
-			operprofitrateMap.add(report.getOperprofitrate());
-			totalprofitrateMap.add(report.getTotalprofitrate());
-			netprofitrateMap.add(report.getNetprofitrate());
+			data.addOperprofitrate(report.getOperprofitrate());
+			data.addTotalprofitrate(report.getTotalprofitrate());
+			data.addNetprofitrate(report.getNetprofitrate());
 			
-			shnetprofitrateMap.add(report.getShnetprofitrate());
+			data.addShnetprofitrate(report.getShnetprofitrate());
 			
-			deshnetprofitrateMap.add(report.getDeshnetprofitrate());
+			data.addDeshnetprofitrate(report.getDeshnetprofitrate());
 			
-			netcashflowrateMap.add(report.getNetcashflowrate());
+			data.addNetcashflowrate(report.getNetcashflowrate());
 			
-			totalassetsrateMap.add(report.getTotalassetsrate());
+			data.addTotalassetsrate(report.getTotalassetsrate());
 			
-			totalliabilityrateMap.add(report.getTotalliabilityrate());
+			data.addTotalliabilityrate(report.getTotalliabilityrate());
 			
-			shequityrateMap.add(report.getShequityrate());
+			data.addShequityrateMap(report.getShequityrate());
 			
-			persharerateMap.add(report.getPersharerate());
+			data.addPersharerate(report.getPersharerate());
 		}
-		
-		data.setCategory(category);
-		
-		data.setRevenuerateMap(revenuerateMap);
-		data.setOperprofitrateMap(operprofitrateMap);
-		data.setTotalprofitrateMap(totalprofitrateMap);
-		data.setNetprofitrateMap(netprofitrateMap);
-		data.setShnetprofitrateMap(shnetprofitrateMap);
-		data.setDeshnetprofitrateMap(deshnetprofitrateMap);
-		data.setNetcashflowrateMap(netcashflowrateMap);
-		data.setTotalassetsrateMap(totalassetsrateMap);
-		data.setTotalliabilityrateMap(totalliabilityrateMap);
-		data.setShequityrateMap(shequityrateMap);
-		data.setPersharerateMap(persharerateMap);
+		return data;
+	}
+
+	@Override
+	public LineChartData queryLine(String code) {
+		List<SecuritiesLineData> list = this.getAnalyserMapper().queryLine(code);
+		LineChartData data = new LineChartData();
+		data.setSecuritiesName(code);
+		for(SecuritiesLineData line : list){
+			data.addCategory(line.getYear());
+			data.addAssetTurnover(line.getAssetTurnover());
+			data.addDebtRatio(line.getDebtRatio());
+			data.addDeshnetprofit(line.getDeshnetprofit());
+			data.addGrossMargin(line.getGrossMargin());
+			data.addMainProfitRate(line.getMainProfitRate());
+			data.addNetAssetsPershare(line.getNetAssetsPershare());
+			data.addNetAssetsProfitRate(line.getNetAssetsProfitRate());
+			data.addNetcashflow(line.getNetcashflow());
+			data.addNetprofit(line.getNetprofit());
+			data.addOperprofit(line.getOperprofit());
+			data.addPershare(line.getPershare());
+			data.addRevenue(line.getRevenue());
+			data.addShequity(line.getShequity());
+			data.addShnetprofit(line.getShnetprofit());
+			data.addTotalassets(line.getTotalassets());
+			data.addTotalAssetsProfitRate(line.getTotalAssetsProfitRate());
+			data.addTotalliability(line.getTotalliability());
+			data.addTotalprofit(line.getTotalprofit());
+		}
 		return data;
 	}
 

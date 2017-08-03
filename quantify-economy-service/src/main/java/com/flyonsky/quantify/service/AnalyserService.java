@@ -1,6 +1,7 @@
 package com.flyonsky.quantify.service;
 
-import com.flyonsky.quantify.model.YearOnYearData;
+import com.flyonsky.quantify.model.chart.LineChartData;
+import com.flyonsky.quantify.model.chart.YearOnYearData;
 
 public interface AnalyserService {
 
@@ -10,4 +11,11 @@ public interface AnalyserService {
 	 * @return
 	 */
 	YearOnYearData query(String code);
+	
+	/**
+	 * 查询年报的典线图数据
+	 * @param code 股票代码
+	 * @return
+	 */
+	LineChartData queryLine(String code);
 }

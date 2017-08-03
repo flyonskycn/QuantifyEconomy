@@ -16,20 +16,57 @@
     <result column="shequityrate" property="shequityrate" jdbcType="DECIMAL" />
     <result column="persharerate" property="persharerate" jdbcType="DECIMAL" />
   </resultMap>
+  
+   <resultMap id="LineData" type="com.flyonsky.quantify.entity.SecuritiesLineData" >
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="revenue" property="revenue" jdbcType="DECIMAL" />
+    <result column="operprofit" property="operprofit" jdbcType="DECIMAL" />
+    <result column="totalprofit" property="totalprofit" jdbcType="DECIMAL" />
+    <result column="netprofit" property="netprofit" jdbcType="DECIMAL" />
+    <result column="shnetprofit" property="shnetprofit" jdbcType="DECIMAL" />
+    <result column="deshnetprofit" property="deshnetprofit" jdbcType="DECIMAL" />
+    <result column="netcashflow" property="netcashflow" jdbcType="DECIMAL" />
+    <result column="totalassets" property="totalassets" jdbcType="DECIMAL" />
+    <result column="totalliability" property="totalliability" jdbcType="DECIMAL" />
+    <result column="shequity" property="shequity" jdbcType="DECIMAL" />
+    
+    <result column="pershare" property="pershare" jdbcType="DECIMAL" />
+    <result column="assetturnover" property="assetTurnover" jdbcType="DECIMAL" />
+    <result column="grossmargin" property="grossMargin" jdbcType="DECIMAL" />
+    <result column="mainprofitrate" property="mainProfitRate" jdbcType="DECIMAL" />
+    <result column="debtratio" property="debtRatio" jdbcType="DECIMAL" />
+    <result column="netassetspershare" property="netAssetsPershare" jdbcType="DECIMAL" />
+    <result column="totalassetsprofitrate" property="totalAssetsProfitRate" jdbcType="DECIMAL" />
+    <result column="netassetsprofitrate" property="netAssetsProfitRate" jdbcType="DECIMAL" />
+  </resultMap>
+  
   <select id="query" resultMap="AnalyserReportMap" parameterType="java.lang.String">
-	select a.code,a.year, (a.revenue - b.revenue)/b.revenue as revenuerate,
-	(a.operprofit - b.operprofit)/b.operprofit as operprofitrate,
-	(a.totalprofit - b.totalprofit)/b.totalprofit as totalprofitrate,
-	(a.netprofit - b.netprofit)/b.netprofit as netprofitrate,
-	(a.shnetprofit - b.shnetprofit)/b.shnetprofit as shnetprofitrate,
-	(a.deshnetprofit - b.deshnetprofit)/b.deshnetprofit as deshnetprofitrate,
-	(a.netcashflow - b.netcashflow)/b.netcashflow as netcashflowrate,
-	(a.totalassets - b.totalassets)/b.totalassets as totalassetsrate,
-	(a.totalliability - b.totalliability)/b.totalliability as totalliabilityrate,
-	(a.shequity - b.shequity)/b.shequity as shequityrate,
-	(a.deshnetprofit/a.totalshares - b.deshnetprofit/b.totalshares)/(b.deshnetprofit/b.totalshares) as persharerate
+	select a.code,a.year, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
+	(a.operprofit - b.operprofit)/b.operprofit*100.0 as operprofitrate,
+	(a.totalprofit - b.totalprofit)/b.totalprofit*100.0 as totalprofitrate,
+	(a.netprofit - b.netprofit)/b.netprofit*100.0 as netprofitrate,
+	(a.shnetprofit - b.shnetprofit)/b.shnetprofit*100.0 as shnetprofitrate,
+	(a.deshnetprofit - b.deshnetprofit)/b.deshnetprofit*100.0 as deshnetprofitrate,
+	(a.netcashflow - b.netcashflow)/b.netcashflow*100.0 as netcashflowrate,
+	(a.totalassets - b.totalassets)/b.totalassets*100.0 as totalassetsrate,
+	(a.totalliability - b.totalliability)/b.totalliability*100.0 as totalliabilityrate,
+	(a.shequity - b.shequity)/b.shequity*100.0 as shequityrate,
+	(a.deshnetprofit/a.totalshares - b.deshnetprofit/b.totalshares)/(b.deshnetprofit/b.totalshares)*100.0 as persharerate
 	 from 
 	(select * from cp_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
 	where a.year = b.rateyear and a.code = b.code and a.code = #{code} order by a.year 
+  </select>
+  
+  <select id="queryLine" resultMap="LineData" parameterType="java.lang.String">
+	select code,year,revenue,operprofit,totalprofit,netprofit,shnetprofit,deshnetprofit,netcashflow,totalassets,totalliability,shequity,
+	deshnetprofit/totalshares*100.0 as pershare,
+	revenue/totalassets as assetTurnover,
+	operprofit/revenue*100.0 as grossMargin,
+	operprofit/totalprofit*100.0 as mainProfitRate,
+	totalliability/totalassets*100.0 as debtRatio,
+	shequity/totalshares as netAssetsPershare,
+	deshnetprofit/totalassets*100.0 as totalAssetsProfitRate,
+	deshnetprofit/shequity*100.0 as netAssetsProfitRate from cp_annualreport where code = #{code} order by year
   </select>
 </mapper>
