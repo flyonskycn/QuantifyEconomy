@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.service;
 
 import com.flyonsky.quantify.entity.AnnualReport;
+import com.flyonsky.quantify.model.GridData;
+import com.flyonsky.quantify.model.QueryInfo;
 
 /**
  * 年报数据服务接口
@@ -16,6 +18,13 @@ public interface AnnualReportService {
 	 * @return
 	 */
 	AnnualReport queryAnnualReport(String code,int year);
+	
+	/**
+	 * 分页查询年报数据
+	 * @param query 查询信息
+	 * @return
+	 */
+	GridData<AnnualReport> queryAnnualReport(QueryInfo query);
 	
 	/**
 	 * 新建年报

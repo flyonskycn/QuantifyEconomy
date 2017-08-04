@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.flyonsky.quantify.dao.AnnualReportMapper;
 import com.flyonsky.quantify.entity.AnnualReport;
 import com.flyonsky.quantify.entity.AnnualReportExample;
+import com.flyonsky.quantify.model.GridData;
+import com.flyonsky.quantify.model.QueryInfo;
 import com.flyonsky.quantify.service.AbstractService;
 import com.flyonsky.quantify.service.AnnualReportService;
 
@@ -26,6 +28,20 @@ public class AnnualReportServiceImp extends AbstractService implements AnnualRep
 			return list.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public GridData<AnnualReport> queryAnnualReport(QueryInfo query) {
+		GridData<AnnualReport> grid=new GridData<AnnualReport>();
+		AnnualReportExample example=new AnnualReportExample();
+		example.setOrderByClause(query.getOrderByClause());
+		example.setCustomWhere(query.getQueryFilter());
+		grid.setTotalRows(this.getAnnualMapper().countByExample(example));
+		
+		example.setLimitStart(query.getPage()*query.getPageSize());
+		example.setLimitEnd(query.getPageSize());
+		grid.setPageData(this.getAnnualMapper().selectByExample(example));
+		return grid;
 	}
 
 	@Override

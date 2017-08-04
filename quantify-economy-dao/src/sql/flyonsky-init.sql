@@ -19,7 +19,10 @@ insert into cp_admin_url values(10,null,'ANALYZE','数据分析',0,1,'fa-user-se
 	(10032,'/admin/analyser/salesrate.co','ANALYZE.ANALYSER.SALESRATE','销售比率查询',1003,2,'')
 (1004,'/admin/analyser/securityvertical.co','ANALYZE.ANALYSER.SECURITYVERTICAL','证券主要指标-纵向',10,0,''),
 	(10041,'/admin/analyser/securities.co','ANALYZE.ANALYSER.SECURITIES','证券主要指标查询',1004,2,''),
-	(10042,'/admin/analyser/securitiesrate.co','ANALYZE.ANALYSER.SECURITIESRATE','证券主要指标比率查询',1004,2,'');
+	(10042,'/admin/analyser/securitiesrate.co','ANALYZE.ANALYSER.SECURITIESRATE','证券主要指标比率查询',1004,2,''),
+(1005,'/admin/annual/annualmanger.co','ANALYZE.ANNUALMANGER','年报管理',10,0,''),
+	(10051,'/admin/annual/edit.co','ANALYZE.ANNUAL.EDIT','年报编辑',1005,2,''),
+	(10052,'/admin/annual/query.co','ANALYZE.ANNUAL.QUERY','年报查询',1005,2,'');
 	
 
 insert into cp_admin_url values(99,null,'ADMIN','系统管理',0,1,'fa-user-secret text-gray'),

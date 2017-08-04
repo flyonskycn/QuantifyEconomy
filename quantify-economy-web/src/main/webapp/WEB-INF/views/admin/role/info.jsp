@@ -26,7 +26,7 @@
 	
     
 	<script type="text/javascript" charset="utf-8" src="/ext/jquery.toaster.js"> </script>
-	<script type="text/javascript" charset="utf-8" src="/js/wristband-admin.js"> </script>
+	<script type="text/javascript" charset="utf-8" src="/js/flyonsky-admin.js"> </script>
 
 
     <style type="text/css">

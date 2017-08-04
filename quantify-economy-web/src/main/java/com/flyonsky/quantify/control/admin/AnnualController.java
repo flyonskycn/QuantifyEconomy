@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyonsky.quantify.entity.AnnualReport;
+import com.flyonsky.quantify.model.GridData;
+import com.flyonsky.quantify.model.QueryInfo;
 import com.flyonsky.quantify.model.ResponseCode;
 import com.flyonsky.quantify.model.ResponseData;
 import com.flyonsky.quantify.service.AnnualReportService;
@@ -31,11 +34,30 @@ public class AnnualController extends AbstractAdminController{
 	@Autowired
 	private AnnualReportService annualService;
 	
+	@RequestMapping("{page}")
+	public String execute(@PathVariable("page") String page){
+		return PATH + "/" + page;
+	}
+	
 	@RequestMapping("index")
-	public String execute(Model model){	
+	public String index(Model model){	
 		List<String> data = this.getFileService().recursive(true, this.getUploadDir());
 		model.addAttribute("files", data);
 		return PATH + "/index";
+	}
+	
+	/**
+	 * 角色列表视图
+	 * @param model
+	 * @param role 
+	 * @param query 
+	 * @return
+	 */
+	@RequestMapping(value="query",produces="application/json")
+	@ResponseBody
+	public GridData<AnnualReport> query(Model model, QueryInfo query){
+		GridData<AnnualReport> grid = this.getAnnualService().queryAnnualReport(query);
+		return grid;
 	}
 	
 	@RequestMapping(value="queryannual",produces="application/json")

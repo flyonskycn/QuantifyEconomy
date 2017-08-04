@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>管理角色列表</title>
+    <title>财报数据管理</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1>管理角色列表</h1>
+    <h1>财报数据管理</h1>
     <div class="row" id="datagird">
     	
     </div>
@@ -60,25 +60,45 @@ $(function() {
     $("#datagird").bs_grid({
  
         ajaxFetchDataURL: "query.co",
-        row_primary_key: "roleid",
+        row_primary_key: "id",
  
         columns: [
-            {field: "roleid", header: "角色ID", visible: "yes"},
-            {field: "rolename", header: "角色名称"},
-            {field: "roleid", header: "操作", "sortable": "no",template:"<a href='info.co?roleid={value}' id='{value}' title='编辑角色' class='glyphicon glyphicon-pencil'></a> "}
+            {field: "id", header: "ID", visible: "no"},
+            {field: "code", header: "证券代码"},
+            {field: "year", header: "年"},
+            {field: "revenue", header: "营业收入"},
+            {field: "operprofit", header: "营业利润"},
+            {field: "totalprofit", header: "利润总额"},
+            {field: "netprofit", header: "净利润"},
+            {field: "shnetprofit", header: "归属股东净利润"},
+            {field: "deshnetprofit", header: "归属股东净利润(扣非)"},
+            {field: "netcashflow", header: "现金流量净额"},
+            {field: "totalassets", header: "总资产"},
+            {field: "totalliability", header: "总负债"},
+            {field: "shequity", header: "股东权益"},
+            {field: "totalshares", header: "股份总数"},
+            {field: "remark", header: "备注"},
+            {field: "id", header: "操作", "sortable": "no",template:"<a href='edit.co?recortid={value}' id='{value}' title='编辑' class='glyphicon glyphicon-pencil'></a> "}
         ],
         sorting: [
-                  {sortingName: "角色ID", field: "roleid", order: "descending"},
-                  {sortingName: "角色名称", field: "rolename", order: "none"},
+                  {sortingName: "证券代码", field: "code", order: "descending"},
+                  {sortingName: "年", field: "year", order: "none"},
               ],
-        customTools:[
-			{tagName: "a", id: "add",href:'info.co', title: "发布",iconClass:"glyphicon glyphicon-plus"},
-        ],
  
         filterOptions: {
             filters: [
                 {
-                    filterName: "角色名称", "filterType": "text", field: "roleName", filterLabel: "角色名称",
+                    filterName: "证券代码", "filterType": "text", field: "code", filterLabel: "证券代码",
+                    excluded_operators: ["in", "not_in"],
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "年", "filterType": "text", field: "year", filterLabel: "年",
                     excluded_operators: ["in", "not_in"],
                     filter_interface: [
                         {
