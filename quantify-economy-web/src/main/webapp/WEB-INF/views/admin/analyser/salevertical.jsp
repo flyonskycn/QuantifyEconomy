@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="<s:url value="/" />ext/AdminLTE/css/skins/_all-skins.min.css">
   	<!-- jQuery 2.2.0 -->
 	<script src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"></script>
-	<title>查询</title>
+	<title>收入分析-纵向</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Main content -->
@@ -48,8 +48,8 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 主营业务占比 -->
-					<div id="mainprofitrate"></div>
+					<!-- 销售同比 -->
+					<div id="salesrate"></div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-6">
 					<!-- 资产周转次数 -->
@@ -58,8 +58,6 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 销售同比 -->
-					<div id="salesrate"></div>
 				</div>
 			</div>
 		</div>
@@ -87,8 +85,6 @@
 		var assetturnoverChart;
 		// 资产利润率曲线
 		var profitChart;
-		// 主营业务占比
-		var mainChart;
 		// 销售同比
 		var salesrateChart;
 	    $(function() {  
@@ -96,7 +92,6 @@
 	        salesChart = echarts.init(document.getElementById('sales'));
 	        assetturnoverChart = echarts.init(document.getElementById('assetturnover'));
 	        profitChart = echarts.init(document.getElementById('profit'));
-	        mainChart = echarts.init(document.getElementById('mainprofitrate'));
 	        salesrateChart = echarts.init(document.getElementById('salesrate'));
 	         $(".search").click(function(){
 	        	 $.ajax({
@@ -109,7 +104,6 @@
 	        				 salesChart.resize({height:500});
 	        				 assetturnoverChart.resize({height:500});
 	        				 profitChart.resize({height:500});
-	        				 mainChart.resize({height:500});
         			        // 销售图表的配置项和数据
         			        var salesOption = {
         			            title: {
@@ -196,6 +190,8 @@
         			                data: data.data.netinterestrateList
         			            }]
         			        };
+        			        // 收益率曲线
+        			        profitChart.setOption(profitOption);
         			        
            			        // 资本周转率图表的配置项和数据
         			        var assetturnoverOption = {
@@ -229,41 +225,6 @@
         			        };
         			        assetturnoverChart.setOption(assetturnoverOption);
         			        
-        			        // 收益率曲线
-        			        profitChart.setOption(profitOption);
-        			        
-        			     	// 每股净资产图表的配置项和数据
-        			        var mainOption = {
-        			            title: {
-        			                text: data.data.securitiesName + '主营占比曲线'
-        			            },
-        			            tooltip: {},
-        			            legend: {
-        			                data:['主营占比']
-        			            },
-        			            xAxis: {
-        			                type: 'category',
-        			                splitLine: {
-        			                    show: false
-        			                },
-        			                data:data.data.category
-        			            },
-        			            yAxis: {
-        			            	name:'主营占比(%)',
-        			                type: 'value',
-        			                boundaryGap: [0, '10%'],
-        			                splitLine: {
-        			                    show: false
-        			                }
-        			            },
-        			            series: [{
-        			                name: '主营占比',
-        			                type: 'line',
-        			                data: data.data.mainprofitrateList
-        			            }]
-        			        };
-        			     	// 主营占比曲线
-        			        mainChart.setOption(mainOption);
 	  					}else{
 	  						$.toaster(data.message);
 	  					}

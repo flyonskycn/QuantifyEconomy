@@ -17,7 +17,7 @@
     <result column="persharerate" property="persharerate" jdbcType="DECIMAL" />
   </resultMap>
   
-   <resultMap id="LineData" type="com.flyonsky.quantify.entity.SecuritiesLineData" >
+   <resultMap id="SecurityLineData" type="com.flyonsky.quantify.entity.SecuritiesLineData" >
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="year" property="year" jdbcType="INTEGER" />
     <result column="revenue" property="revenue" jdbcType="DECIMAL" />
@@ -41,6 +41,19 @@
     <result column="netassetsprofitrate" property="netAssetsProfitRate" jdbcType="DECIMAL" />
   </resultMap>
   
+  <resultMap id="SalesChart" type="com.flyonsky.quantify.entity.SalesCharts" >
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="revenue" property="revenue" jdbcType="DECIMAL" />
+    <result column="operprofit" property="operprofit" jdbcType="DECIMAL" />
+    <result column="totalprofit" property="totalprofit" jdbcType="DECIMAL" />
+    <result column="netprofit" property="netprofit" jdbcType="DECIMAL" />
+    <result column="grossmargin" property="grossmargin" jdbcType="DECIMAL" />
+    <result column="netinterestrate" property="netinterestrate" jdbcType="DECIMAL" />
+    <result column="mainprofitrate" property="mainprofitrate" jdbcType="DECIMAL" />
+    <result column="assetturnover" property="assetturnover" jdbcType="DECIMAL" />
+  </resultMap>
+  
   <select id="query" resultMap="AnalyserReportMap" parameterType="java.lang.String">
 	select a.code,a.year, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
 	(a.operprofit - b.operprofit)/b.operprofit*100.0 as operprofitrate,
@@ -58,7 +71,7 @@
 	where a.year = b.rateyear and a.code = b.code and a.code = #{code} order by a.year 
   </select>
   
-  <select id="queryLine" resultMap="LineData" parameterType="java.lang.String">
+  <select id="queryLine" resultMap="SecurityLineData" parameterType="java.lang.String">
 	select code,year,revenue,operprofit,totalprofit,netprofit,shnetprofit,deshnetprofit,netcashflow,totalassets,totalliability,shequity,
 	deshnetprofit/totalshares*100.0 as pershare,
 	revenue/totalassets as assetTurnover,
@@ -68,5 +81,13 @@
 	shequity/totalshares as netAssetsPershare,
 	deshnetprofit/totalassets*100.0 as totalAssetsProfitRate,
 	deshnetprofit/shequity*100.0 as netAssetsProfitRate from cp_annualreport where code = #{code} order by year
+  </select>
+  
+  <select id="querySales" resultMap="SalesChart" parameterType="java.lang.String">
+	select code,year,revenue,operprofit,totalprofit,netprofit,
+	operprofit/revenue*100.0 as grossmargin,
+	netprofit/revenue*100.0 as netinterestrate,
+	operprofit/totalprofit*100.0 as mainprofitrate,
+	revenue/totalassets as assetturnover from cp_annualreport where code = #{code} order by year
   </select>
 </mapper>

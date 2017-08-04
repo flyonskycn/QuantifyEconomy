@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="<s:url value="/" />ext/AdminLTE/css/skins/_all-skins.min.css">
   	<!-- jQuery 2.2.0 -->
 	<script src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"></script>
-	<title>查询</title>
+	<title>股标指标-纵向</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Main content -->
@@ -38,28 +38,32 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 销售额 -->
-					<div id="sales"></div>
+					<!-- 每股净资产 -->
+					<div id="netassetspershare"></div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 利润率 -->
-					<div id="profit"></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 主营业务占比 -->
-					<div id="mainprofitrate"></div>
-				</div>
-				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 资产周转次数 -->
-					<div id="assetturnover"></div>
+					<!-- 每股收益 -->
+					<div id="pershare"></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 销售同比 -->
-					<div id="salesrate"></div>
+					<!-- 每股现金流 -->
+					<div id="persharecash"></div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<!-- 净资产收益率-->
+					<div id="netassetsprofit"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<!-- 负债率 -->
+					<div id="debtratio"></div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<!-- 同比增长率 -->
+					<div id="rate"></div>
 				</div>
 			</div>
 		</div>
@@ -81,37 +85,42 @@
 	<!-- echart 1.0.1 -->
 	<script src="<s:url value="/" />ext/echarts/echarts.min.js"></script>
 	<script type="text/javascript">
-		// 销售曲线
-		var salesChart;
-		// 资产周转率曲线
-		var assetturnoverChart;
-		// 资产利润率曲线
-		var profitChart;
-		// 主营业务占比
-		var mainChart;
-		// 销售同比
-		var salesrateChart;
+		// 每股净资产
+		var netassetspershareChart;
+		// 每股收益
+		var pershareChart;
+		// 每股现金流
+		var persharecashChart;
+		// 净资产收益率
+		var netassetsprofitChart;
+		// 负债率
+		var debtratioChart;
+		// 同比增长率 
+		var rateChart;
 	    $(function() {  
 			// 基于准备好的dom，初始化echarts实例
-	        salesChart = echarts.init(document.getElementById('sales'));
-	        assetturnoverChart = echarts.init(document.getElementById('assetturnover'));
-	        profitChart = echarts.init(document.getElementById('profit'));
-	        mainChart = echarts.init(document.getElementById('mainprofitrate'));
-	        salesrateChart = echarts.init(document.getElementById('salesrate'));
+	        netassetspershareChart = echarts.init(document.getElementById('netassetspershare'));
+	        pershareChart = echarts.init(document.getElementById('pershare'));
+	        persharecashChart = echarts.init(document.getElementById('persharecash'));
+	        netassetsprofitChart = echarts.init(document.getElementById('netassetsprofit'));
+	        debtratioChart = echarts.init(document.getElementById('debtratio'));
+	        rateChart = echarts.init(document.getElementById('rate'));
 	         $(".search").click(function(){
 	        	 $.ajax({
-	        		 url:'/admin/analyser/sales.co',
+	        		 url:'/admin/analyser/securities.co',
 	        		 data:{'code':$(".form-control").val()},
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 if(data.erroCode == 0){
 	        				 
-	        				 salesChart.resize({height:500});
-	        				 assetturnoverChart.resize({height:500});
-	        				 profitChart.resize({height:500});
-	        				 mainChart.resize({height:500});
-        			        // 销售图表的配置项和数据
-        			        var salesOption = {
+	        				 netassetspershareChart.resize({height:500});
+	        				 pershareChart.resize({height:500});
+	        				 persharecashChart.resize({height:500});
+	        				 netassetsprofitChart.resize({height:500});
+	        				 debtratioChart.resize({height:500});
+	        				 rateChart.resize({height:500});
+        			        // 每股净资产配置
+        			        var netassetspershareOption = {
         			            title: {
         			                text: data.data.securitiesName + '销售曲线'
         			            },
@@ -120,7 +129,7 @@
         			            },
         			            tooltip: {},
         			            legend: {
-        			                data:['营业收入','营业利润','净利润','总利润']
+        			                data:['每股净资产']
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -138,37 +147,22 @@
         			                }
         			            },
         			            series: [{
-        			                name: '营业收入',
+        			                name: '每股净资产',
         			                type: 'line',
-        			                data: data.data.revenueList
-        			            },
-        			            {
-        			                name: '营业利润',
-        			                type: 'line',
-        			                data: data.data.operprofitList
-        			            },
-        			            {
-        			                name: '净利润',
-        			                type: 'line',
-        			                data: data.data.netprofitList
-        			            },
-        			            {
-        			                name: '总利润',
-        			                type: 'line',
-        			                data: data.data.totalprofitList
+        			                data: data.data.netassetsprofitList
         			            }]
         			        };
-        			        // 销售数据
-        			        salesChart.setOption(salesOption);
+        			        // 每股净资产
+        			        netassetspershareChart.setOption(netassetspershareOption);
            			        
-        			        // 收益率定图表的配置项和数据
-        			        var profitOption = {
+        			        // 每股收益图表的配置项和数据
+        			        var pershareOption = {
         			            title: {
-        			                text: data.data.securitiesName + '利润率曲线'
+        			                text: data.data.securitiesName + '每股收益'
         			            },
         			            tooltip: {},
         			            legend: {
-        			                data:['毛利率','净利率']
+        			                data:['每股收益']
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -178,7 +172,7 @@
         			                data:data.data.category
         			            },
         			            yAxis: {
-        			            	name:'利润率(%)',
+        			            	name:'每股收益(RMB)',
         			                type: 'value',
         			                boundaryGap: [0, '10%'],
         			                splitLine: {
@@ -186,25 +180,22 @@
         			                }
         			            },
         			            series: [{
-        			                name: '毛利率',
+        			                name: '每股收益',
         			                type: 'line',
-        			                data: data.data.grossmarginList
-        			            },
-        			            {
-        			                name: '净利率',
-        			                type: 'line',
-        			                data: data.data.netinterestrateList
+        			                data: data.data.pershareList
         			            }]
         			        };
+        			        // 每股收益
+        			        pershareChart.setOption(pershareOption);
         			        
-           			        // 资本周转率图表的配置项和数据
-        			        var assetturnoverOption = {
+        			     	// 每股现金
+        			        var persharecashOption = {
         			            title: {
-        			                text: data.data.securitiesName + '资产周转率曲线'
+        			                text: data.data.securitiesName + '每股现金'
         			            },
         			            tooltip: {},
         			            legend: {
-        			                data:['资产周转率']
+        			                data:['每股现金']
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -214,7 +205,7 @@
         			                data:data.data.category
         			            },
         			            yAxis: {
-        			            	name:'次',
+        			            	name:'每股现金(RMB)',
         			                type: 'value',
         			                boundaryGap: [0, '10%'],
         			                splitLine: {
@@ -222,24 +213,22 @@
         			                }
         			            },
         			            series: [{
-        			                name: '资产周转率',
+        			                name: '每股现金',
         			                type: 'line',
-        			                data: data.data.assetturnoverList
+        			                data: data.data.persharecashList
         			            }]
         			        };
-        			        assetturnoverChart.setOption(assetturnoverOption);
+        			        // 每股现金
+        			        persharecashChart.setOption(persharecashOption);
         			        
-        			        // 收益率曲线
-        			        profitChart.setOption(profitOption);
-        			        
-        			     	// 每股净资产图表的配置项和数据
-        			        var mainOption = {
+           			        // 净资产收益率
+        			        var netassetsprofitOption = {
         			            title: {
-        			                text: data.data.securitiesName + '主营占比曲线'
+        			                text: data.data.securitiesName + '净资产收益率'
         			            },
         			            tooltip: {},
         			            legend: {
-        			                data:['主营占比']
+        			                data:['净资产收益率']
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -249,7 +238,7 @@
         			                data:data.data.category
         			            },
         			            yAxis: {
-        			            	name:'主营占比(%)',
+        			            	name:'净资产收益率(%)',
         			                type: 'value',
         			                boundaryGap: [0, '10%'],
         			                splitLine: {
@@ -257,78 +246,52 @@
         			                }
         			            },
         			            series: [{
-        			                name: '主营占比',
+        			                name: '净资产收益率',
         			                type: 'line',
-        			                data: data.data.mainprofitrateList
+        			                data: data.data.netassetsprofitList
         			            }]
         			        };
-        			     	// 主营占比曲线
-        			        mainChart.setOption(mainOption);
+        			        netassetsprofitChart.setOption(netassetsprofitOption);
+        			        
+           			        // 负债率
+        			        var debtratioOption = {
+        			            title: {
+        			                text: data.data.securitiesName + '负债率'
+        			            },
+        			            tooltip: {},
+        			            legend: {
+        			                data:['负债率']
+        			            },
+        			            xAxis: {
+        			                type: 'category',
+        			                splitLine: {
+        			                    show: false
+        			                },
+        			                data:data.data.category
+        			            },
+        			            yAxis: {
+        			            	name:'负债率(%)',
+        			                type: 'value',
+        			                boundaryGap: [0, '10%'],
+        			                splitLine: {
+        			                    show: false
+        			                }
+        			            },
+        			            series: [{
+        			                name: '负债率',
+        			                type: 'line',
+        			                data: data.data.debtratioList
+        			            }]
+        			        };
+        			        debtratioChart.setOption(debtratioOption);
+        			        
 	  					}else{
 	  						$.toaster(data.message);
 	  					}
 	        		 }
 	        	 })
 	        	 
-	        	 $.ajax({
-	        		 url:'/admin/analyser/salesrate.co',
-	        		 data:{'code':$(".form-control").val()},
-	        		 dataType:'json',
-	        		 success:function(data){
-	        			 
-	        			 salesrateChart.resize({height:500});
-     			        // 销售图表的配置项和数据
-     			        var salesrateOption = {
-     			            title: {
-     			                text: data.data.securitiesName + '销售同比'
-     			            },
-     			            grid:{
-     			            	left:'15%'
-     			            },
-     			            tooltip: {},
-     			            legend: {
-     			                data:['营业收入','营业利润','净利润','总利润']
-     			            },
-     			            xAxis: {
-     			                type: 'category',
-     			                splitLine: {
-     			                    show: false
-     			                },
-     			                data:data.data.category
-     			            },
-     			            yAxis: {
-     			            	name:'同比(%)',
-     			                type: 'value',
-     			                boundaryGap: ['10%', '5%'],
-     			                splitLine: {
-     			                    show: false
-     			                }
-     			            },
-     			            series: [{
-     			                name: '营业收入',
-     			                type: 'line',
-     			                data: data.data.revenuerateMap
-     			            },
-     			            {
-     			                name: '营业利润',
-     			                type: 'line',
-     			                data: data.data.operprofitrateMap
-     			            },
-     			            {
-     			                name: '净利润',
-     			                type: 'line',
-     			                data: data.data.netprofitrateMap
-     			            },
-     			            {
-     			                name: '总利润',
-     			                type: 'line',
-     			                data: data.data.totalprofitrateMap
-     			            }]
-     			        };
-     			        // 销售数据
-     			        salesrateChart.setOption(salesrateOption);
-	        		 }
-	        	 })
+	        	 
 	         });
 	    });
 	</script>

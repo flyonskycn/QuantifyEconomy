@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.SalesMapper" >
+  <resultMap id="SalesChart" type="com.flyonsky.quantify.entity.SalesCharts" >
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="revenue" property="revenue" jdbcType="DECIMAL" />
+    <result column="operprofit" property="operprofit" jdbcType="DECIMAL" />
+    <result column="totalprofit" property="totalprofit" jdbcType="DECIMAL" />
+    <result column="netprofit" property="netprofit" jdbcType="DECIMAL" />
+    <result column="grossmargin" property="grossmargin" jdbcType="DECIMAL" />
+    <result column="netinterestrate" property="netinterestrate" jdbcType="DECIMAL" />
+    <result column="mainprofitrate" property="mainprofitrate" jdbcType="DECIMAL" />
+    <result column="assetturnover" property="assetturnover" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <resultMap id="SalesRateChart" type="com.flyonsky.quantify.entity.SalesRateCharts" >
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="revenuerate" property="revenuerate" jdbcType="DECIMAL" />
+    <result column="operprofitrate" property="operprofitrate" jdbcType="DECIMAL" />
+    <result column="totalprofitrate" property="totalprofitrate" jdbcType="DECIMAL" />
+    <result column="netprofitrate" property="netprofitrate" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <select id="querySales" resultMap="SalesChart" parameterType="java.lang.String">
+	select code,year,revenue,operprofit,totalprofit,netprofit,
+	operprofit/revenue*100.0 as grossmargin,
+	netprofit/revenue*100.0 as netinterestrate,
+	operprofit/totalprofit*100.0 as mainprofitrate,
+	revenue/totalassets as assetturnover from cp_annualreport where code = #{code} order by year
+  </select>
+  
+  <select id="queryRateSales" resultMap="SalesRateChart" parameterType="java.lang.String">
+	select a.code,a.year, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
+	(a.operprofit - b.operprofit)/b.operprofit*100.0 as operprofitrate,
+	(a.totalprofit - b.totalprofit)/b.totalprofit*100.0 as totalprofitrate,
+	(a.netprofit - b.netprofit)/b.netprofit*100.0 as netprofitrate
+	 from 
+	(select * from cp_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
+	where a.year = b.rateyear and a.code = b.code and a.code = #{code} order by a.year 
+  </select>
+</mapper>

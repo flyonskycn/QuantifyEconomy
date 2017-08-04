@@ -6,9 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.AnalyserReportMapper;
+import com.flyonsky.quantify.dao.SalesMapper;
+import com.flyonsky.quantify.dao.SecuritiesChartsMapper;
 import com.flyonsky.quantify.entity.AnalyserReport;
+import com.flyonsky.quantify.entity.SalesCharts;
+import com.flyonsky.quantify.entity.SalesRateCharts;
+import com.flyonsky.quantify.entity.SecuritiesCharts;
 import com.flyonsky.quantify.entity.SecuritiesLineData;
 import com.flyonsky.quantify.model.chart.MultiLineChartData;
+import com.flyonsky.quantify.model.chart.SalesChartData;
+import com.flyonsky.quantify.model.chart.SalesRateChartData;
+import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
 import com.flyonsky.quantify.model.chart.YearOnYearData;
 import com.flyonsky.quantify.service.AbstractService;
 import com.flyonsky.quantify.service.AnalyserService;
@@ -18,6 +26,12 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	
 	@Autowired
 	private AnalyserReportMapper analyserMapper;
+	
+	@Autowired
+	private SalesMapper salesMapper;
+	
+	@Autowired
+	private SecuritiesChartsMapper securitiesMapper;
 
 	@Override
 	public YearOnYearData query(String code) {
@@ -78,6 +92,56 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		return data;
 	}
 
+	@Override
+	public SalesChartData querySales(String code) {
+		List<SalesCharts> list = this.getSalesMapper().querySales(code);
+		SalesChartData data = new SalesChartData();
+		data.setSecuritiesName(code);
+		for(SalesCharts line : list){
+			data.addCategory(line.getYear());
+			data.addAssetturnoverList(line.getAssetturnover());
+			data.addGrossmarginList(line.getGrossmargin());
+			data.addMainprofitrateList(line.getMainprofitrate());
+			data.addNetinterestrateList(line.getNetinterestrate());
+			data.addNetprofit(line.getNetprofit());
+			data.addOperprofit(line.getOperprofit());
+			data.addRevenue(line.getRevenue());
+			data.addTotalprofit(line.getTotalprofit());
+		}
+		return data;
+	}
+
+	@Override
+	public SalesRateChartData queryRateSales(String code) {
+		List<SalesRateCharts> list = this.getSalesMapper().queryRateSales(code);
+		SalesRateChartData data = new SalesRateChartData();
+		data.setSecuritiesName(code);
+		for(SalesRateCharts line : list){
+			data.addCategory(line.getYear());
+			data.addNetprofitrate(line.getNetprofitrate());
+			data.addOperprofitrate(line.getOperprofitrate());
+			data.addRevenuerate(line.getRevenuerate());
+			data.addTotalprofitrate(line.getTotalprofitrate());
+		}
+		return data;
+	}
+
+	@Override
+	public SecuritiesChartsData querySecurities(String code) {
+		List<SecuritiesCharts> list = this.getSecuritiesMapper().querySecurity(code);
+		SecuritiesChartsData data = new SecuritiesChartsData();
+		data.setSecuritiesName(code);
+		for(SecuritiesCharts line : list){
+			data.addCategory(line.getYear());
+			data.addDebtratio(line.getDebtratio());
+			data.addNetassetspershare(line.getNetassetspershare());
+			data.addNetassetsprofit(line.getNetassetsprofit());
+			data.addPershare(line.getPersharecash());
+			data.addPersharecash(line.getPersharecash());
+		}
+		return data;
+	}
+
 	public AnalyserReportMapper getAnalyserMapper() {
 		return analyserMapper;
 	}
@@ -86,4 +150,19 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		this.analyserMapper = analyserMapper;
 	}
 
+	public SalesMapper getSalesMapper() {
+		return salesMapper;
+	}
+
+	public void setSalesMapper(SalesMapper salesMapper) {
+		this.salesMapper = salesMapper;
+	}
+
+	public SecuritiesChartsMapper getSecuritiesMapper() {
+		return securitiesMapper;
+	}
+
+	public void setSecuritiesMapper(SecuritiesChartsMapper securitiesMapper) {
+		this.securitiesMapper = securitiesMapper;
+	}
 }
