@@ -46,6 +46,13 @@ public class AnnualController extends AbstractAdminController{
 		return PATH + "/index";
 	}
 	
+	@RequestMapping("edit")
+	public String edit(int recordid,Model model){	
+		AnnualReport data = this.getAnnualService().queryAnnualReport(recordid);
+		model.addAttribute("data", data);
+		return PATH + "/edit";
+	}
+	
 	/**
 	 * 角色列表视图
 	 * @param model

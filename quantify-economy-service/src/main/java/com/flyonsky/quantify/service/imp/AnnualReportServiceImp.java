@@ -31,6 +31,12 @@ public class AnnualReportServiceImp extends AbstractService implements AnnualRep
 	}
 
 	@Override
+	public AnnualReport queryAnnualReport(int id) {
+		AnnualReport data = this.getAnnualMapper().selectByPrimaryKey(id);
+		return data;
+	}
+
+	@Override
 	public GridData<AnnualReport> queryAnnualReport(QueryInfo query) {
 		GridData<AnnualReport> grid=new GridData<AnnualReport>();
 		AnnualReportExample example=new AnnualReportExample();

@@ -20,6 +20,13 @@ public interface AnnualReportService {
 	AnnualReport queryAnnualReport(String code,int year);
 	
 	/**
+	 * 查看对应的年报
+	 * @param id 
+	 * @return
+	 */
+	AnnualReport queryAnnualReport(int id);
+	
+	/**
 	 * 分页查询年报数据
 	 * @param query 查询信息
 	 * @return

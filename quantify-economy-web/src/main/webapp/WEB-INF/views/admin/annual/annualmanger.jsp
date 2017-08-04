@@ -78,7 +78,7 @@ $(function() {
             {field: "shequity", header: "股东权益"},
             {field: "totalshares", header: "股份总数"},
             {field: "remark", header: "备注"},
-            {field: "id", header: "操作", "sortable": "no",template:"<a href='edit.co?recortid={value}' id='{value}' title='编辑' class='glyphicon glyphicon-pencil'></a> "}
+            {field: "id", header: "操作", "sortable": "no",template:"<a href='edit.co?recordid={value}' id='{value}' title='编辑' class='glyphicon glyphicon-pencil'></a> "}
         ],
         sorting: [
                   {sortingName: "证券代码", field: "code", order: "descending"},
