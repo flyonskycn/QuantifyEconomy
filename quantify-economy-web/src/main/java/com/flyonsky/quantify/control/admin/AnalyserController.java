@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyonsky.quantify.model.ResponseData;
-import com.flyonsky.quantify.model.chart.LineChartData;
+import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.YearOnYearData;
 import com.flyonsky.quantify.service.AnalyserService;
 
@@ -30,9 +30,9 @@ public class AnalyserController extends AbstractAdminController{
 	
 	@RequestMapping(value="analyserline",produces="application/json")
 	@ResponseBody
-	public ResponseData<LineChartData> analyserLine(String code){
-		ResponseData<LineChartData> result = new ResponseData<LineChartData>();
-		LineChartData data = this.getAnalyserService().queryLine(code);
+	public ResponseData<MultiLineChartData> analyserLine(String code){
+		ResponseData<MultiLineChartData> result = new ResponseData<MultiLineChartData>();
+		MultiLineChartData data = this.getAnalyserService().queryLine(code);
 		result.setData(data);
 		return result;
 	}

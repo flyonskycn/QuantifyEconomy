@@ -7,7 +7,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
 	<link rel="stylesheet" href="<s:url value="/" />ext/bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="<s:url value="/" />ext/font-awesome/4.5.0/css/font-awesome.min.css">
+  	<!-- Ionicons -->
+  	<link rel="stylesheet" href="<s:url value="/" />ext/ionicons/2.0.1/css/ionicons.min.css">
+  	<!-- jvectormap -->
+  	<link rel="stylesheet" href="<s:url value="/" />ext/jvectormap/jquery-jvectormap-1.2.2.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="<s:url value="/" />ext/AdminLTE/css/AdminLTE.min.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+	       folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="<s:url value="/" />ext/AdminLTE/css/skins/_all-skins.min.css">
   	<!-- jQuery 2.2.0 -->
 	<script src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"></script>
 	<title>查询</title>
@@ -16,7 +28,7 @@
     <!-- Main content -->
     <section class="content">
 		<div class="container-fluid">
-			<div class="row" style="margin-top: 4rem;">
+			<div class="row" style="margin-top: 4rem;margin-bottom: 1.75rem;">
 				<div class="col-sm-4 col-md-4 col-lg-4 col-md-offset-4">
 					<input type="text" class="form-control"/>
 				</div>
@@ -25,19 +37,23 @@
 				</div>
 			</div>
 			<div class="row">
-				<div id="sales"  style="width: 100%;height:700px;"></div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div id="sales"></div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div id="assetturnover"></div>
+				</div>
 			</div>
 			<div class="row">
-				<div id="assetturnover"  style="width: 100%;height:700px;"></div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div id="profitasset"></div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div id="netassets"></div>
+				</div>
 			</div>
 			<div class="row">
-				<div id="profitasset"  style="width: 100%;height:700px;"></div>
-			</div>
-			<div class="row">
-				<div id="netassets"  style="width: 100%;height:700px;"></div>
-			</div>
-			<div class="row">
-				<div id="debtratio"  style="width: 100%;height:700px;"></div>
+				<div id="debtratio"></div>
 			</div>
 		</div>
 	</section>
@@ -54,9 +70,6 @@
 	<!-- jvectormap -->
 	<script src="<s:url value="/" />ext/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 	<script src="<s:url value="/" />ext/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	
-	<!-- AdminLTE for demo purposes -->
-	<script src="<s:url value="/" />ext/AdminLTE/js/demo.js"></script>
 	
 	<!-- echart 1.0.1 -->
 	<script src="<s:url value="/" />ext/echarts/echarts.min.js"></script>
@@ -85,11 +98,20 @@
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 if(data.erroCode == 0){
-
+	        				 
+	        				 salesChart.resize({height:500});
+	        				 assetturnoverChart.resize({height:500});
+	        				 salesChart.resize({height:500});
+	        				 profitChart.resize({height:500});
+	        				 netassetsChart.resize({height:500});
+	        				 debtratioChart.resize({height:500});
         			        // 销售图表的配置项和数据
         			        var salesOption = {
         			            title: {
         			                text: data.data.securitiesName + '销售曲线'
+        			            },
+        			            grid:{
+        			            	left:'15%'
         			            },
         			            tooltip: {},
         			            legend: {
@@ -105,7 +127,7 @@
         			            yAxis: {
         			            	name:'金额(RMB)',
         			                type: 'value',
-        			                boundaryGap: [0, '100%'],
+        			                boundaryGap: [0, '5%'],
         			                splitLine: {
         			                    show: false
         			                }
@@ -141,7 +163,7 @@
         			            yAxis: {
         			            	name:'次',
         			                type: 'value',
-        			                boundaryGap: [0, '100%'],
+        			                boundaryGap: [0, '10%'],
         			                splitLine: {
         			                    show: false
         			                }
@@ -172,7 +194,7 @@
         			            yAxis: {
         			            	name:'收益率(%)',
         			                type: 'value',
-        			                boundaryGap: [0, '100%'],
+        			                boundaryGap: [0, '10%'],
         			                splitLine: {
         			                    show: false
         			                }
@@ -208,7 +230,7 @@
         			            yAxis: {
         			            	name:'每股净资产金额(RMB)',
         			                type: 'value',
-        			                boundaryGap: [0, '100%'],
+        			                boundaryGap: [0, '10%'],
         			                splitLine: {
         			                    show: false
         			                }
@@ -239,7 +261,7 @@
         			            yAxis: {
         			            	name:'负债率(%)',
         			                type: 'value',
-        			                boundaryGap: [0, '100%'],
+        			                boundaryGap: [0, '10%'],
         			                splitLine: {
         			                    show: false
         			                }

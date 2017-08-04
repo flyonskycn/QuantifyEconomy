@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.flyonsky.quantify.dao.AnalyserReportMapper;
 import com.flyonsky.quantify.entity.AnalyserReport;
 import com.flyonsky.quantify.entity.SecuritiesLineData;
-import com.flyonsky.quantify.model.chart.LineChartData;
+import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.YearOnYearData;
 import com.flyonsky.quantify.service.AbstractService;
 import com.flyonsky.quantify.service.AnalyserService;
@@ -50,9 +50,9 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	}
 
 	@Override
-	public LineChartData queryLine(String code) {
+	public MultiLineChartData queryLine(String code) {
 		List<SecuritiesLineData> list = this.getAnalyserMapper().queryLine(code);
-		LineChartData data = new LineChartData();
+		MultiLineChartData data = new MultiLineChartData();
 		data.setSecuritiesName(code);
 		for(SecuritiesLineData line : list){
 			data.addCategory(line.getYear());

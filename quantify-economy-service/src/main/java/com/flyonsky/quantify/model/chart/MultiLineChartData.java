@@ -9,7 +9,7 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class LineChartData implements Serializable{
+public class MultiLineChartData implements Serializable{
 
 	/**
 	 * 
