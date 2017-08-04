@@ -122,10 +122,7 @@
         			        // 每股净资产配置
         			        var netassetspershareOption = {
         			            title: {
-        			                text: data.data.securitiesName + '销售曲线'
-        			            },
-        			            grid:{
-        			            	left:'15%'
+        			                text: data.data.securitiesName + '每股净资产'
         			            },
         			            tooltip: {},
         			            legend: {
@@ -149,7 +146,7 @@
         			            series: [{
         			                name: '每股净资产',
         			                type: 'line',
-        			                data: data.data.netassetsprofitList
+        			                data: data.data.netassetspershareList
         			            }]
         			        };
         			        // 每股净资产

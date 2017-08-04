@@ -136,7 +136,7 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 			data.addDebtratio(line.getDebtratio());
 			data.addNetassetspershare(line.getNetassetspershare());
 			data.addNetassetsprofit(line.getNetassetsprofit());
-			data.addPershare(line.getPersharecash());
+			data.addPershare(line.getPershare());
 			data.addPersharecash(line.getPersharecash());
 		}
 		return data;
