@@ -17,14 +17,19 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flyonsky.quantify.service.AnnualReportService;
 import com.flyonsky.quantify.service.FileService;
 
 @Service
 public class FileServiceImp implements FileService{
 	
 	private static final Logger LOG = LoggerFactory.getLogger(FileServiceImp.class);
+	
+	@Autowired
+	public AnnualReportService annualService;
 
 	@Override
 	public boolean downLoadN(String url, String targetDir) {
@@ -73,8 +78,8 @@ public class FileServiceImp implements FileService{
 	public List<String> recursive(boolean isAnnualReport, String dir) {
 		List<String> list = new ArrayList<String>();
 		File fd = new File(dir);
+		final List<String> keys = this.getAnnualService().queryAnnualKey();
 		File[] fs = fd.listFiles(new FileFilter(){
-
 			@Override
 			public boolean accept(File pathname) {
 				if(pathname.isDirectory()){
@@ -84,7 +89,7 @@ public class FileServiceImp implements FileService{
 					if(isAnnualReport){
 						Pattern p = Pattern.compile("^(\\d{1,})_(\\d{1,4})_(\\w{1,})\\.pdf$");
 				    	Matcher m = p.matcher(pathname.getName());
-				    	if(m.matches()){
+				    	if(m.matches() && !keys.contains(m.group(1) + "_" + m.group(2))){
 				    		return true;
 				    	}
 				    	return false;
@@ -102,6 +107,14 @@ public class FileServiceImp implements FileService{
 	    	}
 		}
 		return list;
+	}
+
+	public AnnualReportService getAnnualService() {
+		return annualService;
+	}
+
+	public void setAnnualService(AnnualReportService annualService) {
+		this.annualService = annualService;
 	}
 
 }

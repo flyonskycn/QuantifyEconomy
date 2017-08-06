@@ -139,7 +139,7 @@
      				<div class="form-group">
      					<label class="control-label col-sm-4" for="remark">备注</label>
      					<div class="col-sm-8">
-					    	<textarea class="form-control" id="remark" text="${data.remark } rows="1"></textarea>
+					    	<textarea class="form-control" id="remark" rows="1">${data.remark }</textarea>
 						</div>
 				  	</div>
      			</div>

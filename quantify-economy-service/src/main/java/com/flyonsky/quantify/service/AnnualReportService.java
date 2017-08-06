@@ -1,5 +1,8 @@
 package com.flyonsky.quantify.service;
 
+import java.util.List;
+
+import com.flyonsky.quantify.entity.AnnualKey;
 import com.flyonsky.quantify.entity.AnnualReport;
 import com.flyonsky.quantify.model.GridData;
 import com.flyonsky.quantify.model.QueryInfo;
@@ -46,4 +49,10 @@ public interface AnnualReportService {
 	 * @return
 	 */
 	boolean modifyAnnualReport(AnnualReport annualReport);
+	
+	/**
+	 * 查询年报键值
+	 * @return
+	 */
+	List<String> queryAnnualKey();
 }

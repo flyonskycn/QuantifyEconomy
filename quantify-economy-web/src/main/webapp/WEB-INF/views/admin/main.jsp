@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>量化</title>
 	<!-- Tell the browser to be responsive to screen width -->
@@ -25,12 +25,36 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
 	       folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="<s:url value="/" />ext/AdminLTE/css/skins/_all-skins.min.css">
-	  
+	<style type="text/css">
+		.main-sidebar{overflow-x: auto;}
+  		.sidebar-collapse .main-sidebar{overflow:initial;}
+	</style>
+	
+	<style id="style-1-cropbar-clipper" type="text/css">
+		/* Copyright 2014 Evernote Corporation. All rights reserved. */
+		.en-markup-crop-options {
+		    top: 18px !important;
+		    left: 50% !important;
+		    margin-left: -100px !important;
+		    width: 200px !important;
+		    border: 2px rgba(255,255,255,.38) solid !important;
+		    border-radius: 4px !important;
+		}
+		
+		.en-markup-crop-options div div:first-of-type {
+		    margin-left: 0px !important;
+		}
+	
+	</style>
+  	<!--[if lt IE 9]>
+  	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  	<![endif]-->
   	<!-- jQuery 2.2.0 -->
 	<script src="<s:url value="/" />ext/jquery/jQuery-2.2.0.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="overflow-y: hidden;">
-	<div class="wrapper">
+	<div class="wrapper" style="height: auto; min-height: 100%;">
 		<!-- Main header -->
 		<div class="main-header">
 		    <!-- Logo -->
@@ -149,12 +173,12 @@
 		</aside>
 		
 		<!-- Content Wrapper. Contains page content -->
-  		<div class="content-wrapper tab-content" style="min-height: 916px;">
-  			<iframe src="/admin/index.co" class="contentfrm tab-pane fade in active" id="contentfrm" frameborder="0" name="contentfrm" style="width:100%;height: 846px;"></iframe>
+  		<div class="content-wrapper tab-content" style="min-height: 667px;">
+  			<iframe src="/admin/index.co" class="contentfrm tab-pane fade in active" id="contentfrm" frameborder="0" name="contentfrm" style="width:100%;min-height: 667px;"></iframe>
   		</div>
   		
-  		<footer class="main-footer">
-  			<div class="pull-right hidden-xs">
+  		<footer class="main-footer hidden-xs" style="z-index:1000;">
+  			<div class="pull-right">
 				<b>Version</b> 4.0.0
     		</div>
     		<strong>Copyright © 2014-2016 <a href="https://www.flyonskycn.com/">flyonsky</a>.</strong> All rights reserved.

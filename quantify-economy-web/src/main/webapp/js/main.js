@@ -120,8 +120,11 @@ function createtab(cname,href,title){
 			$.toaster('您打开的标签页过多,请关闭后重新打开...','提醒','danger');
 			return;
 		}
+		var height=$(".content-wrapper iframe").height();
   		$(".content-wrapper iframe").removeClass("in active");
-  		$(".content-wrapper").append('<iframe src="'+href+'" class="contentfrm tab-pane fade in active" id='+cname+' frameborder="0" name='+cname+' style="width:100%;height:854px;" onload="loadtab(this)"></iframe>');
+		var newfrm=$('<iframe src="'+href+'" class="contentfrm tab-pane fade in active" id='+cname+' frameborder="0" name='+cname+' style="width:100%;" onload="loadtab(this)"></iframe>');
+		newfrm.height(height);
+  		$(".content-wrapper").append(newfrm);
   		
   		$(".my-tabs li").removeClass("active");
   		$(".my-tabs").append('<li class="active"><a href="#'+cname+'" data-toggle="tab">'+title+'<span class="glyphicon glyphicon-remove" style="display:none;"></span></a></li>');

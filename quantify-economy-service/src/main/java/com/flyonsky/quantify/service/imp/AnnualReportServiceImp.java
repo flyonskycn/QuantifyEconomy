@@ -1,11 +1,14 @@
 package com.flyonsky.quantify.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.AnnualReportMapper;
+import com.flyonsky.quantify.dao.CustomizeMapper;
+import com.flyonsky.quantify.entity.AnnualKey;
 import com.flyonsky.quantify.entity.AnnualReport;
 import com.flyonsky.quantify.entity.AnnualReportExample;
 import com.flyonsky.quantify.model.GridData;
@@ -18,6 +21,9 @@ public class AnnualReportServiceImp extends AbstractService implements AnnualRep
 	
 	@Autowired
 	private AnnualReportMapper annualMapper;
+	
+	@Autowired
+	private CustomizeMapper cusMapper;
 
 	@Override
 	public AnnualReport queryAnnualReport(String code, int year) {
@@ -62,12 +68,30 @@ public class AnnualReportServiceImp extends AbstractService implements AnnualRep
 		return count > 0?true:false;
 	}
 
+	@Override
+	public List<String> queryAnnualKey() {
+		List<AnnualKey> list = this.getCusMapper().queryAnnualKey();
+		List<String> annulList = new ArrayList<String>();
+		for(AnnualKey key : list){
+			annulList.add(key.getAnnualkey());
+		}
+		return annulList;
+	}
+
 	public AnnualReportMapper getAnnualMapper() {
 		return annualMapper;
 	}
 
 	public void setAnnualMapper(AnnualReportMapper annualMapper) {
 		this.annualMapper = annualMapper;
+	}
+
+	public CustomizeMapper getCusMapper() {
+		return cusMapper;
+	}
+
+	public void setCusMapper(CustomizeMapper cusMapper) {
+		this.cusMapper = cusMapper;
 	}
 
 }

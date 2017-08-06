@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flyonsky.quantify.dao.CustomizeMapper" >
+  <resultMap id="AnnualKey" type="com.flyonsky.quantify.entity.AnnualKey" >
+    <result column="annualkey" property="annualkey" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="queryAnnualKey" resultMap="AnnualKey">
+	select distinct CONCAT(code, '_', year)  as annualkey from cp_annualreport 
+  </select>
+</mapper>
