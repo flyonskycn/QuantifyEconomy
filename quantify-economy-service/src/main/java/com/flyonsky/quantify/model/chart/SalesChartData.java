@@ -1,6 +1,9 @@
 package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -21,6 +24,12 @@ public class SalesChartData implements Serializable{
 	
 	// 条目
 	private SortedSet<Integer> category = new TreeSet<Integer>();
+	
+	// 销售数据组合
+	private Map<String,LineChartData> sales = new HashMap<String,LineChartData>();
+	
+	// 利润率组合
+	private Map<String,LineChartData> profitMargins = new HashMap<String,LineChartData>();
 	
 	// 营业收入
 	private LineChartData revenueLine = new LineChartData();
@@ -64,6 +73,24 @@ public class SalesChartData implements Serializable{
 	
 	public void addCategory(Integer category) {
 		this.category.add(category);
+	}
+	
+	private void addKpi(String code, Integer category, Double kpi, EnumKpiType kpiType){
+		String key = MessageFormat.format("{0}_{1}", code,category);
+		LineChartData lineData = null;
+		switch(kpiType){
+		case revenue:
+		case operprofit:
+		case totalprofit:
+		case netprofit:
+			if(this.getSales().containsKey(key)){
+				lineData = this.getSales().get(key);
+			}else{
+				lineData = new LineChartData();
+				this.getSales().put(key, lineData);
+			}
+			break;
+		}
 	}
 	
 	public void addRevenue(Integer category, Double revenue) {
@@ -160,6 +187,22 @@ public class SalesChartData implements Serializable{
 
 	public void setAssetturnoverLine(LineChartData assetturnoverLine) {
 		this.assetturnoverLine = assetturnoverLine;
+	}
+
+	public Map<String, LineChartData> getSales() {
+		return sales;
+	}
+
+	public void setSales(Map<String, LineChartData> sales) {
+		this.sales = sales;
+	}
+
+	public Map<String, LineChartData> getProfitMargins() {
+		return profitMargins;
+	}
+
+	public void setProfitMargins(Map<String, LineChartData> profitMargins) {
+		this.profitMargins = profitMargins;
 	}
 
 }

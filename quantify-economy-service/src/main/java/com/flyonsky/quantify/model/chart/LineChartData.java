@@ -11,6 +11,9 @@ import java.util.TreeSet;
  *
  */
 public class LineChartData {
+	
+	// 曲线名称
+	private String lineName;
 
 	// x 轴数据
 	private SortedSet<Number> xdata = new TreeSet<Number>();
@@ -45,6 +48,14 @@ public class LineChartData {
 
 	public void setYdata(List<List<Object>> ydata) {
 		this.ydata = ydata;
+	}
+
+	public String getLineName() {
+		return lineName;
+	}
+
+	public void setLineName(String lineName) {
+		this.lineName = lineName;
 	}
 	
 }
