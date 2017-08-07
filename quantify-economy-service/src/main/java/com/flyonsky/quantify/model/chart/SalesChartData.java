@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * @author Administrator
  *
  */
-public class SalesChartData implements Serializable{
+public class SalesChartData extends AbstractChartData implements Serializable{
 
 	/**
 	 * 
@@ -76,7 +76,7 @@ public class SalesChartData implements Serializable{
 	}
 	
 	private void addKpi(String code, Integer category, Double kpi, EnumKpiType kpiType){
-		String key = MessageFormat.format("{0}_{1}", code,category);
+		String key = MessageFormat.format("{0}_{1}_{2}", code,category,this.kpiName(kpiType));
 		LineChartData lineData = null;
 		switch(kpiType){
 		case revenue:
