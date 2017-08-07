@@ -17,7 +17,7 @@ import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
 import com.flyonsky.quantify.model.chart.SalesRateChartData;
 import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
-import com.flyonsky.quantify.model.chart.YearOnYearData;
+import com.flyonsky.quantify.model.chart.SecuritiesRateChartsData;
 import com.flyonsky.quantify.service.AbstractService;
 import com.flyonsky.quantify.service.AnalyserService;
 
@@ -34,31 +34,31 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	private SecuritiesChartsMapper securitiesMapper;
 
 	@Override
-	public YearOnYearData query(String code) {
+	public SecuritiesRateChartsData query(String code) {
 		List<AnalyserReport> list = this.getAnalyserMapper().query(code);
-		YearOnYearData data = new YearOnYearData();
+		SecuritiesRateChartsData data = new SecuritiesRateChartsData();
 		data.setSecuritiesName(code);
 		for(AnalyserReport report : list){
 			data.addCategory(report.getYear());
-			data.addRevenuerate(report.getRevenuerate());
+			data.addRevenuerate(report.getYear(),report.getRevenuerate());
 			
-			data.addOperprofitrate(report.getOperprofitrate());
-			data.addTotalprofitrate(report.getTotalprofitrate());
-			data.addNetprofitrate(report.getNetprofitrate());
+			data.addOperprofitrate(report.getYear(),report.getOperprofitrate());
+			data.addTotalprofitrate(report.getYear(),report.getTotalprofitrate());
+			data.addNetprofitrate(report.getYear(),report.getNetprofitrate());
 			
-			data.addShnetprofitrate(report.getShnetprofitrate());
+			data.addShnetprofitrate(report.getYear(),report.getShnetprofitrate());
 			
-			data.addDeshnetprofitrate(report.getDeshnetprofitrate());
+			data.addDeshnetprofitrate(report.getYear(),report.getDeshnetprofitrate());
 			
-			data.addNetcashflowrate(report.getNetcashflowrate());
+			data.addNetcashflowrate(report.getYear(),report.getNetcashflowrate());
 			
-			data.addTotalassetsrate(report.getTotalassetsrate());
+			data.addTotalassetsrate(report.getYear(),report.getTotalassetsrate());
 			
-			data.addTotalliabilityrate(report.getTotalliabilityrate());
+			data.addTotalliabilityrate(report.getYear(),report.getTotalliabilityrate());
 			
-			data.addShequityrateMap(report.getShequityrate());
+			data.addShequityrateMap(report.getYear(),report.getShequityrate());
 			
-			data.addPersharerate(report.getPersharerate());
+			data.addPersharerate(report.getYear(),report.getPersharerate());
 		}
 		return data;
 	}
@@ -70,24 +70,24 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		data.setSecuritiesName(code);
 		for(SecuritiesLineData line : list){
 			data.addCategory(line.getYear());
-			data.addAssetTurnover(line.getAssetTurnover());
-			data.addDebtRatio(line.getDebtRatio());
-			data.addDeshnetprofit(line.getDeshnetprofit());
-			data.addGrossMargin(line.getGrossMargin());
-			data.addMainProfitRate(line.getMainProfitRate());
-			data.addNetAssetsPershare(line.getNetAssetsPershare());
-			data.addNetAssetsProfitRate(line.getNetAssetsProfitRate());
-			data.addNetcashflow(line.getNetcashflow());
-			data.addNetprofit(line.getNetprofit());
-			data.addOperprofit(line.getOperprofit());
-			data.addPershare(line.getPershare());
-			data.addRevenue(line.getRevenue());
-			data.addShequity(line.getShequity());
-			data.addShnetprofit(line.getShnetprofit());
-			data.addTotalassets(line.getTotalassets());
-			data.addTotalAssetsProfitRate(line.getTotalAssetsProfitRate());
-			data.addTotalliability(line.getTotalliability());
-			data.addTotalprofit(line.getTotalprofit());
+			data.addAssetTurnover(line.getYear(), line.getAssetTurnover());
+			data.addDebtRatio(line.getYear(), line.getDebtRatio());
+			data.addDeshnetprofit(line.getYear(), line.getDeshnetprofit());
+			data.addGrossMargin(line.getYear(), line.getGrossMargin());
+			data.addMainProfitRate(line.getYear(), line.getMainProfitRate());
+			data.addNetAssetsPershare(line.getYear(), line.getNetAssetsPershare());
+			data.addNetAssetsProfitRate(line.getYear(), line.getNetAssetsProfitRate());
+			data.addNetcashflow(line.getYear(), line.getNetcashflow());
+			data.addNetprofit(line.getYear(), line.getNetprofit());
+			data.addOperprofit(line.getYear(), line.getOperprofit());
+			data.addPershare(line.getYear(), line.getPershare());
+			data.addRevenue(line.getYear(), line.getRevenue());
+			data.addShequity(line.getYear(), line.getShequity());
+			data.addShnetprofit(line.getYear(), line.getShnetprofit());
+			data.addTotalassets(line.getYear(), line.getTotalassets());
+			data.addTotalAssetsProfitRate(line.getYear(), line.getTotalAssetsProfitRate());
+			data.addTotalliability(line.getYear(), line.getTotalliability());
+			data.addTotalprofit(line.getYear(), line.getTotalprofit());
 		}
 		return data;
 	}
@@ -99,14 +99,14 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		data.setSecuritiesName(code);
 		for(SalesCharts line : list){
 			data.addCategory(line.getYear());
-			data.addAssetturnoverList(line.getAssetturnover());
-			data.addGrossmarginList(line.getGrossmargin());
-			data.addMainprofitrateList(line.getMainprofitrate());
-			data.addNetinterestrateList(line.getNetinterestrate());
-			data.addNetprofit(line.getNetprofit());
-			data.addOperprofit(line.getOperprofit());
-			data.addRevenue(line.getRevenue());
-			data.addTotalprofit(line.getTotalprofit());
+			data.addAssetturnover(line.getYear(), line.getAssetturnover());
+			data.addGrossmargin(line.getYear(), line.getGrossmargin());
+			data.addMainprofitrate(line.getYear(), line.getMainprofitrate());
+			data.addNetinterestrate(line.getYear(), line.getNetinterestrate());
+			data.addNetprofit(line.getYear(), line.getNetprofit());
+			data.addOperprofit(line.getYear(), line.getOperprofit());
+			data.addRevenue(line.getYear(), line.getRevenue());
+			data.addTotalprofit(line.getYear(), line.getTotalprofit());
 		}
 		return data;
 	}
@@ -118,10 +118,10 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		data.setSecuritiesName(code);
 		for(SalesRateCharts line : list){
 			data.addCategory(line.getYear());
-			data.addNetprofitrate(line.getNetprofitrate());
-			data.addOperprofitrate(line.getOperprofitrate());
-			data.addRevenuerate(line.getRevenuerate());
-			data.addTotalprofitrate(line.getTotalprofitrate());
+			data.addNetprofitrate(line.getYear(), line.getNetprofitrate());
+			data.addOperprofitrate(line.getYear(), line.getOperprofitrate());
+			data.addRevenuerate(line.getYear(), line.getRevenuerate());
+			data.addTotalprofitrate(line.getYear(), line.getTotalprofitrate());
 		}
 		return data;
 	}
@@ -133,11 +133,11 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		data.setSecuritiesName(code);
 		for(SecuritiesCharts line : list){
 			data.addCategory(line.getYear());
-			data.addDebtratio(line.getDebtratio());
-			data.addNetassetspershare(line.getNetassetspershare());
-			data.addNetassetsprofit(line.getNetassetsprofit());
-			data.addPershare(line.getPershare());
-			data.addPersharecash(line.getPersharecash());
+			data.addDebtratio(line.getYear(), line.getDebtratio());
+			data.addNetassetspershare(line.getYear(), line.getNetassetspershare());
+			data.addNetassetsprofit(line.getYear(), line.getNetassetsprofit());
+			data.addPershare(line.getYear(), line.getPershare());
+			data.addPersharecash(line.getYear(), line.getPersharecash());
 		}
 		return data;
 	}

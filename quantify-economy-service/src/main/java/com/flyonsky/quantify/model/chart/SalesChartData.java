@@ -1,8 +1,8 @@
 package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * 销售曲线图数据
@@ -20,31 +20,31 @@ public class SalesChartData implements Serializable{
 	private String securitiesName;
 	
 	// 条目
-	private List<Integer> category = new ArrayList<Integer>();
+	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
 	// 营业收入
-	private List<Double> revenueList = new ArrayList<Double>();
+	private LineChartData revenueLine = new LineChartData();
 	
 	// 营业利润
-	private List<Double> operprofitList = new ArrayList<Double>();
+	private LineChartData operprofitLine = new LineChartData();
 	
 	// 总利润
-	private List<Double> totalprofitList = new ArrayList<Double>();
+	private LineChartData totalprofitLine = new LineChartData();
 	
 	// 净利润
-	private List<Double> netprofitList = new ArrayList<Double>();
+	private LineChartData netprofitLine = new LineChartData();
 	
 	// 毛利率:营业利润/营业收入
-	private List<Double> grossmarginList = new ArrayList<Double>();
+	private LineChartData grossmarginLine = new LineChartData();
 	
 	// 净利率
-	private List<Double> netinterestrateList = new ArrayList<Double>();
+	private LineChartData netinterestrateLine = new LineChartData();
 	
 	// 主营业务利润占比:营业利润/总利润
-	private List<Double> mainprofitrateList = new ArrayList<Double>();
+	private LineChartData mainprofitrateLine = new LineChartData();
 	
 	// 资产周转率:销售收入/总资产
-	private List<Double> assetturnoverList = new ArrayList<Double>();
+	private LineChartData assetturnoverLine = new LineChartData();
 
 	public String getSecuritiesName() {
 		return securitiesName;
@@ -54,111 +54,112 @@ public class SalesChartData implements Serializable{
 		this.securitiesName = securitiesName;
 	}
 
-	public List<Integer> getCategory() {
+	public SortedSet<Integer> getCategory() {
 		return category;
 	}
 
-	public void setCategory(List<Integer> category) {
+	public void setCategory(SortedSet<Integer> category) {
 		this.category = category;
 	}
 	
 	public void addCategory(Integer category) {
 		this.category.add(category);
 	}
-
-	public List<Double> getRevenueList() {
-		return revenueList;
-	}
-
-	public void setRevenueList(List<Double> revenueList) {
-		this.revenueList = revenueList;
+	
+	public void addRevenue(Integer category, Double revenue) {
+		this.revenueLine.addData(category,revenue);
 	}
 	
-	public void addRevenue(Double revenue) {
-		this.revenueList.add(revenue);
-	}
-
-	public List<Double> getOperprofitList() {
-		return operprofitList;
-	}
-
-	public void setOperprofitList(List<Double> operprofitList) {
-		this.operprofitList = operprofitList;
+	public void addOperprofit(Integer category, Double operprofit) {
+		this.operprofitLine.addData(category, operprofit);
 	}
 	
-	public void addOperprofit(Double operprofit) {
-		this.operprofitList.add(operprofit);
-	}
-
-	public List<Double> getTotalprofitList() {
-		return totalprofitList;
-	}
-
-	public void setTotalprofitList(List<Double> totalprofitList) {
-		this.totalprofitList = totalprofitList;
+	public void addTotalprofit(Integer category, Double totalprofit) {
+		this.totalprofitLine.addData(category,totalprofit);
 	}
 	
-	public void addTotalprofit(Double totalprofit) {
-		this.totalprofitList.add(totalprofit);
-	}
-
-	public List<Double> getNetprofitList() {
-		return netprofitList;
-	}
-
-	public void setNetprofitList(List<Double> netprofitList) {
-		this.netprofitList = netprofitList;
+	public void addNetprofit(Integer category, Double netprofit) {
+		this.netprofitLine.addData(category,netprofit);
 	}
 	
-	public void addNetprofit(Double netprofit) {
-		this.netprofitList.add(netprofit);
-	}
-
-	public List<Double> getGrossmarginList() {
-		return grossmarginList;
-	}
-
-	public void setGrossMarginList(List<Double> grossmarginList) {
-		this.grossmarginList = grossmarginList;
+	public void addGrossmargin(Integer category, Double grossmargin) {
+		this.grossmarginLine.addData(category, grossmargin);
 	}
 	
-	public void addGrossmarginList(Double grossmargin) {
-		this.grossmarginList.add(grossmargin);
-	}
-
-	public List<Double> getNetinterestrateList() {
-		return netinterestrateList;
-	}
-
-	public void setNetinterestrateList(List<Double> netinterestrateList) {
-		this.netinterestrateList = netinterestrateList;
+	public void addNetinterestrate(Integer category, Double netinterestrate) {
+		this.netinterestrateLine.addData(category, netinterestrate);
 	}
 	
-	public void addNetinterestrateList(Double netinterestrate) {
-		this.netinterestrateList.add(netinterestrate);
-	}
-
-	public List<Double> getMainprofitrateList() {
-		return mainprofitrateList;
-	}
-
-	public void setMainprofitrateList(List<Double> mainprofitrateList) {
-		this.mainprofitrateList = mainprofitrateList;
+	public void addMainprofitrate(Integer category, Double mainprofitrate) {
+		this.mainprofitrateLine.addData(category, mainprofitrate);
 	}
 	
-	public void addMainprofitrateList(Double mainprofitrate) {
-		this.mainprofitrateList.add(mainprofitrate);
+	public void addAssetturnover(Integer category, Double assetturnover) {
+		this.assetturnoverLine.addData(category, assetturnover);
 	}
 
-	public List<Double> getAssetturnoverList() {
-		return assetturnoverList;
+	public LineChartData getRevenueLine() {
+		return revenueLine;
 	}
 
-	public void setAssetturnoverList(List<Double> assetturnoverList) {
-		this.assetturnoverList = assetturnoverList;
+	public void setRevenueLine(LineChartData revenueLine) {
+		this.revenueLine = revenueLine;
 	}
-	
-	public void addAssetturnoverList(Double assetturnover) {
-		this.assetturnoverList.add(assetturnover);
+
+	public LineChartData getOperprofitLine() {
+		return operprofitLine;
 	}
+
+	public void setOperprofitLine(LineChartData operprofitLine) {
+		this.operprofitLine = operprofitLine;
+	}
+
+	public LineChartData getTotalprofitLine() {
+		return totalprofitLine;
+	}
+
+	public void setTotalprofitLine(LineChartData totalprofitLine) {
+		this.totalprofitLine = totalprofitLine;
+	}
+
+	public LineChartData getNetprofitLine() {
+		return netprofitLine;
+	}
+
+	public void setNetprofitLine(LineChartData netprofitLine) {
+		this.netprofitLine = netprofitLine;
+	}
+
+	public LineChartData getGrossmarginLine() {
+		return grossmarginLine;
+	}
+
+	public void setGrossmarginLine(LineChartData grossmarginLine) {
+		this.grossmarginLine = grossmarginLine;
+	}
+
+	public LineChartData getNetinterestrateLine() {
+		return netinterestrateLine;
+	}
+
+	public void setNetinterestrateLine(LineChartData netinterestrateLine) {
+		this.netinterestrateLine = netinterestrateLine;
+	}
+
+	public LineChartData getMainprofitrateLine() {
+		return mainprofitrateLine;
+	}
+
+	public void setMainprofitrateLine(LineChartData mainprofitrateLine) {
+		this.mainprofitrateLine = mainprofitrateLine;
+	}
+
+	public LineChartData getAssetturnoverLine() {
+		return assetturnoverLine;
+	}
+
+	public void setAssetturnoverLine(LineChartData assetturnoverLine) {
+		this.assetturnoverLine = assetturnoverLine;
+	}
+
 }

@@ -4,7 +4,7 @@ import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
 import com.flyonsky.quantify.model.chart.SalesRateChartData;
 import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
-import com.flyonsky.quantify.model.chart.YearOnYearData;
+import com.flyonsky.quantify.model.chart.SecuritiesRateChartsData;
 
 public interface AnalyserService {
 
@@ -13,7 +13,7 @@ public interface AnalyserService {
 	 * @param code 股票代码
 	 * @return
 	 */
-	YearOnYearData query(String code);
+	SecuritiesRateChartsData query(String code);
 	
 	/**
 	 * 查询年报的典线图数据

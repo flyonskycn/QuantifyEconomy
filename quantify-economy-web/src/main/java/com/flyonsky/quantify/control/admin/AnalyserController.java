@@ -11,7 +11,7 @@ import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
 import com.flyonsky.quantify.model.chart.SalesRateChartData;
 import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
-import com.flyonsky.quantify.model.chart.YearOnYearData;
+import com.flyonsky.quantify.model.chart.SecuritiesRateChartsData;
 import com.flyonsky.quantify.service.AnalyserService;
 
 @Controller
@@ -30,9 +30,9 @@ public class AnalyserController extends AbstractAdminController{
 	
 	@RequestMapping(value="analyser",produces="application/json")
 	@ResponseBody
-	public ResponseData<YearOnYearData> analyser(String code){
-		ResponseData<YearOnYearData> result = new ResponseData<YearOnYearData>();
-		YearOnYearData data = this.getAnalyserService().query(code);
+	public ResponseData<SecuritiesRateChartsData> analyser(String code){
+		ResponseData<SecuritiesRateChartsData> result = new ResponseData<SecuritiesRateChartsData>();
+		SecuritiesRateChartsData data = this.getAnalyserService().query(code);
 		result.setData(data);
 		return result;
 	}

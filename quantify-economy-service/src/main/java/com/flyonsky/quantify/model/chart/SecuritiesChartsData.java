@@ -1,9 +1,14 @@
 package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
+/**
+ * 证券指标曲线图
+ * @author luowg
+ *
+ */
 public class SecuritiesChartsData implements Serializable{
 	/**
 	 * 
@@ -14,22 +19,22 @@ public class SecuritiesChartsData implements Serializable{
 	private String securitiesName;
 	
 	// 条目
-	private List<Integer> category = new ArrayList<Integer>();
+	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
 	// 每股收益:扣非后归属股东净利润/总股份数
-	private List<Double> pershareList = new ArrayList<Double>();
+	private LineChartData pershareLine = new LineChartData();
 	
 	// 负债率:总负债/总资产
-	private List<Double> debtratioList = new ArrayList<Double>();
+	private LineChartData debtratioLine = new LineChartData();
 	
 	// 每股净资产:归属股东权益/总股份数
-	private List<Double> netassetspershareList = new ArrayList<Double>();
+	private LineChartData netassetspershareLine = new LineChartData();
 	
 	// 每股现金流
-	private List<Double> persharecashList = new ArrayList<Double>();
+	private LineChartData persharecashLine = new LineChartData();
 	
 	// 净资产收益率
-	private List<Double> netassetsprofitList = new ArrayList<Double>();
+	private LineChartData netassetsprofitLine = new LineChartData();
 
 	public String getSecuritiesName() {
 		return securitiesName;
@@ -39,75 +44,75 @@ public class SecuritiesChartsData implements Serializable{
 		this.securitiesName = securitiesName;
 	}
 
-	public List<Integer> getCategory() {
+	public SortedSet<Integer> getCategory() {
 		return category;
 	}
 
-	public void setCategory(List<Integer> category) {
+	public void setCategory(SortedSet<Integer> category) {
 		this.category = category;
 	}
 	
 	public void addCategory(Integer category) {
 		this.category.add(category);
 	}
-
-	public List<Double> getPershareList() {
-		return pershareList;
-	}
-
-	public void setPershareList(List<Double> pershareList) {
-		this.pershareList = pershareList;
+	
+	public void addPershare(Integer category,Double pershare) {
+		this.pershareLine.addData(category, pershare);
 	}
 	
-	public void addPershare(Double pershare) {
-		this.pershareList.add(pershare);
-	}
-
-	public List<Double> getDebtratioList() {
-		return debtratioList;
-	}
-
-	public void setDebtratioList(List<Double> debtratioList) {
-		this.debtratioList = debtratioList;
+	public void addDebtratio(Integer category, Double debtratio) {
+		this.debtratioLine.addData(category, debtratio);
 	}
 	
-	public void addDebtratio(Double debtratio) {
-		this.debtratioList.add(debtratio);
-	}
-
-	public List<Double> getNetassetspershareList() {
-		return netassetspershareList;
-	}
-
-	public void setNetassetspershareList(List<Double> netassetspershareList) {
-		this.netassetspershareList = netassetspershareList;
+	public void addNetassetspershare(Integer category, Double netassetspershare) {
+		this.netassetspershareLine.addData(category, netassetspershare);
 	}
 	
-	public void addNetassetspershare(Double netassetspershare) {
-		this.netassetspershareList.add(netassetspershare);
-	}
-
-	public List<Double> getPersharecashList() {
-		return persharecashList;
-	}
-
-	public void setPersharecashList(List<Double> persharecashList) {
-		this.persharecashList = persharecashList;
+	public void addPersharecash(Integer category, Double persharecash) {
+		this.persharecashLine.addData(category, persharecash);
 	}
 	
-	public void addPersharecash(Double persharecash) {
-		this.persharecashList.add(persharecash);
+	public void addNetassetsprofit(Integer category, Double netassetsprofit) {
+		this.netassetsprofitLine.addData(category, netassetsprofit);
 	}
 
-	public List<Double> getNetassetsprofitList() {
-		return netassetsprofitList;
+	public LineChartData getPershareLine() {
+		return pershareLine;
 	}
 
-	public void setNetassetsprofitList(List<Double> netassetsprofitList) {
-		this.netassetsprofitList = netassetsprofitList;
+	public void setPershareLine(LineChartData pershareLine) {
+		this.pershareLine = pershareLine;
 	}
-	
-	public void addNetassetsprofit(Double netassetsprofit) {
-		this.netassetsprofitList.add(netassetsprofit);
+
+	public LineChartData getDebtratioLine() {
+		return debtratioLine;
+	}
+
+	public void setDebtratioLine(LineChartData debtratioLine) {
+		this.debtratioLine = debtratioLine;
+	}
+
+	public LineChartData getNetassetspershareLine() {
+		return netassetspershareLine;
+	}
+
+	public void setNetassetspershareLine(LineChartData netassetspershareLine) {
+		this.netassetspershareLine = netassetspershareLine;
+	}
+
+	public LineChartData getPersharecashLine() {
+		return persharecashLine;
+	}
+
+	public void setPersharecashLine(LineChartData persharecashLine) {
+		this.persharecashLine = persharecashLine;
+	}
+
+	public LineChartData getNetassetsprofitLine() {
+		return netassetsprofitLine;
+	}
+
+	public void setNetassetsprofitLine(LineChartData netassetsprofitLine) {
+		this.netassetsprofitLine = netassetsprofitLine;
 	}
 }

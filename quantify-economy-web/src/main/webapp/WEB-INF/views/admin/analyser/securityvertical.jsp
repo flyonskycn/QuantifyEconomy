@@ -112,7 +112,7 @@
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 if(data.erroCode == 0){
-	        				 
+	        				 chartdata = data.data;
 	        				 netassetspershareChart.resize({height:500});
 	        				 pershareChart.resize({height:500});
 	        				 persharecashChart.resize({height:500});
@@ -122,9 +122,11 @@
         			        // 每股净资产配置
         			        var netassetspershareOption = {
         			            title: {
-        			                text: data.data.securitiesName + '每股净资产'
+        			                text: chartdata.securitiesName + '每股净资产'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['每股净资产']
         			            },
@@ -133,7 +135,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'金额(RMB)',
@@ -146,7 +148,7 @@
         			            series: [{
         			                name: '每股净资产',
         			                type: 'line',
-        			                data: data.data.netassetspershareList
+        			                data: chartdata.netassetspershareLine.ydata
         			            }]
         			        };
         			        // 每股净资产
@@ -155,9 +157,11 @@
         			        // 每股收益图表的配置项和数据
         			        var pershareOption = {
         			            title: {
-        			                text: data.data.securitiesName + '每股收益'
+        			                text: chartdata.securitiesName + '每股收益'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['每股收益']
         			            },
@@ -166,7 +170,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'每股收益(RMB)',
@@ -179,7 +183,7 @@
         			            series: [{
         			                name: '每股收益',
         			                type: 'line',
-        			                data: data.data.pershareList
+        			                data: chartdata.pershareLine.ydata
         			            }]
         			        };
         			        // 每股收益
@@ -188,9 +192,11 @@
         			     	// 每股现金
         			        var persharecashOption = {
         			            title: {
-        			                text: data.data.securitiesName + '每股现金'
+        			                text: chartdata.securitiesName + '每股现金'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['每股现金']
         			            },
@@ -199,7 +205,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'每股现金(RMB)',
@@ -212,7 +218,7 @@
         			            series: [{
         			                name: '每股现金',
         			                type: 'line',
-        			                data: data.data.persharecashList
+        			                data: chartdata.persharecashLine.ydata
         			            }]
         			        };
         			        // 每股现金
@@ -221,9 +227,11 @@
            			        // 净资产收益率
         			        var netassetsprofitOption = {
         			            title: {
-        			                text: data.data.securitiesName + '净资产收益率'
+        			                text: chartdata.securitiesName + '净资产收益率'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['净资产收益率']
         			            },
@@ -232,7 +240,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'净资产收益率(%)',
@@ -245,7 +253,7 @@
         			            series: [{
         			                name: '净资产收益率',
         			                type: 'line',
-        			                data: data.data.netassetsprofitList
+        			                data: chartdata.netassetsprofitLine.ydata
         			            }]
         			        };
         			        netassetsprofitChart.setOption(netassetsprofitOption);
@@ -253,9 +261,11 @@
            			        // 负债率
         			        var debtratioOption = {
         			            title: {
-        			                text: data.data.securitiesName + '负债率'
+        			                text: chartdata.securitiesName + '负债率'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['负债率']
         			            },
@@ -264,7 +274,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'负债率(%)',
@@ -277,7 +287,7 @@
         			            series: [{
         			                name: '负债率',
         			                type: 'line',
-        			                data: data.data.debtratioList
+        			                data: chartdata.debtratioLine.ydata
         			            }]
         			        };
         			        debtratioChart.setOption(debtratioOption);

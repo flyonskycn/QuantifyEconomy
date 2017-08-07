@@ -1,11 +1,11 @@
 package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
- * 证券同比数据
+ * 销售同比数据
  * @author luowg
  *
  */
@@ -20,19 +20,19 @@ public class SalesRateChartData implements Serializable{
 	private String securitiesName;
 	
 	// 条目
-	private List<Integer> category = new ArrayList<Integer>();
+	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
 	// 营业收入同比增长率
-	private List<Double> revenuerateMap = new ArrayList<Double>();
+	private LineChartData revenuerateLine = new LineChartData();
 	
 	// 营业利润同比增长率
-	private List<Double> operprofitrateMap = new ArrayList<Double>();
+	private LineChartData operprofitrateLine = new LineChartData();
 	
 	// 总利润同比增长率
-	private List<Double> totalprofitrateMap = new ArrayList<Double>();
+	private LineChartData totalprofitrateLine = new LineChartData();
 	
 	// 净利润同比增长率
-	private List<Double> netprofitrateMap = new ArrayList<Double>();
+	private LineChartData netprofitrateLine = new LineChartData();
 	
 	public String getSecuritiesName() {
 		return securitiesName;
@@ -41,64 +41,64 @@ public class SalesRateChartData implements Serializable{
 	public void setSecuritiesName(String securitiesName) {
 		this.securitiesName = securitiesName;
 	}
-
-	public List<Double> getRevenuerateMap() {
-		return revenuerateMap;
-	}
-
-	public void setRevenuerateMap(List<Double> revenuerateMap) {
-		this.revenuerateMap = revenuerateMap;
+	
+	public void addRevenuerate(Integer category, Double revenuerate) {
+		this.revenuerateLine.addData(category, revenuerate);
 	}
 	
-	public void addRevenuerate(Double revenuerate) {
-		this.revenuerateMap.add(revenuerate);
-	}
-
-	public List<Double> getOperprofitrateMap() {
-		return operprofitrateMap;
-	}
-
-	public void setOperprofitrateMap(List<Double> operprofitrateMap) {
-		this.operprofitrateMap = operprofitrateMap;
+	public void addOperprofitrate(Integer category, Double operprofitrate) {
+		this.operprofitrateLine.addData(category, operprofitrate);
 	}
 	
-	public void addOperprofitrate(Double operprofitrate) {
-		this.operprofitrateMap.add(operprofitrate);
-	}
-
-	public List<Double> getTotalprofitrateMap() {
-		return totalprofitrateMap;
-	}
-
-	public void setTotalprofitrateMap(List<Double> totalprofitrateMap) {
-		this.totalprofitrateMap = totalprofitrateMap;
+	public void addTotalprofitrate(Integer category, Double totalprofitrate) {
+		this.totalprofitrateLine.addData(category, totalprofitrate);
 	}
 	
-	public void addTotalprofitrate(Double totalprofitrate) {
-		this.totalprofitrateMap.add(totalprofitrate);
+	public void addNetprofitrate(Integer category, Double netprofitrate) {
+		this.netprofitrateLine.addData(category, netprofitrate);
 	}
 
-	public List<Double> getNetprofitrateMap() {
-		return netprofitrateMap;
-	}
-
-	public void setNetprofitrateMap(List<Double> netprofitrateMap) {
-		this.netprofitrateMap = netprofitrateMap;
-	}
-	
-	public void addNetprofitrate(Double netprofitrate) {
-		this.netprofitrateMap.add(netprofitrate);
-	}
-
-	public List<Integer> getCategory() {
+	public SortedSet<Integer> getCategory() {
 		return category;
 	}
 
-	public void setCategory(List<Integer> category) {
+	public void setCategory(SortedSet<Integer> category) {
 		this.category = category;
 	}
 	
 	public void addCategory(Integer category) {
 		this.category.add(category);
+	}
+
+	public LineChartData getRevenuerateLine() {
+		return revenuerateLine;
+	}
+
+	public void setRevenuerateLine(LineChartData revenuerateLine) {
+		this.revenuerateLine = revenuerateLine;
+	}
+
+	public LineChartData getOperprofitrateLine() {
+		return operprofitrateLine;
+	}
+
+	public void setOperprofitrateLine(LineChartData operprofitrateLine) {
+		this.operprofitrateLine = operprofitrateLine;
+	}
+
+	public LineChartData getTotalprofitrateLine() {
+		return totalprofitrateLine;
+	}
+
+	public void setTotalprofitrateLine(LineChartData totalprofitrateLine) {
+		this.totalprofitrateLine = totalprofitrateLine;
+	}
+
+	public LineChartData getNetprofitrateLine() {
+		return netprofitrateLine;
+	}
+
+	public void setNetprofitrateLine(LineChartData netprofitrateLine) {
+		this.netprofitrateLine = netprofitrateLine;
 	}
 }

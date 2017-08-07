@@ -100,19 +100,21 @@
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 if(data.erroCode == 0){
-	        				 
+	        				 chartdata = data.data;
 	        				 salesChart.resize({height:500});
 	        				 assetturnoverChart.resize({height:500});
 	        				 profitChart.resize({height:500});
         			        // 销售图表的配置项和数据
         			        var salesOption = {
         			            title: {
-        			                text: data.data.securitiesName + '销售曲线'
+        			                text: chartdata.securitiesName + '销售曲线'
         			            },
         			            grid:{
         			            	left:'15%'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['营业收入','营业利润','净利润','总利润']
         			            },
@@ -121,7 +123,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'金额(RMB)',
@@ -134,22 +136,22 @@
         			            series: [{
         			                name: '营业收入',
         			                type: 'line',
-        			                data: data.data.revenueList
+        			                data: chartdata.revenueLine.ydata
         			            },
         			            {
         			                name: '营业利润',
         			                type: 'line',
-        			                data: data.data.operprofitList
+        			                data: chartdata.operprofitLine.ydata
         			            },
         			            {
         			                name: '净利润',
         			                type: 'line',
-        			                data: data.data.netprofitList
+        			                data: chartdata.netprofitLine.ydata
         			            },
         			            {
         			                name: '总利润',
         			                type: 'line',
-        			                data: data.data.totalprofitList
+        			                data: chartdata.totalprofitLine.ydata
         			            }]
         			        };
         			        // 销售数据
@@ -158,9 +160,11 @@
         			        // 收益率定图表的配置项和数据
         			        var profitOption = {
         			            title: {
-        			                text: data.data.securitiesName + '利润率曲线'
+        			                text: chartdata.securitiesName + '利润率曲线'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['毛利率','净利率']
         			            },
@@ -169,7 +173,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data:chartdata.category
         			            },
         			            yAxis: {
         			            	name:'利润率(%)',
@@ -182,12 +186,12 @@
         			            series: [{
         			                name: '毛利率',
         			                type: 'line',
-        			                data: data.data.grossmarginList
+        			                data: chartdata.grossmarginLine.ydata
         			            },
         			            {
         			                name: '净利率',
         			                type: 'line',
-        			                data: data.data.netinterestrateList
+        			                data: chartdata.netinterestrateLine.ydata
         			            }]
         			        };
         			        // 收益率曲线
@@ -196,9 +200,11 @@
            			        // 资本周转率图表的配置项和数据
         			        var assetturnoverOption = {
         			            title: {
-        			                text: data.data.securitiesName + '资产周转率曲线'
+        			                text: chartdata.securitiesName + '资产周转率曲线'
         			            },
-        			            tooltip: {},
+        			            tooltip: {
+        			            	trigger: 'axis'
+        			            },
         			            legend: {
         			                data:['资产周转率']
         			            },
@@ -207,7 +213,7 @@
         			                splitLine: {
         			                    show: false
         			                },
-        			                data:data.data.category
+        			                data: chartdata.category
         			            },
         			            yAxis: {
         			            	name:'次',
@@ -220,7 +226,7 @@
         			            series: [{
         			                name: '资产周转率',
         			                type: 'line',
-        			                data: data.data.assetturnoverList
+        			                data: chartdata.assetturnoverLine.ydata
         			            }]
         			        };
         			        assetturnoverChart.setOption(assetturnoverOption);
@@ -236,17 +242,19 @@
 	        		 data:{'code':$(".form-control").val()},
 	        		 dataType:'json',
 	        		 success:function(data){
-	        			 
+	        			 chartdata = data.data;
 	        			 salesrateChart.resize({height:500});
      			        // 销售图表的配置项和数据
      			        var salesrateOption = {
      			            title: {
-     			                text: data.data.securitiesName + '销售同比'
+     			                text: chartdata.securitiesName + '销售同比'
      			            },
      			            grid:{
      			            	left:'15%'
      			            },
-     			            tooltip: {},
+     			            tooltip: {
+     			            	trigger: 'axis'
+   			            	},
      			            legend: {
      			                data:['营业收入','营业利润','净利润','总利润']
      			            },
@@ -255,7 +263,7 @@
      			                splitLine: {
      			                    show: false
      			                },
-     			                data:data.data.category
+     			                data:chartdata.category
      			            },
      			            yAxis: {
      			            	name:'同比(%)',
@@ -268,22 +276,22 @@
      			            series: [{
      			                name: '营业收入',
      			                type: 'line',
-     			                data: data.data.revenuerateMap
+     			                data: chartdata.revenuerateLine.ydata
      			            },
      			            {
      			                name: '营业利润',
      			                type: 'line',
-     			                data: data.data.operprofitrateMap
+     			                data: chartdata.operprofitrateLine.ydata
      			            },
      			            {
      			                name: '净利润',
      			                type: 'line',
-     			                data: data.data.netprofitrateMap
+     			                data: chartdata.netprofitrateLine.ydata
      			            },
      			            {
      			                name: '总利润',
      			                type: 'line',
-     			                data: data.data.totalprofitrateMap
+     			                data: chartdata.totalprofitrateLine.ydata
      			            }]
      			        };
      			        // 销售数据
