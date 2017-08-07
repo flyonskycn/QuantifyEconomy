@@ -35,6 +35,36 @@ public abstract class AbstractChartData {
 		case shequity:
 			kpiName="股东权益";
 			break;
+		case totalshares:
+			kpiName="股份总数";
+			break;
+		case pershare:
+			kpiName="每股收益";
+			break;
+		case assetturnover:
+			kpiName="资产周转率";
+			break;
+		case grossmargin:
+			kpiName="毛利率";
+			break;
+		case netinterestrate:
+			kpiName="净利率";
+			break;
+		case mainprofitrate:
+			kpiName="主营业务利润占比";
+			break;
+		case debtratio:
+			kpiName="负债率";
+			break;
+		case netassetspershare:
+			kpiName="每股净资产";
+			break;
+		case totalassetsprofitrate:
+			kpiName="总资产收益率";
+			break;
+		case netAssetsProfitRate:
+			kpiName="净资产收益率";
+			break;
 		}
 		return kpiName;
 	}
