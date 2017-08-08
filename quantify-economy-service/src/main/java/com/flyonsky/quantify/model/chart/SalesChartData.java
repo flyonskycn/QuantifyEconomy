@@ -25,35 +25,14 @@ public class SalesChartData extends AbstractChartData implements Serializable{
 	// 条目
 	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
-	// 销售数据组合
+	// 销售数据组合:营业收入、营业利润、总利润、净利润
 	private Map<String,LineChartData> sales = new HashMap<String,LineChartData>();
 	
-	// 利润率组合
+	// 利润率组合:毛利率:营业利润/营业收入、净利率
 	private Map<String,LineChartData> profitMargins = new HashMap<String,LineChartData>();
 	
-	// 营业收入
-	private LineChartData revenueLine = new LineChartData();
-	
-	// 营业利润
-	private LineChartData operprofitLine = new LineChartData();
-	
-	// 总利润
-	private LineChartData totalprofitLine = new LineChartData();
-	
-	// 净利润
-	private LineChartData netprofitLine = new LineChartData();
-	
-	// 毛利率:营业利润/营业收入
-	private LineChartData grossmarginLine = new LineChartData();
-	
-	// 净利率
-	private LineChartData netinterestrateLine = new LineChartData();
-	
-	// 主营业务利润占比:营业利润/总利润
-	private LineChartData mainprofitrateLine = new LineChartData();
-	
-	// 资产周转率:销售收入/总资产
-	private LineChartData assetturnoverLine = new LineChartData();
+	// 周转率组合:资产周转率:销售收入/总资产
+	private Map<String,LineChartData> turnovers = new HashMap<String,LineChartData>();
 
 	public String getSecuritiesName() {
 		return securitiesName;
@@ -71,12 +50,8 @@ public class SalesChartData extends AbstractChartData implements Serializable{
 		this.category = category;
 	}
 	
-	public void addCategory(Integer category) {
-		this.category.add(category);
-	}
-	
-	private void addKpi(String code, Integer category, Double kpi, EnumKpiType kpiType){
-		String key = MessageFormat.format("{0}_{1}_{2}", code,category,this.kpiName(kpiType));
+	public void addKpi(String code, Integer category, Double kpi, EnumKpiType kpiType){
+		String key = MessageFormat.format("{0}_{1}", code,this.kpiName(kpiType));
 		LineChartData lineData = null;
 		switch(kpiType){
 		case revenue:
@@ -90,103 +65,31 @@ public class SalesChartData extends AbstractChartData implements Serializable{
 				this.getSales().put(key, lineData);
 			}
 			break;
+		case grossmargin:
+		case netinterestrate:
+			if(this.getProfitMargins().containsKey(key)){
+				lineData = this.getProfitMargins().get(key);
+			}else{
+				lineData = new LineChartData();
+				this.getProfitMargins().put(key, lineData);
+			}
+			break;
+		case assetturnover:
+			if(this.getTurnovers().containsKey(key)){
+				lineData = this.getTurnovers().get(key);
+			}else{
+				lineData = new LineChartData();
+				this.getTurnovers().put(key, lineData);
+			}
+			break;
+		default:
+			break;
 		}
-	}
-	
-	public void addRevenue(Integer category, Double revenue) {
-		this.revenueLine.addData(category,revenue);
-	}
-	
-	public void addOperprofit(Integer category, Double operprofit) {
-		this.operprofitLine.addData(category, operprofit);
-	}
-	
-	public void addTotalprofit(Integer category, Double totalprofit) {
-		this.totalprofitLine.addData(category,totalprofit);
-	}
-	
-	public void addNetprofit(Integer category, Double netprofit) {
-		this.netprofitLine.addData(category,netprofit);
-	}
-	
-	public void addGrossmargin(Integer category, Double grossmargin) {
-		this.grossmarginLine.addData(category, grossmargin);
-	}
-	
-	public void addNetinterestrate(Integer category, Double netinterestrate) {
-		this.netinterestrateLine.addData(category, netinterestrate);
-	}
-	
-	public void addMainprofitrate(Integer category, Double mainprofitrate) {
-		this.mainprofitrateLine.addData(category, mainprofitrate);
-	}
-	
-	public void addAssetturnover(Integer category, Double assetturnover) {
-		this.assetturnoverLine.addData(category, assetturnover);
-	}
-
-	public LineChartData getRevenueLine() {
-		return revenueLine;
-	}
-
-	public void setRevenueLine(LineChartData revenueLine) {
-		this.revenueLine = revenueLine;
-	}
-
-	public LineChartData getOperprofitLine() {
-		return operprofitLine;
-	}
-
-	public void setOperprofitLine(LineChartData operprofitLine) {
-		this.operprofitLine = operprofitLine;
-	}
-
-	public LineChartData getTotalprofitLine() {
-		return totalprofitLine;
-	}
-
-	public void setTotalprofitLine(LineChartData totalprofitLine) {
-		this.totalprofitLine = totalprofitLine;
-	}
-
-	public LineChartData getNetprofitLine() {
-		return netprofitLine;
-	}
-
-	public void setNetprofitLine(LineChartData netprofitLine) {
-		this.netprofitLine = netprofitLine;
-	}
-
-	public LineChartData getGrossmarginLine() {
-		return grossmarginLine;
-	}
-
-	public void setGrossmarginLine(LineChartData grossmarginLine) {
-		this.grossmarginLine = grossmarginLine;
-	}
-
-	public LineChartData getNetinterestrateLine() {
-		return netinterestrateLine;
-	}
-
-	public void setNetinterestrateLine(LineChartData netinterestrateLine) {
-		this.netinterestrateLine = netinterestrateLine;
-	}
-
-	public LineChartData getMainprofitrateLine() {
-		return mainprofitrateLine;
-	}
-
-	public void setMainprofitrateLine(LineChartData mainprofitrateLine) {
-		this.mainprofitrateLine = mainprofitrateLine;
-	}
-
-	public LineChartData getAssetturnoverLine() {
-		return assetturnoverLine;
-	}
-
-	public void setAssetturnoverLine(LineChartData assetturnoverLine) {
-		this.assetturnoverLine = assetturnoverLine;
+		if(lineData != null){
+			this.category.add(category);
+			lineData.setLineName(this.kpiName(kpiType));
+			lineData.addData(category, kpi);
+		}
 	}
 
 	public Map<String, LineChartData> getSales() {
@@ -203,6 +106,14 @@ public class SalesChartData extends AbstractChartData implements Serializable{
 
 	public void setProfitMargins(Map<String, LineChartData> profitMargins) {
 		this.profitMargins = profitMargins;
+	}
+
+	public Map<String,LineChartData> getTurnovers() {
+		return turnovers;
+	}
+
+	public void setTurnovers(Map<String,LineChartData> turnovers) {
+		this.turnovers = turnovers;
 	}
 
 }

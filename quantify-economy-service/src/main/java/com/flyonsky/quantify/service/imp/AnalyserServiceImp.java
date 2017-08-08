@@ -13,6 +13,7 @@ import com.flyonsky.quantify.entity.SalesCharts;
 import com.flyonsky.quantify.entity.SalesRateCharts;
 import com.flyonsky.quantify.entity.SecuritiesCharts;
 import com.flyonsky.quantify.entity.SecuritiesLineData;
+import com.flyonsky.quantify.model.chart.EnumKpiType;
 import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
 import com.flyonsky.quantify.model.chart.SalesRateChartData;
@@ -98,15 +99,14 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		SalesChartData data = new SalesChartData();
 		data.setSecuritiesName(code);
 		for(SalesCharts line : list){
-			data.addCategory(line.getYear());
-			data.addAssetturnover(line.getYear(), line.getAssetturnover());
-			data.addGrossmargin(line.getYear(), line.getGrossmargin());
-			data.addMainprofitrate(line.getYear(), line.getMainprofitrate());
-			data.addNetinterestrate(line.getYear(), line.getNetinterestrate());
-			data.addNetprofit(line.getYear(), line.getNetprofit());
-			data.addOperprofit(line.getYear(), line.getOperprofit());
-			data.addRevenue(line.getYear(), line.getRevenue());
-			data.addTotalprofit(line.getYear(), line.getTotalprofit());
+			data.addKpi(code, line.getYear(), line.getAssetturnover(), EnumKpiType.assetturnover);
+			data.addKpi(code, line.getYear(), line.getGrossmargin(), EnumKpiType.grossmargin);
+			data.addKpi(code, line.getYear(), line.getMainprofitrate(), EnumKpiType.mainprofitrate);
+			data.addKpi(code, line.getYear(), line.getNetinterestrate(), EnumKpiType.netinterestrate);
+			data.addKpi(code, line.getYear(), line.getNetprofit(), EnumKpiType.netprofit);
+			data.addKpi(code, line.getYear(), line.getOperprofit(), EnumKpiType.operprofit);
+			data.addKpi(code, line.getYear(), line.getRevenue(), EnumKpiType.revenue);
+			data.addKpi(code, line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
 		}
 		return data;
 	}

@@ -9,7 +9,7 @@ public abstract class AbstractChartData {
 			kpiName = "营业收入";
 			break;
 		case operprofit:
-			kpiName = "营业收入";
+			kpiName = "营业利润";
 			break;
 		case totalprofit:
 			kpiName = "利润总额";

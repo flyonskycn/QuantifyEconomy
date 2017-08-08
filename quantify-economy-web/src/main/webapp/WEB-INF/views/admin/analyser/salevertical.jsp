@@ -104,6 +104,16 @@
 	        				 salesChart.resize({height:500});
 	        				 assetturnoverChart.resize({height:500});
 	        				 profitChart.resize({height:500});
+	        				 var seriesdata = new Array();
+	        				 var legenddata = new Array();
+	        				 $.each(chartdata.sales, function(i, n){
+	        					 legenddata.push(n.lineName);
+	        					 seriesdata.push({
+	        						 name: n.lineName,
+	        						 type: 'line',
+	        						 data: n.ydata
+	        					 })
+        					});
         			        // 销售图表的配置项和数据
         			        var salesOption = {
         			            title: {
@@ -116,7 +126,7 @@
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['营业收入','营业利润','净利润','总利润']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -133,29 +143,21 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '营业收入',
-        			                type: 'line',
-        			                data: chartdata.revenueLine.ydata
-        			            },
-        			            {
-        			                name: '营业利润',
-        			                type: 'line',
-        			                data: chartdata.operprofitLine.ydata
-        			            },
-        			            {
-        			                name: '净利润',
-        			                type: 'line',
-        			                data: chartdata.netprofitLine.ydata
-        			            },
-        			            {
-        			                name: '总利润',
-        			                type: 'line',
-        			                data: chartdata.totalprofitLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        // 销售数据
         			        salesChart.setOption(salesOption);
+        			        
+        			        seriesdata = new Array();
+	        				legenddata = new Array();
+	        				 for(line in chartdata.profitMargins){
+	        					 legenddata.push(chartdata.profitMargins[line].lineName);
+	        					 seriesdata.push({
+	        						 name: chartdata.profitMargins[line].lineName,
+	        						 type: 'line',
+	        						 data: chartdata.profitMargins[line].ydata
+	        					 })
+	        				 }
            			        
         			        // 收益率定图表的配置项和数据
         			        var profitOption = {
@@ -166,7 +168,7 @@
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['毛利率','净利率']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -183,20 +185,22 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '毛利率',
-        			                type: 'line',
-        			                data: chartdata.grossmarginLine.ydata
-        			            },
-        			            {
-        			                name: '净利率',
-        			                type: 'line',
-        			                data: chartdata.netinterestrateLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        // 收益率曲线
         			        profitChart.setOption(profitOption);
         			        
+        			        
+        			        seriesdata = new Array();
+	        				legenddata = new Array();
+	        				 for(line in chartdata.turnovers){
+	        					 legenddata.push(chartdata.turnovers[line].lineName);
+	        					 seriesdata.push({
+	        						 name: chartdata.turnovers[line].lineName,
+	        						 type: 'line',
+	        						 data: chartdata.turnovers[line].ydata
+	        					 })
+	        				 }
            			        // 资本周转率图表的配置项和数据
         			        var assetturnoverOption = {
         			            title: {
@@ -206,7 +210,7 @@
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['资产周转率']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -223,11 +227,7 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '资产周转率',
-        			                type: 'line',
-        			                data: chartdata.assetturnoverLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        assetturnoverChart.setOption(assetturnoverOption);
         			        
