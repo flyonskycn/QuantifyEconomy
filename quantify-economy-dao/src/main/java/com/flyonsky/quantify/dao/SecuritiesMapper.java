@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.flyonsky.quantify.entity.SecuritiesCharts;
 
-public interface SecuritiesChartsMapper {
+public interface SecuritiesMapper {
 
-	List<SecuritiesCharts> querySecurity(String code);
+	List<SecuritiesCharts> querySecurity(List<String> codes);
 }

@@ -133,5 +133,9 @@ public enum EnumKpiType {
 	/**
 	 * 净资产收益率
 	 */
-	netAssetsProfitRate
+	netAssetsProfitRate,
+	/**
+	 * 每股现金净额
+	 */
+	persharecash
 }

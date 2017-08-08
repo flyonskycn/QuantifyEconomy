@@ -106,6 +106,9 @@ public abstract class AbstractChartData {
 		case netAssetsProfitRate:
 			kpiName="净资产收益率";
 			break;
+		case persharecash:
+			kpiName="每股现金净额";
+			break;
 		}
 		return kpiName;
 	}

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.AnalyserReportMapper;
 import com.flyonsky.quantify.dao.SalesMapper;
-import com.flyonsky.quantify.dao.SecuritiesChartsMapper;
+import com.flyonsky.quantify.dao.SecuritiesMapper;
 import com.flyonsky.quantify.entity.AnalyserReport;
 import com.flyonsky.quantify.entity.SalesCharts;
 import com.flyonsky.quantify.entity.SalesRateCharts;
@@ -32,7 +32,7 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	private SalesMapper salesMapper;
 	
 	@Autowired
-	private SecuritiesChartsMapper securitiesMapper;
+	private SecuritiesMapper securitiesMapper;
 
 	@Override
 	public SecuritiesRateChartsData query(String code) {
@@ -126,17 +126,15 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	}
 
 	@Override
-	public SecuritiesChartsData querySecurities(String code) {
-		List<SecuritiesCharts> list = this.getSecuritiesMapper().querySecurity(code);
+	public SecuritiesChartsData querySecurities(List<String> codes) {
+		List<SecuritiesCharts> list = this.getSecuritiesMapper().querySecurity(codes);
 		SecuritiesChartsData data = new SecuritiesChartsData();
-		data.setSecuritiesName(code);
 		for(SecuritiesCharts line : list){
-			data.addCategory(line.getYear());
-			data.addDebtratio(line.getYear(), line.getDebtratio());
-			data.addNetassetspershare(line.getYear(), line.getNetassetspershare());
-			data.addNetassetsprofit(line.getYear(), line.getNetassetsprofit());
-			data.addPershare(line.getYear(), line.getPershare());
-			data.addPersharecash(line.getYear(), line.getPersharecash());
+			data.addKpi(line.getCode(), line.getYear(), line.getDebtratio(), EnumKpiType.debtratio);
+			data.addKpi(line.getCode(), line.getYear(), line.getNetassetspershare(), EnumKpiType.netassetspershare);
+			data.addKpi(line.getCode(), line.getYear(), line.getNetassetsprofit(), EnumKpiType.netAssetsProfitRate);
+			data.addKpi(line.getCode(), line.getYear(), line.getPershare(), EnumKpiType.pershare);
+			data.addKpi(line.getCode(), line.getYear(), line.getPersharecash(), EnumKpiType.persharecash);
 		}
 		return data;
 	}
@@ -157,11 +155,11 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		this.salesMapper = salesMapper;
 	}
 
-	public SecuritiesChartsMapper getSecuritiesMapper() {
+	public SecuritiesMapper getSecuritiesMapper() {
 		return securitiesMapper;
 	}
 
-	public void setSecuritiesMapper(SecuritiesChartsMapper securitiesMapper) {
+	public void setSecuritiesMapper(SecuritiesMapper securitiesMapper) {
 		this.securitiesMapper = securitiesMapper;
 	}
 }

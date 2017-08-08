@@ -108,7 +108,7 @@
 	         $(".search").click(function(){
 	        	 $.ajax({
 	        		 url:'/admin/analyser/securities.co',
-	        		 data:{'code':$(".form-control").val()},
+	        		 data:{'codes':[$(".form-control").val()]},
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 if(data.erroCode == 0){
@@ -119,16 +119,28 @@
 	        				 netassetsprofitChart.resize({height:500});
 	        				 debtratioChart.resize({height:500});
 	        				 rateChart.resize({height:500});
+	        				 
+	        				 var seriesdata = new Array();
+	        				 var legenddata = new Array();
+	        				 $.each(chartdata.netassetspershares, function(i, n){
+	        					 legenddata.push(n.lineName);
+	        					 seriesdata.push({
+	        						 name: n.lineName,
+	        						 type: 'line',
+	        						 data: n.ydata
+	        					 })
+        					});
+	        				 
         			        // 每股净资产配置
         			        var netassetspershareOption = {
         			            title: {
-        			                text: chartdata.securitiesName + '每股净资产'
+        			                text: '每股净资产'
         			            },
         			            tooltip: {
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['每股净资产']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -145,25 +157,31 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '每股净资产',
-        			                type: 'line',
-        			                data: chartdata.netassetspershareLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        // 每股净资产
         			        netassetspershareChart.setOption(netassetspershareOption);
            			        
+	        				 seriesdata = new Array();
+	        				 legenddata = new Array();
+	        				 $.each(chartdata.pershares, function(i, n){
+	        					 legenddata.push(n.lineName);
+	        					 seriesdata.push({
+	        						 name: n.lineName,
+	        						 type: 'line',
+	        						 data: n.ydata
+	        					 })
+        					});
         			        // 每股收益图表的配置项和数据
         			        var pershareOption = {
         			            title: {
-        			                text: chartdata.securitiesName + '每股收益'
+        			                text: '每股收益'
         			            },
         			            tooltip: {
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['每股收益']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -180,25 +198,31 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '每股收益',
-        			                type: 'line',
-        			                data: chartdata.pershareLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        // 每股收益
         			        pershareChart.setOption(pershareOption);
         			        
+	        				 seriesdata = new Array();
+	        				 legenddata = new Array();
+	        				 $.each(chartdata.persharecashs, function(i, n){
+	        					 legenddata.push(n.lineName);
+	        					 seriesdata.push({
+	        						 name: n.lineName,
+	        						 type: 'line',
+	        						 data: n.ydata
+	        					 })
+        					});
         			     	// 每股现金
         			        var persharecashOption = {
         			            title: {
-        			                text: chartdata.securitiesName + '每股现金'
+        			                text: '每股现金'
         			            },
         			            tooltip: {
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['每股现金']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -215,25 +239,31 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '每股现金',
-        			                type: 'line',
-        			                data: chartdata.persharecashLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        // 每股现金
         			        persharecashChart.setOption(persharecashOption);
         			        
+	        				 seriesdata = new Array();
+	        				 legenddata = new Array();
+	        				 $.each(chartdata.netassetsprofits, function(i, n){
+	        					 legenddata.push(n.lineName);
+	        					 seriesdata.push({
+	        						 name: n.lineName,
+	        						 type: 'line',
+	        						 data: n.ydata
+	        					 })
+        					});
            			        // 净资产收益率
         			        var netassetsprofitOption = {
         			            title: {
-        			                text: chartdata.securitiesName + '净资产收益率'
+        			                text: '净资产收益率'
         			            },
         			            tooltip: {
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['净资产收益率']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -250,24 +280,30 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '净资产收益率',
-        			                type: 'line',
-        			                data: chartdata.netassetsprofitLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        netassetsprofitChart.setOption(netassetsprofitOption);
         			        
+	        				 seriesdata = new Array();
+	        				 legenddata = new Array();
+	        				 $.each(chartdata.debtratios, function(i, n){
+	        					 legenddata.push(n.lineName);
+	        					 seriesdata.push({
+	        						 name: n.lineName,
+	        						 type: 'line',
+	        						 data: n.ydata
+	        					 })
+        					});
            			        // 负债率
         			        var debtratioOption = {
         			            title: {
-        			                text: chartdata.securitiesName + '负债率'
+        			                text: '负债率'
         			            },
         			            tooltip: {
         			            	trigger: 'axis'
         			            },
         			            legend: {
-        			                data:['负债率']
+        			                data:legenddata
         			            },
         			            xAxis: {
         			                type: 'category',
@@ -284,11 +320,7 @@
         			                    show: false
         			                }
         			            },
-        			            series: [{
-        			                name: '负债率',
-        			                type: 'line',
-        			                data: chartdata.debtratioLine.ydata
-        			            }]
+        			            series: seriesdata
         			        };
         			        debtratioChart.setOption(debtratioOption);
         			        

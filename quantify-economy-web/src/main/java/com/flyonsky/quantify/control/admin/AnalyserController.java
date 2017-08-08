@@ -1,9 +1,12 @@
 package com.flyonsky.quantify.control.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyonsky.quantify.model.ResponseData;
@@ -66,9 +69,9 @@ public class AnalyserController extends AbstractAdminController{
 	
 	@RequestMapping(value="securities",produces="application/json")
 	@ResponseBody
-	public ResponseData<SecuritiesChartsData> securities(String code){
+	public ResponseData<SecuritiesChartsData> securities(@RequestParam("codes[]") List<String> codes){
 		ResponseData<SecuritiesChartsData> result = new ResponseData<SecuritiesChartsData>();
-		SecuritiesChartsData data = this.getAnalyserService().querySecurities(code);
+		SecuritiesChartsData data = this.getAnalyserService().querySecurities(codes);
 		result.setData(data);
 		return result;
 	}

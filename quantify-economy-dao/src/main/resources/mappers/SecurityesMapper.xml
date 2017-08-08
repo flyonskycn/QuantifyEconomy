@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.flyonsky.quantify.dao.SecuritiesChartsMapper" >
+<mapper namespace="com.flyonsky.quantify.dao.SecuritiesMapper" >
   <resultMap id="SecuritiesCharts" type="com.flyonsky.quantify.entity.SecuritiesCharts" >
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="year" property="year" jdbcType="INTEGER" />
@@ -11,13 +11,17 @@
     <result column="netassetsprofit" property="netassetsprofit" jdbcType="DECIMAL" />
   </resultMap>
   
-  <select id="querySecurity" resultMap="SecuritiesCharts" parameterType="java.lang.String">
+  <select id="querySecurity" resultMap="SecuritiesCharts" parameterType="java.util.ArrayList">
 	select code,year,
 	deshnetprofit/totalshares as pershare,
 	totalliability/totalassets*100.0 as debtratio,
 	shequity/totalshares as netassetspershare,
 	netcashflow/totalshares as persharecash,
-	deshnetprofit/shequity*100.0 as netassetsprofit from cp_annualreport where code = #{code} order by year
+	deshnetprofit/shequity*100.0 as netassetsprofit from cp_annualreport where code in (
+		<foreach item="guard" index="index" collection="list"  separator=","> 
+			#{guard} 
+	    </foreach>  
+       )  order by year
   </select>
   
 </mapper>

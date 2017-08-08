@@ -1,5 +1,7 @@
 package com.flyonsky.quantify.service;
 
+import java.util.List;
+
 import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
 import com.flyonsky.quantify.model.chart.SalesWithChartData;
@@ -41,5 +43,5 @@ public interface AnalyserService {
 	 * @param code 股票代码
 	 * @return
 	 */
-	SecuritiesChartsData querySecurities(String code);
+	SecuritiesChartsData querySecurities(List<String> codes);
 }
