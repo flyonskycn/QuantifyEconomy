@@ -20,6 +20,9 @@ public class LineChartData {
 	
 	// y 轴数据
 	private List<List<Object>> ydata = new ArrayList<List<Object>>();
+	
+	// y 描述
+	private String yunit;
 
 	public SortedSet<Number> getXdata() {
 		return xdata;
@@ -56,6 +59,14 @@ public class LineChartData {
 
 	public void setLineName(String lineName) {
 		this.lineName = lineName;
+	}
+
+	public String getYunit() {
+		return yunit;
+	}
+
+	public void setYunit(String yunit) {
+		this.yunit = yunit;
 	}
 	
 }
