@@ -94,33 +94,31 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	}
 
 	@Override
-	public SalesChartData querySales(String code) {
-		List<SalesCharts> list = this.getSalesMapper().querySales(code);
+	public SalesChartData querySales(List<String> codes) {
+		List<SalesCharts> list = this.getSalesMapper().querySales(codes);
 		SalesChartData data = new SalesChartData();
-		data.setSecuritiesName(code);
 		for(SalesCharts line : list){
-			data.addKpi(code, line.getYear(), line.getAssetturnover(), EnumKpiType.assetturnover);
-			data.addKpi(code, line.getYear(), line.getGrossmargin(), EnumKpiType.grossmargin);
-			data.addKpi(code, line.getYear(), line.getMainprofitrate(), EnumKpiType.mainprofitrate);
-			data.addKpi(code, line.getYear(), line.getNetinterestrate(), EnumKpiType.netinterestrate);
-			data.addKpi(code, line.getYear(), line.getNetprofit(), EnumKpiType.netprofit);
-			data.addKpi(code, line.getYear(), line.getOperprofit(), EnumKpiType.operprofit);
-			data.addKpi(code, line.getYear(), line.getRevenue(), EnumKpiType.revenue);
-			data.addKpi(code, line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
+			data.addKpi(line.getCode(), line.getYear(), line.getAssetturnover(), EnumKpiType.assetturnover);
+			data.addKpi(line.getCode(), line.getYear(), line.getGrossmargin(), EnumKpiType.grossmargin);
+			data.addKpi(line.getCode(), line.getYear(), line.getMainprofitrate(), EnumKpiType.mainprofitrate);
+			data.addKpi(line.getCode(), line.getYear(), line.getNetinterestrate(), EnumKpiType.netinterestrate);
+			data.addKpi(line.getCode(), line.getYear(), line.getNetprofit(), EnumKpiType.netprofit);
+			data.addKpi(line.getCode(), line.getYear(), line.getOperprofit(), EnumKpiType.operprofit);
+			data.addKpi(line.getCode(), line.getYear(), line.getRevenue(), EnumKpiType.revenue);
+			data.addKpi(line.getCode(), line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
 		}
 		return data;
 	}
 
 	@Override
-	public SalesWithChartData queryRateSales(String code) {
-		List<SalesRateCharts> list = this.getSalesMapper().queryRateSales(code);
+	public SalesWithChartData queryRateSales(List<String> codes) {
+		List<SalesRateCharts> list = this.getSalesMapper().queryRateSales(codes);
 		SalesWithChartData data = new SalesWithChartData();
-		data.setSecuritiesName(code);
 		for(SalesRateCharts line : list){
-			data.addKpi(code, line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
-			data.addKpi(code, line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);
-			data.addKpi(code, line.getYear(), line.getRevenuerate(), EnumKpiType.revenuewith);
-			data.addKpi(code, line.getYear(), line.getTotalprofitrate(), EnumKpiType.totalprofitwith);
+			data.addKpi(line.getCode(), line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
+			data.addKpi(line.getCode(), line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);
+			data.addKpi(line.getCode(), line.getYear(), line.getRevenuerate(), EnumKpiType.revenuewith);
+			data.addKpi(line.getCode(), line.getYear(), line.getTotalprofitrate(), EnumKpiType.totalprofitwith);
 		}
 		return data;
 	}

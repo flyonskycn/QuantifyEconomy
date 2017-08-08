@@ -68,16 +68,28 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 销售同比 -->
-					<div id="salesrate"></div>
+					<!-- 销售收入同比 -->
+					<div id="revenuewith"></div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 资产周转次数 -->
-					<div id="assetturnover"></div>
+					<!-- 销售利润同比 -->
+					<div id="operprofitwith"></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
+					<!-- 总利润同比 -->
+					<div id="totalprofitwith"></div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<!-- 净利润同比 -->
+					<div id="netprofitwith"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<!-- 资产周转次数 -->
+					<div id="assetturnover"></div>
 				</div>
 			</div>
 		</div>
@@ -114,8 +126,14 @@
 		var profitmarginChart;
 		// 资产周转率曲线
 		var assetturnoverChart;
-		// 销售同比
-		var salesrateChart;
+		// 销售收入同比 
+		var revenuewithChart;
+		// 销售利润同比
+		var operprofitwithChart;
+		// 总利润同比
+		var totalprofitwithChart;
+		// 净利润同比
+		var netprofitwithChart;
 	    $(function() {  
 			// 基于准备好的dom，初始化echarts实例
 	        revenueChart = echarts.init(document.getElementById('revenue'));
@@ -125,11 +143,14 @@
 	        grossmarginChart = echarts.init(document.getElementById('grossmargin'));
 	        profitmarginChart = echarts.init(document.getElementById('profitmargin'));
 	        assetturnoverChart = echarts.init(document.getElementById('assetturnover'));
-	        salesrateChart = echarts.init(document.getElementById('salesrate'));
+	        revenuewithChart = echarts.init(document.getElementById('revenuewith'));
+	        operprofitwithChart = echarts.init(document.getElementById('operprofitwith'));
+	        totalprofitwithChart = echarts.init(document.getElementById('totalprofitwith'));
+	        netprofitwithChart = echarts.init(document.getElementById('netprofitwith'));
 	         $(".search").click(function(){
 	        	 $.ajax({
 	        		 url:'/admin/analyser/sales.co',
-	        		 data:{'code':$(".form-control").val()},
+	        		 data:{'codes':[$(".form-control").val()]},
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 if(data.erroCode == 0){
@@ -171,54 +192,23 @@
 	        	 
 	        	 $.ajax({
 	        		 url:'/admin/analyser/salesrate.co',
-	        		 data:{'code':$(".form-control").val()},
+	        		 data:{'codes':[$(".form-control").val()]},
 	        		 dataType:'json',
 	        		 success:function(data){
 	        			 chartdata = data.data;
-	        			 salesrateChart.resize({height:500});
-     			        var seriesdata = new Array();
-        				var legenddata = new Array();
-        				$.each(chartdata.withs, function(i, n){
-        					 legenddata.push(n.lineName);
-        					 seriesdata.push({
-        						 name: n.lineName,
-        						 type: 'line',
-        						 data: n.ydata
-        					 })
-       					});
-     			        // 销售图表的配置项和数据
-     			        var salesrateOption = {
-     			            title: {
-     			                text: chartdata.securitiesName + '销售同比'
-     			            },
-     			            grid:{
-     			            	left:'15%'
-     			            },
-     			            tooltip: {
-     			            	trigger: 'axis'
-   			            	},
-     			            legend: {
-     			                data:legenddata
-     			            },
-     			            xAxis: {
-     			                type: 'category',
-     			                splitLine: {
-     			                    show: false
-     			                },
-     			                data:chartdata.category
-     			            },
-     			            yAxis: {
-     			            	name:'同比(%)',
-     			                type: 'value',
-     			                boundaryGap: ['10%', '5%'],
-     			                splitLine: {
-     			                    show: false
-     			                }
-     			            },
-     			            series: seriesdata
-     			        };
-     			        // 销售数据
-     			        salesrateChart.setOption(salesrateOption);
+	        			 revenuewithChart.resize({height:500});
+	        			 operprofitwithChart.resize({height:500});
+	        			 totalprofitwithChart.resize({height:500});
+	        			 netprofitwithChart.resize({height:500});
+	     				 // 销售收入同比
+        				 linechart(revenuewithChart,'销售收入同比',chartdata.revenues,chartdata.category);
+        				// 销售收入同比
+        				 linechart(operprofitwithChart,'销售利润同比',chartdata.operprofits,chartdata.category);
+        				// 销售收入同比
+        				 linechart(totalprofitwithChart,'总利润同比',chartdata.totalprofits,chartdata.category);
+        				// 销售收入同比
+        				 linechart(netprofitwithChart,'净利润同比',chartdata.netprofits,chartdata.category);
+     			        
 	        		 }
 	        	 })
 	         });

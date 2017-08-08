@@ -2,9 +2,9 @@ package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -26,13 +26,13 @@ public class SalesWithChartData extends AbstractChartData implements Serializabl
 	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
 	// 销售收入同比
-	private Map<String,LineChartData> revenues = new HashMap<String, LineChartData>();
+	private SortedMap<String,LineChartData> revenues = new TreeMap<String, LineChartData>();
 	// 销售利润同比
-	private Map<String,LineChartData> operprofits = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> operprofits = new TreeMap<String,LineChartData>();
 	// 总利润同比
-	private Map<String,LineChartData> totalprofits = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> totalprofits = new TreeMap<String,LineChartData>();
 	// 净利润同比
-	private Map<String, LineChartData> netprofits = new HashMap<String, LineChartData>();
+	private SortedMap<String, LineChartData> netprofits = new TreeMap<String, LineChartData>();
 	
 	public String getSecuritiesName() {
 		return securitiesName;
@@ -93,40 +93,41 @@ public class SalesWithChartData extends AbstractChartData implements Serializabl
 		
 		if(lineData != null){
 			this.category.add(category);
-			lineData.setLineName(this.kpiName(kpiType));
+			lineData.setLineName(code);
+			lineData.setYunit("百分比(%)");
 			lineData.addData(category, kpi);
 		}
 	}
 
-	public Map<String, LineChartData> getRevenues() {
+	public SortedMap<String, LineChartData> getRevenues() {
 		return revenues;
 	}
 
-	public void setRevenues(Map<String, LineChartData> revenues) {
+	public void setRevenues(SortedMap<String, LineChartData> revenues) {
 		this.revenues = revenues;
 	}
 
-	public Map<String, LineChartData> getOperprofits() {
+	public SortedMap<String, LineChartData> getOperprofits() {
 		return operprofits;
 	}
 
-	public void setOperprofits(Map<String, LineChartData> operprofits) {
+	public void setOperprofits(SortedMap<String, LineChartData> operprofits) {
 		this.operprofits = operprofits;
 	}
 
-	public Map<String, LineChartData> getTotalprofits() {
+	public SortedMap<String, LineChartData> getTotalprofits() {
 		return totalprofits;
 	}
 
-	public void setTotalprofits(Map<String, LineChartData> totalprofits) {
+	public void setTotalprofits(SortedMap<String, LineChartData> totalprofits) {
 		this.totalprofits = totalprofits;
 	}
 
-	public Map<String, LineChartData> getNetprofits() {
+	public SortedMap<String, LineChartData> getNetprofits() {
 		return netprofits;
 	}
 
-	public void setNetprofits(Map<String, LineChartData> netprofits) {
+	public void setNetprofits(SortedMap<String, LineChartData> netprofits) {
 		this.netprofits = netprofits;
 	}
 }

@@ -23,21 +23,29 @@
     <result column="netprofitrate" property="netprofitrate" jdbcType="DECIMAL" />
   </resultMap>
   
-  <select id="querySales" resultMap="SalesChart" parameterType="java.lang.String">
+  <select id="querySales" resultMap="SalesChart" parameterType="java.util.ArrayList">
 	select code,year,revenue,operprofit,totalprofit,netprofit,
 	operprofit/revenue*100.0 as grossmargin,
 	netprofit/revenue*100.0 as netinterestrate,
 	operprofit/totalprofit*100.0 as mainprofitrate,
-	revenue/totalassets as assetturnover from cp_annualreport where code = #{code} order by year
+	revenue/totalassets as assetturnover from cp_annualreport where code in (
+		<foreach item="guard" index="index" collection="list"  separator=","> 
+			#{guard} 
+	    </foreach> 
+	) order by year
   </select>
   
-  <select id="queryRateSales" resultMap="SalesRateChart" parameterType="java.lang.String">
+  <select id="queryRateSales" resultMap="SalesRateChart" parameterType="java.util.ArrayList">
 	select a.code,a.year, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
 	(a.operprofit - b.operprofit)/b.operprofit*100.0 as operprofitrate,
 	(a.totalprofit - b.totalprofit)/b.totalprofit*100.0 as totalprofitrate,
 	(a.netprofit - b.netprofit)/b.netprofit*100.0 as netprofitrate
 	 from 
 	(select * from cp_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
-	where a.year = b.rateyear and a.code = b.code and a.code = #{code} order by a.year 
+	where a.year = b.rateyear and a.code = b.code and a.code in (
+		<foreach item="guard" index="index" collection="list"  separator=","> 
+			#{guard} 
+	    </foreach>  
+	    ) order by a.year 
   </select>
 </mapper>

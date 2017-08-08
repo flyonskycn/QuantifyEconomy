@@ -2,9 +2,9 @@ package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -18,41 +18,30 @@ public class SalesChartData extends AbstractChartData implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 4955125191773943394L;
-
-	// 证券名称
-	private String securitiesName;
 	
 	// 条目
 	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
 	// 营业收入
-	private Map<String,LineChartData> revenues = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> revenues = new TreeMap<String,LineChartData>();
 	
 	// 营业利润
-	private Map<String,LineChartData> operprofits = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> operprofits = new TreeMap<String,LineChartData>();
 	
 	// 总利润
-	private Map<String,LineChartData> totalprofits = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> totalprofits = new TreeMap<String,LineChartData>();
 	
 	// 净利润
-	private Map<String,LineChartData> netprofits = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> netprofits = new TreeMap<String,LineChartData>();
 	
 	// 毛利率
-	private Map<String,LineChartData> grossmargins = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> grossmargins = new TreeMap<String,LineChartData>();
 	
 	// 净利率
-	private Map<String,LineChartData> profitMargins = new HashMap<String,LineChartData>();
+	private SortedMap<String,LineChartData> profitMargins = new TreeMap<String,LineChartData>();
 	
 	// 周转率组合:资产周转率:销售收入/总资产
-	private Map<String,LineChartData> turnovers = new HashMap<String,LineChartData>();
-
-	public String getSecuritiesName() {
-		return securitiesName;
-	}
-
-	public void setSecuritiesName(String securitiesName) {
-		this.securitiesName = securitiesName;
-	}
+	private SortedMap<String,LineChartData> turnovers = new TreeMap<String,LineChartData>();
 
 	public SortedSet<Integer> getCategory() {
 		return category;
@@ -139,59 +128,59 @@ public class SalesChartData extends AbstractChartData implements Serializable{
 		}
 	}
 
-	public Map<String, LineChartData> getProfitMargins() {
+	public SortedMap<String, LineChartData> getProfitMargins() {
 		return profitMargins;
 	}
 
-	public void setProfitMargins(Map<String, LineChartData> profitMargins) {
+	public void setProfitMargins(SortedMap<String, LineChartData> profitMargins) {
 		this.profitMargins = profitMargins;
 	}
 
-	public Map<String,LineChartData> getTurnovers() {
+	public SortedMap<String,LineChartData> getTurnovers() {
 		return turnovers;
 	}
 
-	public void setTurnovers(Map<String,LineChartData> turnovers) {
+	public void setTurnovers(SortedMap<String,LineChartData> turnovers) {
 		this.turnovers = turnovers;
 	}
 
-	public Map<String, LineChartData> getRevenues() {
+	public SortedMap<String, LineChartData> getRevenues() {
 		return revenues;
 	}
 
-	public void setRevenues(Map<String, LineChartData> revenues) {
+	public void setRevenues(SortedMap<String, LineChartData> revenues) {
 		this.revenues = revenues;
 	}
 
-	public Map<String, LineChartData> getOperprofits() {
+	public SortedMap<String, LineChartData> getOperprofits() {
 		return operprofits;
 	}
 
-	public void setOperprofits(Map<String, LineChartData> operprofits) {
+	public void setOperprofits(SortedMap<String, LineChartData> operprofits) {
 		this.operprofits = operprofits;
 	}
 
-	public Map<String, LineChartData> getTotalprofits() {
+	public SortedMap<String, LineChartData> getTotalprofits() {
 		return totalprofits;
 	}
 
-	public void setTotalprofits(Map<String, LineChartData> totalprofits) {
+	public void setTotalprofits(SortedMap<String, LineChartData> totalprofits) {
 		this.totalprofits = totalprofits;
 	}
 
-	public Map<String, LineChartData> getNetprofits() {
+	public SortedMap<String, LineChartData> getNetprofits() {
 		return netprofits;
 	}
 
-	public void setNetprofits(Map<String, LineChartData> netprofits) {
+	public void setNetprofits(SortedMap<String, LineChartData> netprofits) {
 		this.netprofits = netprofits;
 	}
 
-	public Map<String,LineChartData> getGrossmargins() {
+	public SortedMap<String,LineChartData> getGrossmargins() {
 		return grossmargins;
 	}
 
-	public void setGrossmargins(Map<String,LineChartData> grossmargins) {
+	public void setGrossmargins(SortedMap<String,LineChartData> grossmargins) {
 		this.grossmargins = grossmargins;
 	}
 

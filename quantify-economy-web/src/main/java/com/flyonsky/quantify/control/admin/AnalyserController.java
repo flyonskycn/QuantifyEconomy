@@ -51,18 +51,18 @@ public class AnalyserController extends AbstractAdminController{
 	
 	@RequestMapping(value="sales",produces="application/json")
 	@ResponseBody
-	public ResponseData<SalesChartData> sales(String code){
+	public ResponseData<SalesChartData> sales(@RequestParam("codes[]") List<String> codes){
 		ResponseData<SalesChartData> result = new ResponseData<SalesChartData>();
-		SalesChartData data = this.getAnalyserService().querySales(code);
+		SalesChartData data = this.getAnalyserService().querySales(codes);
 		result.setData(data);
 		return result;
 	}
 	
 	@RequestMapping(value="salesrate",produces="application/json")
 	@ResponseBody
-	public ResponseData<SalesWithChartData> salesRate(String code){
+	public ResponseData<SalesWithChartData> salesRate(@RequestParam("codes[]") List<String> codes){
 		ResponseData<SalesWithChartData> result = new ResponseData<SalesWithChartData>();
-		SalesWithChartData data = this.getAnalyserService().queryRateSales(code);
+		SalesWithChartData data = this.getAnalyserService().queryRateSales(codes);
 		result.setData(data);
 		return result;
 	}

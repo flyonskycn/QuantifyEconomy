@@ -7,7 +7,7 @@ import com.flyonsky.quantify.entity.SalesRateCharts;
 
 public interface SalesMapper {
 
-	List<SalesCharts> querySales(String code);
+	List<SalesCharts> querySales(List<String> codes);
 	
-	List<SalesRateCharts> queryRateSales(String code);
+	List<SalesRateCharts> queryRateSales(List<String> codes);
 }

@@ -2,9 +2,9 @@ package com.flyonsky.quantify.model.chart;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -22,19 +22,19 @@ public class SecuritiesChartsData extends AbstractChartData implements Serializa
 	private SortedSet<Integer> category = new TreeSet<Integer>();
 	
 	// 每股收益:扣非后归属股东净利润/总股份数
-	private Map<String, LineChartData> pershares = new HashMap<String, LineChartData>();
+	private SortedMap<String, LineChartData> pershares = new TreeMap<String, LineChartData>();
 	
 	// 负债率:总负债/总资产
-	private Map<String, LineChartData> debtratios = new HashMap<String, LineChartData>();
+	private SortedMap<String, LineChartData> debtratios = new TreeMap<String, LineChartData>();
 	
 	// 每股净资产:归属股东权益/总股份数
-	private Map<String, LineChartData> netassetspershares = new HashMap<String, LineChartData>();
+	private SortedMap<String, LineChartData> netassetspershares = new TreeMap<String, LineChartData>();
 	
 	// 每股现金流
-	private Map<String, LineChartData> persharecashs = new HashMap<String, LineChartData>();
+	private SortedMap<String, LineChartData> persharecashs = new TreeMap<String, LineChartData>();
 	
 	// 净资产收益率
-	private Map<String, LineChartData> netassetsprofits = new HashMap<String, LineChartData>();
+	private SortedMap<String, LineChartData> netassetsprofits = new TreeMap<String, LineChartData>();
 
 	public SortedSet<Integer> getCategory() {
 		return category;
@@ -99,43 +99,43 @@ public class SecuritiesChartsData extends AbstractChartData implements Serializa
 		}
 	}
 
-	public Map<String, LineChartData> getPershares() {
+	public SortedMap<String, LineChartData> getPershares() {
 		return pershares;
 	}
 
-	public void setPershares(Map<String, LineChartData> pershares) {
+	public void setPershares(SortedMap<String, LineChartData> pershares) {
 		this.pershares = pershares;
 	}
 
-	public Map<String, LineChartData> getDebtratios() {
+	public SortedMap<String, LineChartData> getDebtratios() {
 		return debtratios;
 	}
 
-	public void setDebtratios(Map<String, LineChartData> debtratios) {
+	public void setDebtratios(SortedMap<String, LineChartData> debtratios) {
 		this.debtratios = debtratios;
 	}
 
-	public Map<String, LineChartData> getNetassetspershares() {
+	public SortedMap<String, LineChartData> getNetassetspershares() {
 		return netassetspershares;
 	}
 
-	public void setNetassetspershares(Map<String, LineChartData> netassetspershares) {
+	public void setNetassetspershares(SortedMap<String, LineChartData> netassetspershares) {
 		this.netassetspershares = netassetspershares;
 	}
 
-	public Map<String, LineChartData> getPersharecashs() {
+	public SortedMap<String, LineChartData> getPersharecashs() {
 		return persharecashs;
 	}
 
-	public void setPersharecashs(Map<String, LineChartData> persharecashs) {
+	public void setPersharecashs(SortedMap<String, LineChartData> persharecashs) {
 		this.persharecashs = persharecashs;
 	}
 
-	public Map<String, LineChartData> getNetassetsprofits() {
+	public SortedMap<String, LineChartData> getNetassetsprofits() {
 		return netassetsprofits;
 	}
 
-	public void setNetassetsprofits(Map<String, LineChartData> netassetsprofits) {
+	public void setNetassetsprofits(SortedMap<String, LineChartData> netassetsprofits) {
 		this.netassetsprofits = netassetsprofits;
 	}
 }

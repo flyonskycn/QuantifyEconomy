@@ -26,17 +26,17 @@ public interface AnalyserService {
 	
 	/**
 	 * 查询销售曲线数据
-	 * @param code 股票代码
+	 * @param codes 股票代码
 	 * @return
 	 */
-	SalesChartData querySales(String code);
+	SalesChartData querySales(List<String> codes);
 	
 	/**
 	 * 查询销售同比曲线数据
 	 * @param code 股票代码
 	 * @return
 	 */
-	SalesWithChartData queryRateSales(String code);
+	SalesWithChartData queryRateSales(List<String> codes);
 	
 	/**
 	 * 查询证券的主要财务指标
