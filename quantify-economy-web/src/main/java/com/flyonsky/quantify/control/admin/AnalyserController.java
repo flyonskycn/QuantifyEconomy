@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.flyonsky.quantify.model.ResponseData;
 import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
-import com.flyonsky.quantify.model.chart.SalesRateChartData;
+import com.flyonsky.quantify.model.chart.SalesWithChartData;
 import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
 import com.flyonsky.quantify.model.chart.SecuritiesRateChartsData;
 import com.flyonsky.quantify.service.AnalyserService;
@@ -57,9 +57,9 @@ public class AnalyserController extends AbstractAdminController{
 	
 	@RequestMapping(value="salesrate",produces="application/json")
 	@ResponseBody
-	public ResponseData<SalesRateChartData> salesRate(String code){
-		ResponseData<SalesRateChartData> result = new ResponseData<SalesRateChartData>();
-		SalesRateChartData data = this.getAnalyserService().queryRateSales(code);
+	public ResponseData<SalesWithChartData> salesRate(String code){
+		ResponseData<SalesWithChartData> result = new ResponseData<SalesWithChartData>();
+		SalesWithChartData data = this.getAnalyserService().queryRateSales(code);
 		result.setData(data);
 		return result;
 	}

@@ -150,14 +150,14 @@
         			        
         			        seriesdata = new Array();
 	        				legenddata = new Array();
-	        				 for(line in chartdata.profitMargins){
-	        					 legenddata.push(chartdata.profitMargins[line].lineName);
+	        				$.each(chartdata.profitMargins, function(i, n){
+	        					 legenddata.push(n.lineName);
 	        					 seriesdata.push({
-	        						 name: chartdata.profitMargins[line].lineName,
+	        						 name: n.lineName,
 	        						 type: 'line',
-	        						 data: chartdata.profitMargins[line].ydata
+	        						 data: n.ydata
 	        					 })
-	        				 }
+	       					});
            			        
         			        // 收益率定图表的配置项和数据
         			        var profitOption = {
@@ -193,14 +193,15 @@
         			        
         			        seriesdata = new Array();
 	        				legenddata = new Array();
-	        				 for(line in chartdata.turnovers){
-	        					 legenddata.push(chartdata.turnovers[line].lineName);
+	        				$.each(chartdata.turnovers, function(i, n){
+	        					 legenddata.push(n.lineName);
 	        					 seriesdata.push({
-	        						 name: chartdata.turnovers[line].lineName,
+	        						 name: n.lineName,
 	        						 type: 'line',
-	        						 data: chartdata.turnovers[line].ydata
+	        						 data: n.ydata
 	        					 })
-	        				 }
+	       					});
+	        				
            			        // 资本周转率图表的配置项和数据
         			        var assetturnoverOption = {
         			            title: {
@@ -244,6 +245,16 @@
 	        		 success:function(data){
 	        			 chartdata = data.data;
 	        			 salesrateChart.resize({height:500});
+     			        var seriesdata = new Array();
+        				var legenddata = new Array();
+        				$.each(chartdata.withs, function(i, n){
+        					 legenddata.push(n.lineName);
+        					 seriesdata.push({
+        						 name: n.lineName,
+        						 type: 'line',
+        						 data: n.ydata
+        					 })
+       					});
      			        // 销售图表的配置项和数据
      			        var salesrateOption = {
      			            title: {
@@ -256,7 +267,7 @@
      			            	trigger: 'axis'
    			            	},
      			            legend: {
-     			                data:['营业收入','营业利润','净利润','总利润']
+     			                data:legenddata
      			            },
      			            xAxis: {
      			                type: 'category',
@@ -273,26 +284,7 @@
      			                    show: false
      			                }
      			            },
-     			            series: [{
-     			                name: '营业收入',
-     			                type: 'line',
-     			                data: chartdata.revenuerateLine.ydata
-     			            },
-     			            {
-     			                name: '营业利润',
-     			                type: 'line',
-     			                data: chartdata.operprofitrateLine.ydata
-     			            },
-     			            {
-     			                name: '净利润',
-     			                type: 'line',
-     			                data: chartdata.netprofitrateLine.ydata
-     			            },
-     			            {
-     			                name: '总利润',
-     			                type: 'line',
-     			                data: chartdata.totalprofitrateLine.ydata
-     			            }]
+     			            series: seriesdata
      			        };
      			        // 销售数据
      			        salesrateChart.setOption(salesrateOption);

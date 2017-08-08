@@ -2,7 +2,7 @@ package com.flyonsky.quantify.service;
 
 import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
-import com.flyonsky.quantify.model.chart.SalesRateChartData;
+import com.flyonsky.quantify.model.chart.SalesWithChartData;
 import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
 import com.flyonsky.quantify.model.chart.SecuritiesRateChartsData;
 
@@ -34,7 +34,7 @@ public interface AnalyserService {
 	 * @param code 股票代码
 	 * @return
 	 */
-	SalesRateChartData queryRateSales(String code);
+	SalesWithChartData queryRateSales(String code);
 	
 	/**
 	 * 查询证券的主要财务指标

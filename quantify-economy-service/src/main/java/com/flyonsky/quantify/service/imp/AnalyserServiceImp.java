@@ -16,7 +16,7 @@ import com.flyonsky.quantify.entity.SecuritiesLineData;
 import com.flyonsky.quantify.model.chart.EnumKpiType;
 import com.flyonsky.quantify.model.chart.MultiLineChartData;
 import com.flyonsky.quantify.model.chart.SalesChartData;
-import com.flyonsky.quantify.model.chart.SalesRateChartData;
+import com.flyonsky.quantify.model.chart.SalesWithChartData;
 import com.flyonsky.quantify.model.chart.SecuritiesChartsData;
 import com.flyonsky.quantify.model.chart.SecuritiesRateChartsData;
 import com.flyonsky.quantify.service.AbstractService;
@@ -112,16 +112,15 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	}
 
 	@Override
-	public SalesRateChartData queryRateSales(String code) {
+	public SalesWithChartData queryRateSales(String code) {
 		List<SalesRateCharts> list = this.getSalesMapper().queryRateSales(code);
-		SalesRateChartData data = new SalesRateChartData();
+		SalesWithChartData data = new SalesWithChartData();
 		data.setSecuritiesName(code);
 		for(SalesRateCharts line : list){
-			data.addCategory(line.getYear());
-			data.addNetprofitrate(line.getYear(), line.getNetprofitrate());
-			data.addOperprofitrate(line.getYear(), line.getOperprofitrate());
-			data.addRevenuerate(line.getYear(), line.getRevenuerate());
-			data.addTotalprofitrate(line.getYear(), line.getTotalprofitrate());
+			data.addKpi(code, line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
+			data.addKpi(code, line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);
+			data.addKpi(code, line.getYear(), line.getRevenuerate(), EnumKpiType.revenuewith);
+			data.addKpi(code, line.getYear(), line.getTotalprofitrate(), EnumKpiType.totalprofitwith);
 		}
 		return data;
 	}
