@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/3 14:21:26                            */
+/* Created on:     2017/8/9 20:37:44                            */
 /*==============================================================*/
 
 
@@ -25,6 +25,8 @@ drop table if exists cp_report_chart;
 drop table if exists cp_report_page;
 
 drop table if exists cp_report_pagechart;
+
+drop table if exists cp_securities;
 
 /*==============================================================*/
 /* Table: cp_admin_log                                          */
@@ -206,6 +208,17 @@ create table cp_report_pagechart
 );
 
 alter table cp_report_pagechart comment '报表页和图表项的关系';
+
+/*==============================================================*/
+/* Table: cp_securities                                         */
+/*==============================================================*/
+create table cp_securities
+(
+   id                   int not null auto_increment comment '记录ＩＤ',
+   name                 varchar(64) not null,
+   code                 varchar(32) not null,
+   primary key (id)
+);
 
 alter table cp_admin_log add constraint FK_Reference_5 foreign key (uId)
       references cp_admin_url (uId) on delete restrict on update restrict;

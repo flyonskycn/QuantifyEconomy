@@ -37,7 +37,7 @@
         enableSelectByExample="true" 
         enableCountByExample="true" 
         enableUpdateByExample="true" ></table> -->
-        
+        <!-- 
          <table tableName="cp_admin_log" domainObjectName="AdminLog"></table>
          <table tableName="cp_admin_role" domainObjectName="AdminRole"></table>
          <table tableName="cp_admin_role_url" domainObjectName="AdminRoleUrl"></table>
@@ -56,6 +56,8 @@
          <table tableName="v_admin_role_allurl" domainObjectName="VAdminRoleAllUrl"></table>
          <table tableName="v_admin_user_url" domainObjectName="VAdminUserUrl"></table>
          <table tableName="cp_annualreport" domainObjectName="AnnualReport"></table>
+          -->
+         <table tableName="cp_securities" domainObjectName="Securities"></table>
        
     </context>
 </generatorConfiguration>
