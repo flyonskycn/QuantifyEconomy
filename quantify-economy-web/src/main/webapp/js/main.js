@@ -120,7 +120,7 @@ function createtab(cname,href,title){
 			$.toaster('您打开的标签页过多,请关闭后重新打开...','提醒','danger');
 			return;
 		}
-		var height=$(".content-wrapper iframe").height();
+		var height=$(".content-wrapper").height();
   		$(".content-wrapper iframe").removeClass("in active");
 		var newfrm=$('<iframe src="'+href+'" class="contentfrm tab-pane fade in active" id='+cname+' frameborder="0" name='+cname+' style="width:100%;" onload="loadtab(this)"></iframe>');
 		newfrm.height(height);
