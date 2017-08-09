@@ -173,10 +173,10 @@
 	        				 linechart(totalprofitChart,'总利润',chartdata.totalprofits,chartdata.category);
 	        				 
 	        				 // 净利润
-	        				 linechart(netprofitChart,'毛利率',chartdata.netprofits,chartdata.category);
+	        				 linechart(netprofitChart,'净利润',chartdata.netprofits,chartdata.category);
 	        				 
 	        				 // 毛利率
-	        				 linechart(grossmarginChart,'净利润',chartdata.grossmargins,chartdata.category);
+	        				 linechart(grossmarginChart,'毛利率',chartdata.grossmargins,chartdata.category);
 	        				 
 	        				 // 净利率
 	        				 linechart(profitmarginChart,'净利率',chartdata.profitMargins,chartdata.category);
