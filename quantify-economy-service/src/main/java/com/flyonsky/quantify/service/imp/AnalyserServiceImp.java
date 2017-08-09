@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.AnalyserReportMapper;
+import com.flyonsky.quantify.dao.DataMapper;
 import com.flyonsky.quantify.dao.SalesMapper;
-import com.flyonsky.quantify.dao.SecuritiesMapper;
 import com.flyonsky.quantify.entity.AnalyserReport;
 import com.flyonsky.quantify.entity.SalesCharts;
 import com.flyonsky.quantify.entity.SalesRateCharts;
@@ -32,7 +32,7 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	private SalesMapper salesMapper;
 	
 	@Autowired
-	private SecuritiesMapper securitiesMapper;
+	private DataMapper dataMapper;
 
 	@Override
 	public SecuritiesRateChartsData query(String code) {
@@ -125,7 +125,7 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 
 	@Override
 	public SecuritiesChartsData querySecurities(List<String> codes) {
-		List<SecuritiesCharts> list = this.getSecuritiesMapper().querySecurity(codes);
+		List<SecuritiesCharts> list = this.getDataMapper().querySecurity(codes);
 		SecuritiesChartsData data = new SecuritiesChartsData();
 		for(SecuritiesCharts line : list){
 			data.addKpi(line.getCode(), line.getYear(), line.getDebtratio(), EnumKpiType.debtratio);
@@ -153,11 +153,11 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		this.salesMapper = salesMapper;
 	}
 
-	public SecuritiesMapper getSecuritiesMapper() {
-		return securitiesMapper;
+	public DataMapper getDataMapper() {
+		return dataMapper;
 	}
 
-	public void setSecuritiesMapper(SecuritiesMapper securitiesMapper) {
-		this.securitiesMapper = securitiesMapper;
+	public void setDataMapper(DataMapper dataMapper) {
+		this.dataMapper = dataMapper;
 	}
 }
