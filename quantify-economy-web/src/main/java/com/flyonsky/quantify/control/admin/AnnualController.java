@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyonsky.quantify.entity.AnnualReport;
+import com.flyonsky.quantify.entity.Securities;
+import com.flyonsky.quantify.entity.VAnnualReport;
 import com.flyonsky.quantify.model.GridData;
 import com.flyonsky.quantify.model.QueryInfo;
 import com.flyonsky.quantify.model.ResponseCode;
 import com.flyonsky.quantify.model.ResponseData;
 import com.flyonsky.quantify.service.AnnualReportService;
 import com.flyonsky.quantify.service.FileService;
+import com.flyonsky.quantify.service.SecuritieService;
 
 @Controller
 @RequestMapping(AnnualController.PATH)
@@ -33,6 +36,9 @@ public class AnnualController extends AbstractAdminController{
 	
 	@Autowired
 	private AnnualReportService annualService;
+	
+	@Autowired
+	private SecuritieService secService;
 	
 	@RequestMapping("{page}")
 	public String execute(@PathVariable("page") String page){
@@ -54,7 +60,7 @@ public class AnnualController extends AbstractAdminController{
 	}
 	
 	/**
-	 * 角色列表视图
+	 * 年报数据
 	 * @param model
 	 * @param role 
 	 * @param query 
@@ -62,8 +68,8 @@ public class AnnualController extends AbstractAdminController{
 	 */
 	@RequestMapping(value="query",produces="application/json")
 	@ResponseBody
-	public GridData<AnnualReport> query(Model model, QueryInfo query){
-		GridData<AnnualReport> grid = this.getAnnualService().queryAnnualReport(query);
+	public GridData<VAnnualReport> query(Model model, QueryInfo query){
+		GridData<VAnnualReport> grid = this.getAnnualService().queryAnnualReport(query);
 		return grid;
 	}
 	
@@ -95,6 +101,43 @@ public class AnnualController extends AbstractAdminController{
 		}
 		return result;
 	}
+	
+	/**
+	 * 年报数据
+	 * @param model
+	 * @param role 
+	 * @param query 
+	 * @return
+	 */
+	@RequestMapping(value="querysecurities",produces="application/json")
+	@ResponseBody
+	public GridData<Securities> querySecurities(Model model, QueryInfo query){
+		GridData<Securities> grid = this.getSecService().querySecurities(query);
+		return grid;
+	}
+	
+	@RequestMapping("editsecurities")
+	public String editSecurities(int recordid,Model model){	
+		Securities data = this.getSecService().querySecurities(recordid);
+		model.addAttribute("data", data);
+		return PATH + "/editsecurities";
+	}
+	
+	@RequestMapping(value="savesecurities",produces="application/json")
+	@ResponseBody
+	public ResponseCode saveSecurities(@RequestBody Securities data){
+		ResponseCode result = new ResponseCode();
+		boolean flag = false;
+		if(data.getId() != null && data.getId() > 0){
+			flag = this.getSecService().modifySecuritie(data);
+		}else{
+			flag = this.getSecService().createSecuritie(data);
+		}
+		if(!flag){
+			result.set(1, "数据操作失败");
+		}
+		return result;
+	}
 
 	public FileService getFileService() {
 		return fileService;
@@ -118,5 +161,13 @@ public class AnnualController extends AbstractAdminController{
 
 	public void setAnnualService(AnnualReportService annualService) {
 		this.annualService = annualService;
+	}
+
+	public SecuritieService getSecService() {
+		return secService;
+	}
+
+	public void setSecService(SecuritieService secService) {
+		this.secService = secService;
 	}
 }

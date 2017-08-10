@@ -100,7 +100,10 @@ cp_admin_role_user AS a
 INNER JOIN cp_admin_role_url AS b ON a.roleId = b.roleId
 INNER JOIN cp_admin_url AS c ON b.uId = c.uId ;
 
-
+-- 报表视图
+create or replace view v_annualreport
+as 
+select a.*,b.name from cp_annualreport a left join cp_securities b on a.code = b.code;
 
 
 

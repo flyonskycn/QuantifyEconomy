@@ -3,6 +3,7 @@ package com.flyonsky.quantify.service;
 import java.util.List;
 
 import com.flyonsky.quantify.entity.AnnualReport;
+import com.flyonsky.quantify.entity.VAnnualReport;
 import com.flyonsky.quantify.model.GridData;
 import com.flyonsky.quantify.model.QueryInfo;
 
@@ -33,7 +34,7 @@ public interface AnnualReportService {
 	 * @param query 查询信息
 	 * @return
 	 */
-	GridData<AnnualReport> queryAnnualReport(QueryInfo query);
+	GridData<VAnnualReport> queryAnnualReport(QueryInfo query);
 	
 	/**
 	 * 新建年报

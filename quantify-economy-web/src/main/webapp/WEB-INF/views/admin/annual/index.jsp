@@ -42,7 +42,7 @@
      				<div class="form-group">
      					<label class="control-label col-sm-4" for="year">年</label>
      					<div class="col-sm-8">
-					    	<input type="text" class="form-control" id="year" readonly="readonly">
+					    	<input type="text" class="form-control" id="year">
 					    </div>
 				  	</div>
      			</div>

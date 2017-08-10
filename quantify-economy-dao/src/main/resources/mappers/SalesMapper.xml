@@ -4,6 +4,7 @@
   <resultMap id="SalesChart" type="com.flyonsky.quantify.entity.SalesCharts" >
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="revenue" property="revenue" jdbcType="DECIMAL" />
     <result column="operprofit" property="operprofit" jdbcType="DECIMAL" />
     <result column="totalprofit" property="totalprofit" jdbcType="DECIMAL" />
@@ -17,6 +18,7 @@
   <resultMap id="SalesRateChart" type="com.flyonsky.quantify.entity.SalesRateCharts" >
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="revenuerate" property="revenuerate" jdbcType="DECIMAL" />
     <result column="operprofitrate" property="operprofitrate" jdbcType="DECIMAL" />
     <result column="totalprofitrate" property="totalprofitrate" jdbcType="DECIMAL" />
@@ -24,11 +26,11 @@
   </resultMap>
   
   <select id="querySales" resultMap="SalesChart" parameterType="java.util.ArrayList">
-	select code,year,revenue,operprofit,totalprofit,netprofit,
+	select code,year,name,revenue,operprofit,totalprofit,netprofit,
 	operprofit/revenue*100.0 as grossmargin,
 	netprofit/revenue*100.0 as netinterestrate,
 	operprofit/totalprofit*100.0 as mainprofitrate,
-	revenue/totalassets as assetturnover from cp_annualreport where code in (
+	revenue/totalassets as assetturnover from v_annualreport where code in (
 		<foreach item="guard" index="index" collection="list"  separator=","> 
 			#{guard} 
 	    </foreach> 
@@ -36,12 +38,12 @@
   </select>
   
   <select id="queryRateSales" resultMap="SalesRateChart" parameterType="java.util.ArrayList">
-	select a.code,a.year, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
+	select a.code,a.year,a.name, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
 	(a.operprofit - b.operprofit)/b.operprofit*100.0 as operprofitrate,
 	(a.totalprofit - b.totalprofit)/b.totalprofit*100.0 as totalprofitrate,
 	(a.netprofit - b.netprofit)/b.netprofit*100.0 as netprofitrate
 	 from 
-	(select * from cp_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
+	(select * from v_annualreport ) a ,(select year + 1 as rateyear,a.* from cp_annualreport a) b 
 	where a.year = b.rateyear and a.code = b.code and a.code in (
 		<foreach item="guard" index="index" collection="list"  separator=","> 
 			#{guard} 

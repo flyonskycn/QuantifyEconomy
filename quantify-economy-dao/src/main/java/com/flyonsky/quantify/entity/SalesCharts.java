@@ -20,6 +20,9 @@ public class SalesCharts implements Serializable{
 	// 年
 	private int year;
 	
+	// 证券名称
+	private String name;
+	
 	// 营业收入
 	private double revenue;
 	
@@ -122,5 +125,13 @@ public class SalesCharts implements Serializable{
 
 	public void setAssetturnover(double assetturnover) {
 		this.assetturnover = assetturnover;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

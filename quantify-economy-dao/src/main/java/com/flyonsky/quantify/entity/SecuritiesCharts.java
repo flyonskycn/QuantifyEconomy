@@ -15,6 +15,9 @@ public class SecuritiesCharts implements Serializable{
 	// 年
 	private int year;
 	
+	// 证券名称
+	private String name;
+	
 	// 每股收益:扣非后归属股东净利润/总股份数
 	private double pershare;
 	
@@ -88,5 +91,13 @@ public class SecuritiesCharts implements Serializable{
 
 	public void setPershare(double pershare) {
 		this.pershare = pershare;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

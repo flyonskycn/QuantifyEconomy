@@ -59,5 +59,7 @@
           -->
          <table tableName="cp_securities" domainObjectName="Securities"></table>
        
+    	<table tableName="v_annualreport" domainObjectName="VAnnualReport"></table>
+       	
     </context>
 </generatorConfiguration>

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>财报数据管理</title>
+    <title>证券数据管理</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1>财报数据管理</h1>
+    <h1>证券数据管理</h1>
     <div class="row" id="datagird">
     	
     </div>
@@ -59,32 +59,22 @@
 $(function() {	 	 
     $("#datagird").bs_grid({
  
-        ajaxFetchDataURL: "query.co",
+        ajaxFetchDataURL: "querysecurities.co",
         row_primary_key: "id",
  
         columns: [
             {field: "id", header: "ID", visible: "no"},
             {field: "code", header: "证券代码"},
             {field: "name", header: "证券名称"},
-            {field: "year", header: "年"},
-            {field: "revenue", header: "营业收入"},
-            {field: "operprofit", header: "营业利润"},
-            {field: "totalprofit", header: "利润总额"},
-            {field: "netprofit", header: "净利润"},
-            {field: "shnetprofit", header: "归属股东净利润"},
-            {field: "deshnetprofit", header: "归属股东净利润(扣非)"},
-            {field: "netcashflow", header: "现金流量净额"},
-            {field: "totalassets", header: "总资产"},
-            {field: "totalliability", header: "总负债"},
-            {field: "shequity", header: "股东权益"},
-            {field: "totalshares", header: "股份总数"},
-            {field: "remark", header: "备注"},
-            {field: "id", header: "操作", "sortable": "no",template:"<a href='edit.co?recordid={value}' id='{value}' title='编辑' class='glyphicon glyphicon-pencil'></a> "}
+            {field: "id", header: "操作", "sortable": "no",template:"<a href='editsecurities.co?recordid={value}' id='{value}' title='编辑' class='glyphicon glyphicon-pencil'></a> "}
+        ],
+        
+        customTools:[
+            {tagName: "a", id: "addinfo",href:'editsecurities.co?recordid=0', title: "新建",iconClass:"glyphicon glyphicon-plus"},
         ],
         sorting: [
                   {sortingName: "证券代码", field: "code", order: "descending"},
                   {sortingName: "证券名称", field: "name", order: "none"},
-                  {sortingName: "年", field: "year", order: "none"},
               ],
  
         filterOptions: {
@@ -101,16 +91,6 @@ $(function() {
                 },
                 {
                     filterName: "证券名称", "filterType": "text", field: "name", filterLabel: "证券名称",
-                    excluded_operators: ["in", "not_in"],
-                    filter_interface: [
-                        {
-                            filter_element: "input",
-                            filter_element_attributes: {"type": "text"}
-                        }
-                    ]
-                },
-                {
-                    filterName: "年", "filterType": "text", field: "year", filterLabel: "年",
                     excluded_operators: ["in", "not_in"],
                     filter_interface: [
                         {

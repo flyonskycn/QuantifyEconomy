@@ -11,6 +11,7 @@ public class SalesRateCharts implements Serializable{
 
     private String code;
     private int year;
+    private String name;
     private double revenuerate;
     private double operprofitrate;
     private double totalprofitrate;
@@ -50,5 +51,11 @@ public class SalesRateCharts implements Serializable{
 	}
 	public void setNetprofitrate(double netprofitrate) {
 		this.netprofitrate = netprofitrate;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

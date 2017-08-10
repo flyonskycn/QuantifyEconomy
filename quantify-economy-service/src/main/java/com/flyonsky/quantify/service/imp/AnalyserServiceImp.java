@@ -98,14 +98,14 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		List<SalesCharts> list = this.getSalesMapper().querySales(codes);
 		SalesChartData data = new SalesChartData();
 		for(SalesCharts line : list){
-			data.addKpi(line.getCode(), line.getYear(), line.getAssetturnover(), EnumKpiType.assetturnover);
-			data.addKpi(line.getCode(), line.getYear(), line.getGrossmargin(), EnumKpiType.grossmargin);
-			data.addKpi(line.getCode(), line.getYear(), line.getMainprofitrate(), EnumKpiType.mainprofitrate);
-			data.addKpi(line.getCode(), line.getYear(), line.getNetinterestrate(), EnumKpiType.netinterestrate);
-			data.addKpi(line.getCode(), line.getYear(), line.getNetprofit(), EnumKpiType.netprofit);
-			data.addKpi(line.getCode(), line.getYear(), line.getOperprofit(), EnumKpiType.operprofit);
-			data.addKpi(line.getCode(), line.getYear(), line.getRevenue(), EnumKpiType.revenue);
-			data.addKpi(line.getCode(), line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
+			data.addKpi(line.getName(), line.getYear(), line.getAssetturnover(), EnumKpiType.assetturnover);
+			data.addKpi(line.getName(), line.getYear(), line.getGrossmargin(), EnumKpiType.grossmargin);
+			data.addKpi(line.getName(), line.getYear(), line.getMainprofitrate(), EnumKpiType.mainprofitrate);
+			data.addKpi(line.getName(), line.getYear(), line.getNetinterestrate(), EnumKpiType.netinterestrate);
+			data.addKpi(line.getName(), line.getYear(), line.getNetprofit(), EnumKpiType.netprofit);
+			data.addKpi(line.getName(), line.getYear(), line.getOperprofit(), EnumKpiType.operprofit);
+			data.addKpi(line.getName(), line.getYear(), line.getRevenue(), EnumKpiType.revenue);
+			data.addKpi(line.getName(), line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
 		}
 		return data;
 	}
@@ -115,10 +115,10 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		List<SalesRateCharts> list = this.getSalesMapper().queryRateSales(codes);
 		SalesWithChartData data = new SalesWithChartData();
 		for(SalesRateCharts line : list){
-			data.addKpi(line.getCode(), line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
-			data.addKpi(line.getCode(), line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);
-			data.addKpi(line.getCode(), line.getYear(), line.getRevenuerate(), EnumKpiType.revenuewith);
-			data.addKpi(line.getCode(), line.getYear(), line.getTotalprofitrate(), EnumKpiType.totalprofitwith);
+			data.addKpi(line.getName(), line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
+			data.addKpi(line.getName(), line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);
+			data.addKpi(line.getName(), line.getYear(), line.getRevenuerate(), EnumKpiType.revenuewith);
+			data.addKpi(line.getName(), line.getYear(), line.getTotalprofitrate(), EnumKpiType.totalprofitwith);
 		}
 		return data;
 	}
@@ -128,11 +128,11 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 		List<SecuritiesCharts> list = this.getDataMapper().querySecurity(codes);
 		SecuritiesChartsData data = new SecuritiesChartsData();
 		for(SecuritiesCharts line : list){
-			data.addKpi(line.getCode(), line.getYear(), line.getDebtratio(), EnumKpiType.debtratio);
-			data.addKpi(line.getCode(), line.getYear(), line.getNetassetspershare(), EnumKpiType.netassetspershare);
-			data.addKpi(line.getCode(), line.getYear(), line.getNetassetsprofit(), EnumKpiType.netAssetsProfitRate);
-			data.addKpi(line.getCode(), line.getYear(), line.getPershare(), EnumKpiType.pershare);
-			data.addKpi(line.getCode(), line.getYear(), line.getPersharecash(), EnumKpiType.persharecash);
+			data.addKpi(line.getName(), line.getYear(), line.getDebtratio(), EnumKpiType.debtratio);
+			data.addKpi(line.getName(), line.getYear(), line.getNetassetspershare(), EnumKpiType.netassetspershare);
+			data.addKpi(line.getName(), line.getYear(), line.getNetassetsprofit(), EnumKpiType.netAssetsProfitRate);
+			data.addKpi(line.getName(), line.getYear(), line.getPershare(), EnumKpiType.pershare);
+			data.addKpi(line.getName(), line.getYear(), line.getPersharecash(), EnumKpiType.persharecash);
 		}
 		return data;
 	}

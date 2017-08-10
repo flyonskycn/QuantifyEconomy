@@ -4,6 +4,7 @@
   <resultMap id="SecuritiesCharts" type="com.flyonsky.quantify.entity.SecuritiesCharts" >
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pershare" property="pershare" jdbcType="DECIMAL" />
     <result column="debtratio" property="debtratio" jdbcType="DECIMAL" />
     <result column="netassetspershare" property="netassetspershare" jdbcType="DECIMAL" />
@@ -12,12 +13,12 @@
   </resultMap>
   
   <select id="querySecurity" resultMap="SecuritiesCharts" parameterType="java.util.ArrayList">
-	select code,year,
+	select code,year,name,
 	deshnetprofit/totalshares as pershare,
 	totalliability/totalassets*100.0 as debtratio,
 	shequity/totalshares as netassetspershare,
 	netcashflow/totalshares as persharecash,
-	deshnetprofit/shequity*100.0 as netassetsprofit from cp_annualreport where code in (
+	deshnetprofit/shequity*100.0 as netassetsprofit from v_annualreport where code in (
 		<foreach item="guard" index="index" collection="list"  separator=","> 
 			#{guard} 
 	    </foreach>  
