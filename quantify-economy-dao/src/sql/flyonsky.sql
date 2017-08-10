@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/9 20:37:44                            */
+/* Created on:     2017/8/10 21:17:43                           */
 /*==============================================================*/
 
 
@@ -214,9 +214,10 @@ alter table cp_report_pagechart comment '报表页和图表项的关系';
 /*==============================================================*/
 create table cp_securities
 (
-   id                   int not null auto_increment comment '记录ＩＤ',
-   name                 varchar(64) not null,
-   code                 varchar(32) not null,
+   id                   int not null auto_increment,
+   name                 varchar(64),
+   code                 varchar(32),
+   issuedate            date,
    primary key (id)
 );
 
