@@ -5,6 +5,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="issuedate" property="issuedate" jdbcType="DATE" />
+    <result column="exchange" property="exchange" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, code
+    id, name, code, issuedate, exchange
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.flyonsky.quantify.entity.SecuritiesExample" >
     select
@@ -107,10 +109,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.flyonsky.quantify.entity.Securities" >
-    insert into cp_securities (id, name, code
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}
-      )
+    insert into cp_securities (id, name, code, 
+      issuedate, exchange)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{issuedate,jdbcType=DATE}, #{exchange,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.flyonsky.quantify.entity.Securities" >
     insert into cp_securities
@@ -124,6 +126,12 @@
       <if test="code != null" >
         code,
       </if>
+      <if test="issuedate != null" >
+        issuedate,
+      </if>
+      <if test="exchange != null" >
+        exchange,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -134,6 +142,12 @@
       </if>
       <if test="code != null" >
         #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="issuedate != null" >
+        #{issuedate,jdbcType=DATE},
+      </if>
+      <if test="exchange != null" >
+        #{exchange,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -155,6 +169,12 @@
       <if test="record.code != null" >
         code = #{record.code,jdbcType=VARCHAR},
       </if>
+      <if test="record.issuedate != null" >
+        issuedate = #{record.issuedate,jdbcType=DATE},
+      </if>
+      <if test="record.exchange != null" >
+        exchange = #{record.exchange,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -164,7 +184,9 @@
     update cp_securities
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR}
+      code = #{record.code,jdbcType=VARCHAR},
+      issuedate = #{record.issuedate,jdbcType=DATE},
+      exchange = #{record.exchange,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -178,13 +200,21 @@
       <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
       </if>
+      <if test="issuedate != null" >
+        issuedate = #{issuedate,jdbcType=DATE},
+      </if>
+      <if test="exchange != null" >
+        exchange = #{exchange,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.flyonsky.quantify.entity.Securities" >
     update cp_securities
     set name = #{name,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR}
+      code = #{code,jdbcType=VARCHAR},
+      issuedate = #{issuedate,jdbcType=DATE},
+      exchange = #{exchange,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

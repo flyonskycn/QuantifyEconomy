@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/10 21:17:43                           */
+/* Created on:     2017/8/14 11:44:15                           */
 /*==============================================================*/
 
 
@@ -25,6 +25,8 @@ drop table if exists cp_report_chart;
 drop table if exists cp_report_page;
 
 drop table if exists cp_report_pagechart;
+
+drop index Index_1 on cp_securities;
 
 drop table if exists cp_securities;
 
@@ -218,7 +220,16 @@ create table cp_securities
    name                 varchar(64),
    code                 varchar(32),
    issuedate            date,
+   exchange             varchar(64),
    primary key (id)
+);
+
+/*==============================================================*/
+/* Index: Index_1                                               */
+/*==============================================================*/
+create unique index Index_1 on cp_securities
+(
+   code
 );
 
 alter table cp_admin_log add constraint FK_Reference_5 foreign key (uId)

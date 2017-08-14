@@ -1,6 +1,7 @@
 package com.flyonsky.quantify.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Securities implements Serializable {
     private Integer id;
@@ -8,6 +9,10 @@ public class Securities implements Serializable {
     private String name;
 
     private String code;
+
+    private Date issuedate;
+
+    private String exchange;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,5 +38,21 @@ public class Securities implements Serializable {
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public Date getIssuedate() {
+        return issuedate;
+    }
+
+    public void setIssuedate(Date issuedate) {
+        this.issuedate = issuedate;
+    }
+
+    public String getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange == null ? null : exchange.trim();
     }
 }

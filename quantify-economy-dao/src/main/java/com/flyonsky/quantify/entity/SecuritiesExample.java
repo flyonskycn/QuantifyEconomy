@@ -1,6 +1,8 @@
 package com.flyonsky.quantify.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class SecuritiesExample {
@@ -132,6 +134,32 @@ public class SecuritiesExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -331,6 +359,136 @@ public class SecuritiesExample {
 
         public Criteria andCodeNotBetween(String value1, String value2) {
             addCriterion("code not between", value1, value2, "code");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateIsNull() {
+            addCriterion("issuedate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateIsNotNull() {
+            addCriterion("issuedate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateEqualTo(Date value) {
+            addCriterionForJDBCDate("issuedate =", value, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("issuedate <>", value, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateGreaterThan(Date value) {
+            addCriterionForJDBCDate("issuedate >", value, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("issuedate >=", value, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateLessThan(Date value) {
+            addCriterionForJDBCDate("issuedate <", value, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("issuedate <=", value, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateIn(List<Date> values) {
+            addCriterionForJDBCDate("issuedate in", values, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("issuedate not in", values, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("issuedate between", value1, value2, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssuedateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("issuedate not between", value1, value2, "issuedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeIsNull() {
+            addCriterion("exchange is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeIsNotNull() {
+            addCriterion("exchange is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeEqualTo(String value) {
+            addCriterion("exchange =", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeNotEqualTo(String value) {
+            addCriterion("exchange <>", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeGreaterThan(String value) {
+            addCriterion("exchange >", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeGreaterThanOrEqualTo(String value) {
+            addCriterion("exchange >=", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeLessThan(String value) {
+            addCriterion("exchange <", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeLessThanOrEqualTo(String value) {
+            addCriterion("exchange <=", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeLike(String value) {
+            addCriterion("exchange like", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeNotLike(String value) {
+            addCriterion("exchange not like", value, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeIn(List<String> values) {
+            addCriterion("exchange in", values, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeNotIn(List<String> values) {
+            addCriterion("exchange not in", values, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeBetween(String value1, String value2) {
+            addCriterion("exchange between", value1, value2, "exchange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExchangeNotBetween(String value1, String value2) {
+            addCriterion("exchange not between", value1, value2, "exchange");
             return (Criteria) this;
         }
     }
