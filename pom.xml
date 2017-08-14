@@ -183,6 +183,16 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>${commons.io.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
   	</dependencies>
   </dependencyManagement>
   <properties>
@@ -203,6 +213,7 @@
   	<woodstox.version>4.4.0</woodstox.version>
   	<memcached.version>2.0.0</memcached.version>
   	<commons.io.version>2.5</commons.io.version>
+  	<poi.version>3.16</poi.version>
   </properties>
   <modules>
   	<module>quantify-economy-web</module>
