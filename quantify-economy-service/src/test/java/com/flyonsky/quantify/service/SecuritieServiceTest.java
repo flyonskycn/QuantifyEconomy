@@ -12,12 +12,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.flyonsky.quantify.BaseSpringJUnit;
 import com.flyonsky.quantify.entity.Securities;
 
+@Ignore
 public class SecuritieServiceTest extends BaseSpringJUnit{
 
 	@Autowired
