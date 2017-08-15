@@ -19,4 +19,12 @@ public interface FileService {
 	 * @return
 	 */
 	List<String> recursive(boolean isAnnualReport, String dir);
+	
+	/**
+	 * 下载指定股票代码的年报
+	 * @param code 证券代码
+	 * @param targetDir 目标ＤＩＲ
+	 * @return
+	 */
+	boolean downloadByCode(String code, String targetDir);
 }

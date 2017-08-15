@@ -37,4 +37,11 @@ public interface SecuritieService {
 	 * @return
 	 */
 	Securities querySecurities(int id);
+	
+	/**
+	 * 查看对应的证券信息
+	 * @param code 证券代码
+	 * @return
+	 */
+	Securities querySecurities(String code);
 }

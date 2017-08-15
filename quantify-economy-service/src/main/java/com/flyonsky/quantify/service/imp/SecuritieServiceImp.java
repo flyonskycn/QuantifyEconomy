@@ -1,5 +1,7 @@
 package com.flyonsky.quantify.service.imp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,17 +45,28 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 		return grid;
 	}
 
+	@Override
+	public Securities querySecurities(int id) {
+		return this.getSecMapper().selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Securities querySecurities(String code) {
+		SecuritiesExample example = new SecuritiesExample();
+		example.createCriteria().andCodeEqualTo(code);
+		List<Securities> list = this.getSecMapper().selectByExample(example);
+		if(list != null && list.size() > 0){
+			return list.get(0);
+		}
+		return null;
+	}
+
 	public SecuritiesMapper getSecMapper() {
 		return secMapper;
 	}
 
 	public void setSecMapper(SecuritiesMapper secMapper) {
 		this.secMapper = secMapper;
-	}
-
-	@Override
-	public Securities querySecurities(int id) {
-		return this.getSecMapper().selectByPrimaryKey(id);
 	}
 
 }

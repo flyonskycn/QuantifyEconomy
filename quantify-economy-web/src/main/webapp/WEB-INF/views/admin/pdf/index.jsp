@@ -34,6 +34,14 @@
      	<a href="#" class="btn btn-default btn-url">URL上传</a>
 	  </div>
      
+     
+     <div class="form-group">
+     	<label for="code">证券代码</label>
+     	<input type="text" class="form-control" id="code" placeholder="证券代码">
+     </div>
+     <div class="form-group">
+     	<a href="#" class="btn btn-default btn-code">年报下载</a>
+	  </div>
 	</div>
      <script type="text/javascript">
      	$(function(){
@@ -61,6 +69,23 @@
          				if(data.erroCode == 0){
      						$.toaster("上传成功");
      						$("#pdfurl").val('');
+     					}else{
+     						$.toaster(data.message);
+     					}
+         			}
+     			})
+     		});
+     		
+     		$(".btn-code").click(function(){
+     			$.ajax({
+         			data:{'code':$("#code").val()},
+         			url:'/admin/pdf/downloadcode.co',
+         			type:'POST',
+         			dataType:'json',
+         			success:function(data){
+         				if(data.erroCode == 0){
+     						$.toaster("上传成功");
+     						$("#code").val('');
      					}else{
      						$.toaster(data.message);
      					}
