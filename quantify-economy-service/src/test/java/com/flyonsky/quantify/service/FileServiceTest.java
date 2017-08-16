@@ -1,6 +1,7 @@
 package com.flyonsky.quantify.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +22,9 @@ public class FileServiceTest extends BaseSpringJUnit{
 	
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private SecuritieService securitiesService;
 	
 	@Value("${quantify.upload.dir}")
 	private String dir;
@@ -66,5 +70,15 @@ public class FileServiceTest extends BaseSpringJUnit{
 		Set<String> codes = this.fileService.pdfCode(this.dir);
 		Assert.assertNotNull(codes);
 		System.out.println(codes);
+	}
+	
+	@Test
+	public void testDownLoadPdf(){
+		List<String> list = this.securitiesService.querySecurities();
+		Set<String> set = this.fileService.pdfCode(this.dir);
+		list.removeAll(set);
+		for(String code : list){
+			this.fileService.downloadByCode(code, this.dir);
+		}
 	}
 }
