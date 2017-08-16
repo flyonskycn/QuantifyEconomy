@@ -31,6 +31,7 @@ import com.flyonsky.quantify.entity.Securities;
 import com.flyonsky.quantify.service.AnnualReportService;
 import com.flyonsky.quantify.service.FileService;
 import com.flyonsky.quantify.service.SecuritieService;
+import com.flyonsky.quantify.util.MDEncode;
 
 @Service
 public class FileServiceImp implements FileService{
@@ -145,6 +146,7 @@ public class FileServiceImp implements FileService{
 		int year = cal.get(Calendar.YEAR);
 		String dt = null;
 		boolean flag = false;
+		Set<String> urls = new HashSet<String>();
 		while(sec.getIssuedate().before(now)){
 			dt = sf.format(now);
 			try {
@@ -165,7 +167,11 @@ public class FileServiceImp implements FileService{
 			}else{
 				url = MessageFormat.format(this.getSse01url(), code,String.valueOf(year - 1));
 			}
-			LOG.debug(url);
+			if(urls.contains(MDEncode.md5Encode(url))){
+				now.setTime(now.getTime() - 365*24*60*60*1000l);
+				continue;
+			}
+			urls.add(MDEncode.md5Encode(url));
 			flag = this.downLoadN(url,targetDir);
 			if(flag){
 				LOG.debug(url);
