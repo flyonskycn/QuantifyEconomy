@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flyonsky.quantify.dao.CustomizeMapper;
 import com.flyonsky.quantify.dao.SecuritiesMapper;
 import com.flyonsky.quantify.entity.Securities;
 import com.flyonsky.quantify.entity.SecuritiesExample;
@@ -18,6 +19,9 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 	
 	@Autowired
 	private SecuritiesMapper secMapper;
+	
+	@Autowired
+	private CustomizeMapper cusMapper;
 
 	@Override
 	public boolean createSecuritie(Securities sec) {
@@ -61,12 +65,26 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 		return null;
 	}
 
+	@Override
+	public List<String> querySecurities() {
+		List<String> data = this.getCusMapper().querySecurities();
+		return data;
+	}
+
 	public SecuritiesMapper getSecMapper() {
 		return secMapper;
 	}
 
 	public void setSecMapper(SecuritiesMapper secMapper) {
 		this.secMapper = secMapper;
+	}
+
+	public CustomizeMapper getCusMapper() {
+		return cusMapper;
+	}
+
+	public void setCusMapper(CustomizeMapper cusMapper) {
+		this.cusMapper = cusMapper;
 	}
 
 }

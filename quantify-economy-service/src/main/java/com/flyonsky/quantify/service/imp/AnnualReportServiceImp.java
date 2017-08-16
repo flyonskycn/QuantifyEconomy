@@ -1,6 +1,5 @@
 package com.flyonsky.quantify.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.flyonsky.quantify.dao.AnnualReportMapper;
 import com.flyonsky.quantify.dao.CustomizeMapper;
 import com.flyonsky.quantify.dao.VAnnualReportMapper;
-import com.flyonsky.quantify.entity.AnnualKey;
 import com.flyonsky.quantify.entity.AnnualReport;
 import com.flyonsky.quantify.entity.AnnualReportExample;
 import com.flyonsky.quantify.entity.VAnnualReport;
@@ -76,12 +74,8 @@ public class AnnualReportServiceImp extends AbstractService implements AnnualRep
 
 	@Override
 	public List<String> queryAnnualKey() {
-		List<AnnualKey> list = this.getCusMapper().queryAnnualKey();
-		List<String> annulList = new ArrayList<String>();
-		for(AnnualKey key : list){
-			annulList.add(key.getAnnualkey());
-		}
-		return annulList;
+		List<String> list = this.getCusMapper().queryAnnualKey();
+		return list;
 	}
 
 	public AnnualReportMapper getAnnualMapper() {

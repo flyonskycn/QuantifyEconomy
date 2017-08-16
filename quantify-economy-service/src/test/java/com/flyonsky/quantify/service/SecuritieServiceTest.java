@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
@@ -14,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.flyonsky.quantify.BaseSpringJUnit;
 import com.flyonsky.quantify.entity.Securities;
 
-@Ignore
+//@Ignore
 public class SecuritieServiceTest extends BaseSpringJUnit{
 
 	@Autowired
 	private SecuritieService service;
 	
-//	@Ignore
+	@Ignore
 	@Test
 	public void test1() throws EncryptedDocumentException, InvalidFormatException, FileNotFoundException, IOException, ParseException{
 		Workbook wb = WorkbookFactory.create(this.getClass().getClassLoader().getResourceAsStream("AG.xls"));
@@ -55,6 +57,7 @@ public class SecuritieServiceTest extends BaseSpringJUnit{
         }
 	}
 	
+	@Ignore
 	@Test
 	public void test2() throws EncryptedDocumentException, InvalidFormatException, FileNotFoundException, IOException, ParseException{
 		Workbook wb = WorkbookFactory.create(this.getClass().getClassLoader().getResourceAsStream("SG.xlsx"));
@@ -84,6 +87,13 @@ public class SecuritieServiceTest extends BaseSpringJUnit{
 	            }
 			}
         }
+	}
+	
+	@Test
+	public void testQuerySecurities(){
+		List<String> data = this.getService().querySecurities();
+		Assert.assertNotNull(data);
+		System.out.println(data);
 	}
 
 	public SecuritieService getService() {

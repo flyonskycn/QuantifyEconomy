@@ -10,7 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -178,6 +180,26 @@ public class FileServiceImp implements FileService{
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public Set<String> pdfCode(String dir) {
+		Set<String> list = new HashSet<String>();
+		File fd = new File(dir);
+		File[] fs = fd.listFiles(new FileFilter(){
+			@Override
+			public boolean accept(File pathname) {
+				if(pathname.isDirectory()){
+					return true;
+				}
+				return false;
+			}
+			
+		});
+		for(File f : fs){
+			list.add(f.getName());
+		}
+		return list;
 	}
 
 	public AnnualReportService getAnnualService() {

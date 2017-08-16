@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.flyonsky.quantify.dao.CustomizeMapper" >
-  <resultMap id="AnnualKey" type="com.flyonsky.quantify.entity.AnnualKey" >
-    <result column="annualkey" property="annualkey" jdbcType="VARCHAR" />
-  </resultMap>
   
-  <select id="queryAnnualKey" resultMap="AnnualKey">
+  <select id="queryAnnualKey" resultType="java.lang.String">
 	select distinct CONCAT(code, '_', year)  as annualkey from cp_annualreport 
+  </select>
+  
+  <select id="querySecurities" resultType="java.lang.String">
+  	select code from cp_securities a where a.exchange = '上交所'
   </select>
 </mapper>

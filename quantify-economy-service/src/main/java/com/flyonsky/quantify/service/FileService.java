@@ -1,6 +1,7 @@
 package com.flyonsky.quantify.service;
 
 import java.util.List;
+import java.util.Set;
 
 public interface FileService {
 
@@ -27,4 +28,11 @@ public interface FileService {
 	 * @return
 	 */
 	boolean downloadByCode(String code, String targetDir);
+	
+	/**
+	 * 包含文件的证券列表
+	 * @param dir 目标目录
+	 * @return 证券代码列表
+	 */
+	Set<String> pdfCode(String dir);
 }
