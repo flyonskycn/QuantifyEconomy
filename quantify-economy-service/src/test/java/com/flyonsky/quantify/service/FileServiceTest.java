@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.flyonsky.quantify.BaseSpringJUnit;
 
+@Ignore
 public class FileServiceTest extends BaseSpringJUnit{
 	
 	@Autowired
