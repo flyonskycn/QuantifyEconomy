@@ -20,11 +20,21 @@
 	<div class="container-fluid" style="margin-top: 1.75rem;">
      <div class="row">
      	<div class="col-xs-3">
-     		<div class="list-group">
-     			<c:forEach var="item" items="${files}">
-     				<a href="#" class="list-group-item annual">${item}</a>
-     			</c:forEach>
-			</div>
+     		  <div class="row" style="margin-top: 1.75rem;margin-bottom: 1.75rem;">
+				<div class="col-sm-8 col-md-8 col-lg-8">
+					<input type="text" class="form-control"/>
+				</div>
+				<div class="col-sm-4 col-md-4 col-lg-4">
+					<a href="#" class="search" style="height: 34px;line-height: 34px;" >查询</a>
+				</div>
+			 </div>
+			 <div class="row">
+	     		<div class="list-group annuals">
+	     			<c:forEach var="item" items="${files}">
+	     				<a href="#" class="list-group-item annual">${item}</a>
+	     			</c:forEach>
+				</div>
+			 </div>
      	</div>
      	<div class="col-xs-9 content">
      		<form class="form-horizontal">
@@ -170,7 +180,7 @@
 	
 	<script type="text/javascript">
 	$(function(){
-		$(".annual").click(function(){
+		$(document).on('click','.annual',function(){
 			
 			var re = new RegExp("(\\d{1,})_(\\d{1,4})\\d*_(\\w{1,})\\.pdf$");
 			var m = $(this).html().match(re);
@@ -220,6 +230,23 @@
 			$('.media').media({width:1200, 
 				height:700,
 				src:$(this).html()});  
+		});
+		
+		$(".search").click(function(){
+			$(".annuals").empty();
+			$.ajax({
+				url:'/admin/annual/querypdf.co',
+				data:{'code':$(".form-control").val()},
+				success:function(data){
+					if(data.erroCode == 0){
+ 						for(var index in data.data){
+ 							$(".annuals").append('<a href="#" class="list-group-item annual">' + data.data[index] + '</a>');
+ 						}
+ 					}else{
+ 						$.toaster(data.message);
+ 					}
+				}
+			})
 		});
 		
 		$(".btn-success").click(function(){

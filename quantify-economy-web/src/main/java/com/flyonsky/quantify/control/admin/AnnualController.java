@@ -59,6 +59,15 @@ public class AnnualController extends AbstractAdminController{
 		return PATH + "/edit";
 	}
 	
+	@RequestMapping("querypdf")
+	@ResponseBody
+	public ResponseData<List<String>> queryPdf(String code){
+		ResponseData<List<String>> result = new ResponseData<List<String>>();
+		List<String> data = this.getFileService().recursive(true, this.getUploadDir() + code + "/");
+		result.setData(data);
+		return result;
+	}
+	
 	/**
 	 * 年报数据
 	 * @param model
