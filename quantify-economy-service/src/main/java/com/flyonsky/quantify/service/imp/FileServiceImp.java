@@ -247,4 +247,49 @@ public class FileServiceImp implements FileService{
 	public void setSse01url(String sse01url) {
 		this.sse01url = sse01url;
 	}
+
+	@Override
+	public boolean downLoadSzN(String url, String code, String targetDir) {
+		boolean flag = false;
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost(url);
+		CloseableHttpResponse response2 = null;
+		try {
+			response2 = client.execute(httpPost);
+			if(response2.getStatusLine().getStatusCode() != 404){
+				HttpEntity entity2 = response2.getEntity();
+	          
+	        	Pattern p = Pattern.compile("(\\d*)-");
+	        	Matcher m = p.matcher(url);
+	        	if(m.find()){
+	        		String dirPath = MessageFormat.format("{0}{1}/{2}", targetDir, code, m.group(1));
+	        		File dir = new File(dirPath);
+	        		if(!dir.exists()){
+	        			dir.mkdirs();
+	        		}
+	            	String nFileName = MessageFormat.format("{0}/{1}_{2}_n.pdf", dirPath,code, m.group(1));
+	            	File nFile = new File(nFileName);
+	            	if(!nFile.exists()){
+	            		if(nFile.createNewFile()){
+	            			FileOutputStream output = new FileOutputStream(nFile);
+	            			entity2.writeTo(output);
+	            			output.close();
+	            			flag = true;
+	            		}
+	            	}
+	        	}
+			}
+		} catch(Exception e ){
+			LOG.error(e.getMessage());
+		}finally{
+			if(response2 != null){
+				try {
+					response2.close();
+				} catch (IOException e) {
+					LOG.error(e.getMessage());
+				}
+			}
+		}
+		return flag;
+	}
 }

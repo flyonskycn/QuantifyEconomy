@@ -93,6 +93,17 @@ public class PdfController extends AbstractAdminController{
         return result;
     }
 	
+	@RequestMapping(value = "downloadszpdf", method = RequestMethod.POST)
+	@ResponseBody
+    public ResponseCode downLoadSzPdf(String url,String code) {
+		ResponseCode result = new ResponseCode();
+		boolean flag = this.getFileService().downLoadSzN(url, code, this.getUploadDir());
+        if (!flag) {
+        	result.set(1, "文件上传失败");
+    	}
+        return result;
+    }
+	
 	@RequestMapping(value = "downloadcode", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseCode downloadcode(String code){

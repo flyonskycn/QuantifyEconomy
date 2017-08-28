@@ -27,7 +27,7 @@
 		</div>
      </form>
      <div class="form-group">
-     	<label for="pdfurl">PDF URL</label>
+     	<label for="pdfurl">上交所PDF URL</label>
      	<input type="text" class="form-control" id="pdfurl" placeholder="PDF URL">
      </div>
      <div class="form-group">
@@ -36,12 +36,26 @@
      
      
      <div class="form-group">
-     	<label for="code">证券代码</label>
+     	<label for="code">上交所证券代码</label>
      	<input type="text" class="form-control" id="code" placeholder="证券代码">
      </div>
      <div class="form-group">
      	<a href="#" class="btn btn-default btn-code">年报下载</a>
 	  </div>
+	  
+	  
+	<div class="form-group">
+		<label for="szpdfurl">深交所PDF URL</label>
+		<input type="text" class="form-control" id="szpdfurl" placeholder="PDF URL">
+	</div>
+	<div class="form-group">
+     	<label for="szcode">深交所证券代码</label>
+     	<input type="text" class="form-control" id="szcode" placeholder="证券代码">
+     </div>
+	<div class="form-group">
+     	<a href="#" class="btn btn-default btn-szurl">URL上传</a>
+  	</div>
+  	
 	</div>
      <script type="text/javascript">
      	$(function(){
@@ -69,6 +83,24 @@
          				if(data.erroCode == 0){
      						$.toaster("上传成功");
      						$("#pdfurl").val('');
+     					}else{
+     						$.toaster(data.message);
+     					}
+         			}
+     			})
+     		});
+     		
+     		$(".btn-szurl").click(function(){
+     			$.ajax({
+         			data:{'url':$("#szpdfurl").val(),'code':$("#szcode").val()},
+         			url:'/admin/pdf/downloadszpdf.co',
+         			type:'POST',
+         			dataType:'json',
+         			success:function(data){
+         				if(data.erroCode == 0){
+     						$.toaster("上传成功");
+     						$("#szpdfurl").val('');
+     						$("#szcode").val('')
      					}else{
      						$.toaster(data.message);
      					}

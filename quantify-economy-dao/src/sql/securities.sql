@@ -7,7 +7,9 @@ INSERT INTO cp_industry(industryid,name) VALUES (1,'银行'),
 	(7,'钢铁'),
 	(8,'航空'),
 	(9,'海运'),
-	(10,'电力');
+	(10,'电力'),
+	(11,'保险'),
+	(12,'房地产');
 
 -- 银行
 insert into cp_industrysecury(industryid,code) values (1,'600000'),

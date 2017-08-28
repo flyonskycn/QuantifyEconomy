@@ -14,6 +14,15 @@ public interface FileService {
 	boolean downLoadN(String url, String targetDir);
 	
 	/**
+	 * 下载深交所年报PDF文件
+	 * @param url 年报PDF文件ＵＲＬ
+	 * @param code 证券代码
+	 * @param targetDir 目标DIR
+	 * @return
+	 */
+	boolean downLoadSzN(String url,String code,String targetDir);
+	
+	/**
 	 * 获取指定目录下的满足条件文件的URL
 	 * @param isAnnualReport 是否为年报
 	 * @param dir 目录
