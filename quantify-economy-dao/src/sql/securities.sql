@@ -32,4 +32,5 @@ insert into cp_industrysecury(industryid,code) values (2,'601857'),
 	
 -- 建筑业
 insert into cp_industrysecury(industryid,code) values (3,'601800'),
-	(3,'601186');
+	(3,'601186'),
+	(3,'601668');
