@@ -60,6 +60,10 @@
          <table tableName="cp_securities" domainObjectName="Securities"></table>
        
     	<table tableName="v_annualreport" domainObjectName="VAnnualReport"></table>
+    	
+    	<table tableName="cp_industry" domainObjectName="Industry"></table>
+    	
+    	<table tableName="cp_industrysecury" domainObjectName="IndustrySecury"></table>
        	
     </context>
 </generatorConfiguration>

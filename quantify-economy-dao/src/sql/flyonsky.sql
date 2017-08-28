@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/14 11:44:15                           */
+/* Created on:     2017/8/28 10:01:43                           */
 /*==============================================================*/
 
 
@@ -19,6 +19,10 @@ drop table if exists cp_admin_user;
 drop table if exists cp_annualreport;
 
 drop table if exists cp_config;
+
+drop table if exists cp_industry;
+
+drop table if exists cp_industrysecury;
 
 drop table if exists cp_report_chart;
 
@@ -165,6 +169,33 @@ create table cp_config
    cfgsort              int comment '配置ID，用于排序',
    primary key (cfgkey)
 );
+
+/*==============================================================*/
+/* Table: cp_industry                                           */
+/*==============================================================*/
+create table cp_industry
+(
+   id                   int not null auto_increment,
+   industryid           int,
+   name                 varchar(64) not null comment '行业名称',
+   primary key (id)
+);
+
+alter table cp_industry comment '行业大类';
+
+/*==============================================================*/
+/* Table: cp_industrysecury                                     */
+/*==============================================================*/
+create table cp_industrysecury
+(
+   id                   int not null auto_increment,
+   industryid           int not null comment '行业ID',
+   code                 varchar(32) not null,
+   remart               varchar(128),
+   primary key (id)
+);
+
+alter table cp_industrysecury comment '行业与证券表';
 
 /*==============================================================*/
 /* Table: cp_report_chart                                       */

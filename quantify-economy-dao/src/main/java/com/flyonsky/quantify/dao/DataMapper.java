@@ -7,4 +7,6 @@ import com.flyonsky.quantify.entity.SecuritiesCharts;
 public interface DataMapper {
 
 	List<SecuritiesCharts> querySecurity(List<String> codes);
+	
+	List<SecuritiesCharts> queryIndustry(String code);
 }

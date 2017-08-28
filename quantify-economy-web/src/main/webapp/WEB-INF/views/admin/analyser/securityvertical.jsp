@@ -38,8 +38,8 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 每股净资产 -->
-					<div id="netassetspershare"></div>
+					<!-- 净资产收益率-->
+					<div id="netassetsprofit"></div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-6">
 					<!-- 每股收益 -->
@@ -48,12 +48,12 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 每股现金流 -->
-					<div id="persharecash"></div>
+					<!-- 每股净资产 -->
+					<div id="netassetspershare"></div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<!-- 净资产收益率-->
-					<div id="netassetsprofit"></div>
+					<!-- 每股现金流 -->
+					<div id="persharecash"></div>
 				</div>
 			</div>
 			<div class="row">

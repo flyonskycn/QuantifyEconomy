@@ -134,6 +134,15 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 			data.addKpi(line.getName(), line.getYear(), line.getPershare(), EnumKpiType.pershare);
 			data.addKpi(line.getName(), line.getYear(), line.getPersharecash(), EnumKpiType.persharecash);
 		}
+		
+		list = this.getDataMapper().queryIndustry(codes.get(0));
+		for(SecuritiesCharts line : list){
+			data.addKpi(line.getName(), line.getYear(), line.getDebtratio(), EnumKpiType.debtratio);
+			data.addKpi(line.getName(), line.getYear(), line.getNetassetspershare(), EnumKpiType.netassetspershare);
+			data.addKpi(line.getName(), line.getYear(), line.getNetassetsprofit(), EnumKpiType.netAssetsProfitRate);
+			data.addKpi(line.getName(), line.getYear(), line.getPershare(), EnumKpiType.pershare);
+			data.addKpi(line.getName(), line.getYear(), line.getPersharecash(), EnumKpiType.persharecash);
+		}
 		return data;
 	}
 

@@ -25,4 +25,18 @@
        )  order by year
   </select>
   
+  <select id="queryIndustry" resultMap="SecuritiesCharts" parameterType="java.lang.String">
+  	select code,year,name,
+	avgdeshnetprofit/avgtotalshares as pershare,
+	avgtotalliability/avgtotalassets*100.0 as debtratio,
+	avgshequity/avgtotalshares as netassetspershare,
+	avgnetcashflow/avgtotalshares as persharecash,
+	avgdeshnetprofit/avgshequity*100.0 as netassetsprofit from (
+	select year,'000000' as code,'行业' as name,avg(deshnetprofit) as avgdeshnetprofit, avg(totalshares) as avgtotalshares,avg(totalliability) as avgtotalliability,avg(totalassets) as avgtotalassets,avg(shequity) as avgshequity,avg(netcashflow) as avgnetcashflow
+	 from cp_annualreport where code in (
+	 select code from cp_industrysecury where industryid in( 
+		select industryid from cp_industrysecury where code = #{code}
+       )) group by year ) a order by year
+  </select>
+  
 </mapper>
