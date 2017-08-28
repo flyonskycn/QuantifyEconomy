@@ -1,7 +1,13 @@
 INSERT INTO cp_industry(industryid,name) VALUES (1,'银行'),
 	(2,'石油和天然气'),
 	(3,'建筑业'),
-	(4,'券商');
+	(4,'券商'),
+	(5,'汽车'),
+	(6,'煤碳'),
+	(7,'钢铁'),
+	(8,'航空'),
+	(9,'海运'),
+	(10,'电力');
 
 -- 银行
 insert into cp_industrysecury(industryid,code) values (1,'600000'),
@@ -46,3 +52,9 @@ insert into cp_industrysecury(industryid,code) values (4,'600999'),
 	(4,'600837'),
 	(4,'600958'),
 	(4,'601788');
+
+-- 汽车	
+insert into cp_industrysecury(industryid,code) values (5,'600104'),
+	(5,'600006'),
+	(5,'601238');
+	
