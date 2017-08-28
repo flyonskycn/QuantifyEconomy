@@ -60,4 +60,8 @@ insert into cp_industrysecury(industryid,code) values (5,'600104'),
 	(5,'600006'),
 	(5,'601238'),
 	(5,'000800');
+
+-- 房地产
+insert into cp_industrysecury(industryid,code) values (12,'000002'),
+	(12,'600048');
 	
