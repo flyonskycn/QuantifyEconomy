@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -252,7 +253,7 @@ public class FileServiceImp implements FileService{
 	public boolean downLoadSzN(String url, String code, String targetDir) {
 		boolean flag = false;
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpPost httpPost = new HttpPost(url);
+		HttpGet httpPost = new HttpGet(url);
 		CloseableHttpResponse response2 = null;
 		try {
 			response2 = client.execute(httpPost);
