@@ -58,5 +58,6 @@ insert into cp_industrysecury(industryid,code) values (4,'600999'),
 -- 汽车	
 insert into cp_industrysecury(industryid,code) values (5,'600104'),
 	(5,'600006'),
-	(5,'601238');
+	(5,'601238'),
+	(5,'000800');
 	

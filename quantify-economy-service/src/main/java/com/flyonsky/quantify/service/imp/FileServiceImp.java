@@ -262,13 +262,16 @@ public class FileServiceImp implements FileService{
 	          
 	        	Pattern p = Pattern.compile("(\\d*)-");
 	        	Matcher m = p.matcher(url);
+	        	int year = 0;
 	        	if(m.find()){
-	        		String dirPath = MessageFormat.format("{0}{1}/{2}", targetDir, code, m.group(1));
+	        		year = Integer.parseInt(m.group(1));
+	        		year--;
+	        		String dirPath = MessageFormat.format("{0}{1}/{2}", targetDir, code, String.valueOf(year));
 	        		File dir = new File(dirPath);
 	        		if(!dir.exists()){
 	        			dir.mkdirs();
 	        		}
-	            	String nFileName = MessageFormat.format("{0}/{1}_{2}_n.pdf", dirPath,code, m.group(1));
+	            	String nFileName = MessageFormat.format("{0}/{1}_{2}_n.pdf", dirPath,code, String.valueOf(year));
 	            	File nFile = new File(nFileName);
 	            	if(!nFile.exists()){
 	            		if(nFile.createNewFile()){
