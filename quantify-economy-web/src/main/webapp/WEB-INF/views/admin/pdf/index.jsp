@@ -100,7 +100,6 @@
          				if(data.erroCode == 0){
      						$.toaster("上传成功");
      						$("#szpdfurl").val('');
-     						$("#szcode").val('')
      					}else{
      						$.toaster(data.message);
      					}
