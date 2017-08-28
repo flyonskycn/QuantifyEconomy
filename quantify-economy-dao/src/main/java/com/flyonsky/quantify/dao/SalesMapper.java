@@ -9,5 +9,9 @@ public interface SalesMapper {
 
 	List<SalesCharts> querySales(List<String> codes);
 	
+	List<SalesCharts> querySalesIndustry(String code);
+	
 	List<SalesRateCharts> queryRateSales(List<String> codes);
+	
+	List<SalesRateCharts> queryRateSalesIndustry(String code);
 }

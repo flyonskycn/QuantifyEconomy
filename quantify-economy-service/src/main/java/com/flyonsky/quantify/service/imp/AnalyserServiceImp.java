@@ -107,6 +107,18 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 			data.addKpi(line.getName(), line.getYear(), line.getRevenue(), EnumKpiType.revenue);
 			data.addKpi(line.getName(), line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
 		}
+		
+		list = this.getSalesMapper().querySalesIndustry(codes.get(0));
+		for(SalesCharts line : list){
+			data.addKpi(line.getName(), line.getYear(), line.getAssetturnover(), EnumKpiType.assetturnover);
+			data.addKpi(line.getName(), line.getYear(), line.getGrossmargin(), EnumKpiType.grossmargin);
+			data.addKpi(line.getName(), line.getYear(), line.getMainprofitrate(), EnumKpiType.mainprofitrate);
+			data.addKpi(line.getName(), line.getYear(), line.getNetinterestrate(), EnumKpiType.netinterestrate);
+			data.addKpi(line.getName(), line.getYear(), line.getNetprofit(), EnumKpiType.netprofit);
+			data.addKpi(line.getName(), line.getYear(), line.getOperprofit(), EnumKpiType.operprofit);
+			data.addKpi(line.getName(), line.getYear(), line.getRevenue(), EnumKpiType.revenue);
+			data.addKpi(line.getName(), line.getYear(), line.getTotalprofit(), EnumKpiType.totalprofit);
+		}
 		return data;
 	}
 
@@ -114,6 +126,15 @@ public class AnalyserServiceImp extends AbstractService implements AnalyserServi
 	public SalesWithChartData queryRateSales(List<String> codes) {
 		List<SalesRateCharts> list = this.getSalesMapper().queryRateSales(codes);
 		SalesWithChartData data = new SalesWithChartData();
+		for(SalesRateCharts line : list){
+			data.addKpi(line.getName(), line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
+			data.addKpi(line.getName(), line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);
+			data.addKpi(line.getName(), line.getYear(), line.getRevenuerate(), EnumKpiType.revenuewith);
+			data.addKpi(line.getName(), line.getYear(), line.getTotalprofitrate(), EnumKpiType.totalprofitwith);
+		}
+		
+		list = this.getSalesMapper().queryRateSalesIndustry(codes.get(0));
+		 
 		for(SalesRateCharts line : list){
 			data.addKpi(line.getName(), line.getYear(), line.getNetprofitrate(), EnumKpiType.netprofitwith);
 			data.addKpi(line.getName(), line.getYear(), line.getOperprofitrate(), EnumKpiType.operprofitwith);

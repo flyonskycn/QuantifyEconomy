@@ -37,6 +37,24 @@
 	) order by year
   </select>
   
+  <select id="querySalesIndustry" resultMap="SalesChart" parameterType="java.lang.String">
+	select code,year,name,avgrevenue as revenue,avgoperprofit as operprofit,avgtotalprofit as totalprofit,avgnetprofit as netprofit,
+	avgoperprofit/avgrevenue*100.0 as grossmargin,
+	avgnetprofit/avgrevenue*100.0 as netinterestrate,
+	avgoperprofit/avgtotalprofit*100.0 as mainprofitrate,
+	avgrevenue/avgtotalassets as assetturnover from (
+	select year,'000000' as code,'行业' as name,
+	 avg(revenue) as avgrevenue,
+	 avg(operprofit) as avgoperprofit,
+	 avg(totalprofit) as avgtotalprofit,
+	 avg(netprofit) as avgnetprofit,
+	 avg(totalassets) as avgtotalassets
+	 from cp_annualreport where code in (
+	 select code from cp_industrysecury where industryid in( 
+		select industryid from cp_industrysecury where code = #{code}
+       )) group by year ) a order by year
+  </select>
+  
   <select id="queryRateSales" resultMap="SalesRateChart" parameterType="java.util.ArrayList">
 	select a.code,a.year,a.name, (a.revenue - b.revenue)/b.revenue*100.0 as revenuerate,
 	(a.operprofit - b.operprofit)/b.operprofit*100.0 as operprofitrate,
@@ -49,5 +67,32 @@
 			#{guard} 
 	    </foreach>  
 	    ) order by a.year 
+  </select>
+  
+    <select id="queryRateSalesIndustry" resultMap="SalesRateChart" parameterType="java.lang.String">
+	select a.code,a.year,a.name, (a.avgrevenue - b.avgrevenue)/b.avgrevenue*100.0 as revenuerate,
+	(a.avgoperprofit - b.avgoperprofit)/b.avgoperprofit*100.0 as operprofitrate,
+	(a.avgtotalprofit - b.avgtotalprofit)/b.avgtotalprofit*100.0 as totalprofitrate,
+	(a.avgnetprofit - b.avgnetprofit)/b.avgnetprofit*100.0 as netprofitrate
+	 from (
+	select year,'000000' as code,'行业' as name,
+	 avg(revenue) as avgrevenue,
+	 avg(operprofit) as avgoperprofit,
+	 avg(totalprofit) as avgtotalprofit,
+	 avg(netprofit) as avgnetprofit
+	 from cp_annualreport where code in (
+	 select code from cp_industrysecury where industryid in( 
+		select industryid from cp_industrysecury where code = #{code}
+       )) group by year  ) a ,
+       (select year+ 1 as rateyear,'000000' as code,'行业' as name,
+	 avg(revenue) as avgrevenue,
+	 avg(operprofit) as avgoperprofit,
+	 avg(totalprofit) as avgtotalprofit,
+	 avg(netprofit) as avgnetprofit
+	 from cp_annualreport where code in (
+	 select code from cp_industrysecury where industryid in( 
+		select industryid from cp_industrysecury where code = #{code}
+       )) group by year ) b 
+	where a.year = b.rateyear and a.code = b.code order by a.year 
   </select>
 </mapper>
