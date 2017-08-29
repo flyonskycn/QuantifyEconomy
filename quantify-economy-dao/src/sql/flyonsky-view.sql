@@ -105,6 +105,12 @@ create or replace view v_annualreport
 as 
 select a.*,b.name from cp_annualreport a left join cp_securities b on a.code = b.code;
 
+-- 行业证券视图
+create or replace view v_industrysecury
+as 
+select a.*,b.name as insustryname,c.name secname from cp_industrysecury a left join cp_industry b on a.industryid = b.industryid left join cp_securities c on a.code = c.code;
+
+
 
 
 

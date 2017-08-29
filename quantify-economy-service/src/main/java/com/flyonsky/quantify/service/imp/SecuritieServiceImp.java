@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.CustomizeMapper;
 import com.flyonsky.quantify.dao.SecuritiesMapper;
+import com.flyonsky.quantify.dao.VIndustrySecuryMapper;
 import com.flyonsky.quantify.entity.Securities;
 import com.flyonsky.quantify.entity.SecuritiesExample;
+import com.flyonsky.quantify.entity.VIndustrySecury;
+import com.flyonsky.quantify.entity.VIndustrySecuryExample;
 import com.flyonsky.quantify.model.GridData;
 import com.flyonsky.quantify.model.QueryInfo;
 import com.flyonsky.quantify.service.AbstractService;
@@ -22,6 +25,9 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 	
 	@Autowired
 	private CustomizeMapper cusMapper;
+	
+	@Autowired
+	private VIndustrySecuryMapper vIndusSecuryMapper;
 
 	@Override
 	public boolean createSecuritie(Securities sec) {
@@ -71,6 +77,20 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 		return data;
 	}
 
+	@Override
+	public GridData<VIndustrySecury> queryIndustrySecury(QueryInfo query) {
+		GridData<VIndustrySecury> grid=new GridData<VIndustrySecury>();
+		VIndustrySecuryExample example=new VIndustrySecuryExample();
+		example.setOrderByClause(query.getOrderByClause());
+		example.setCustomWhere(query.getQueryFilter());
+		grid.setTotalRows(this.getvIndusSecuryMapper().countByExample(example));
+		
+		example.setLimitStart(query.getPage()*query.getPageSize());
+		example.setLimitEnd(query.getPageSize());
+		grid.setPageData(this.getvIndusSecuryMapper().selectByExample(example));
+		return grid;
+	}
+
 	public SecuritiesMapper getSecMapper() {
 		return secMapper;
 	}
@@ -85,6 +105,14 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 
 	public void setCusMapper(CustomizeMapper cusMapper) {
 		this.cusMapper = cusMapper;
+	}
+
+	public VIndustrySecuryMapper getvIndusSecuryMapper() {
+		return vIndusSecuryMapper;
+	}
+
+	public void setvIndusSecuryMapper(VIndustrySecuryMapper vIndusSecuryMapper) {
+		this.vIndusSecuryMapper = vIndusSecuryMapper;
 	}
 
 }

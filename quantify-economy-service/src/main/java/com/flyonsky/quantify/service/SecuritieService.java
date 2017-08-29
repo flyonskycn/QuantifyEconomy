@@ -3,6 +3,7 @@ package com.flyonsky.quantify.service;
 import java.util.List;
 
 import com.flyonsky.quantify.entity.Securities;
+import com.flyonsky.quantify.entity.VIndustrySecury;
 import com.flyonsky.quantify.model.GridData;
 import com.flyonsky.quantify.model.QueryInfo;
 
@@ -52,4 +53,11 @@ public interface SecuritieService {
 	 * @return
 	 */
 	List<String> querySecurities();
+	
+	/**
+	 * 分页查询证券和分类列表
+	 * @param query 查询信息
+	 * @return
+	 */
+	GridData<VIndustrySecury> queryIndustrySecury(QueryInfo query);
 }

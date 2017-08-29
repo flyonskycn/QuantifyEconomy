@@ -27,7 +27,9 @@ insert into cp_admin_url values(10,null,'ANALYZE','数据分析',0,1,'fa-user-se
 (1007,'/admin/annual/securities.co','ANALYZE.ANNUAL.SECURITIES','证券管理',10,0,''),
 	(10071,'/admin/annual/editsecurities.co','ANALYZE.ANNUAL.EDITSECURITIES','证券编辑',1007,0,''),
 	(10072,'/admin/annual/savesecurities.co','ANALYZE.ANNUAL.SAVESECRTITIES','证券保存',1007,0,''),
-	(10073,'/admin/annual/querysecurities.co','ANALYZE.ANNUAL.QUERYSECURITIES','证券查询',1007,0,'');
+	(10073,'/admin/annual/querysecurities.co','ANALYZE.ANNUAL.QUERYSECURITIES','证券查询',1007,0,''),
+(1008,'/admin/annual/industrysecury.co','ANALYZE.ANNUAL.INDUSTRYSECURY','证券分类查看',10,0,''),
+	(10081,'/admin/annual/queryindustry.co','ANALYZE.ANNUAL.QUERYINDUSTRY','证券分类查询',1008,0,'');
 	
 
 insert into cp_admin_url values(99,null,'ADMIN','系统管理',0,1,'fa-user-secret text-gray'),

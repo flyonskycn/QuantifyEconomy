@@ -64,6 +64,8 @@
     	<table tableName="cp_industry" domainObjectName="Industry"></table>
     	
     	<table tableName="cp_industrysecury" domainObjectName="IndustrySecury"></table>
+    	
+    	<table tableName="v_industrysecury" domainObjectName="VIndustrySecury"></table>
        	
     </context>
 </generatorConfiguration>
