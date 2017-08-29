@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyonsky.quantify.entity.AnnualReport;
+import com.flyonsky.quantify.entity.Industry;
 import com.flyonsky.quantify.entity.Securities;
 import com.flyonsky.quantify.entity.VAnnualReport;
 import com.flyonsky.quantify.entity.VIndustrySecury;
@@ -133,10 +134,24 @@ public class AnnualController extends AbstractAdminController{
 	 * @param query 
 	 * @return
 	 */
-	@RequestMapping(value="queryindustry",produces="application/json")
+	@RequestMapping(value="queryindussecury",produces="application/json")
 	@ResponseBody
 	public GridData<VIndustrySecury> queryIndustrySecury(Model model, QueryInfo query){
 		GridData<VIndustrySecury> grid = this.getSecService().queryIndustrySecury(query);
+		return grid;
+	}
+	
+	/**
+	 * 年报数据
+	 * @param model
+	 * @param role 
+	 * @param query 
+	 * @return
+	 */
+	@RequestMapping(value="queryindustry",produces="application/json")
+	@ResponseBody
+	public GridData<Industry> queryIndustry(Model model, QueryInfo query){
+		GridData<Industry> grid = this.getSecService().queryIndustry(query);
 		return grid;
 	}
 	

@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flyonsky.quantify.dao.CustomizeMapper;
+import com.flyonsky.quantify.dao.IndustryMapper;
 import com.flyonsky.quantify.dao.SecuritiesMapper;
 import com.flyonsky.quantify.dao.VIndustrySecuryMapper;
+import com.flyonsky.quantify.entity.Industry;
+import com.flyonsky.quantify.entity.IndustryExample;
 import com.flyonsky.quantify.entity.Securities;
 import com.flyonsky.quantify.entity.SecuritiesExample;
 import com.flyonsky.quantify.entity.VIndustrySecury;
@@ -28,6 +31,9 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 	
 	@Autowired
 	private VIndustrySecuryMapper vIndusSecuryMapper;
+	
+	@Autowired
+	private IndustryMapper industryMapper;
 
 	@Override
 	public boolean createSecuritie(Securities sec) {
@@ -91,6 +97,20 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 		return grid;
 	}
 
+	@Override
+	public GridData<Industry> queryIndustry(QueryInfo query) {
+		GridData<Industry> grid=new GridData<Industry>();
+		IndustryExample example=new IndustryExample();
+		example.setOrderByClause(query.getOrderByClause());
+		example.setCustomWhere(query.getQueryFilter());
+		grid.setTotalRows(this.getIndustryMapper().countByExample(example));
+		
+		example.setLimitStart(query.getPage()*query.getPageSize());
+		example.setLimitEnd(query.getPageSize());
+		grid.setPageData(this.getIndustryMapper().selectByExample(example));
+		return grid;
+	}
+
 	public SecuritiesMapper getSecMapper() {
 		return secMapper;
 	}
@@ -113,6 +133,14 @@ public class SecuritieServiceImp extends AbstractService implements SecuritieSer
 
 	public void setvIndusSecuryMapper(VIndustrySecuryMapper vIndusSecuryMapper) {
 		this.vIndusSecuryMapper = vIndusSecuryMapper;
+	}
+
+	public IndustryMapper getIndustryMapper() {
+		return industryMapper;
+	}
+
+	public void setIndustryMapper(IndustryMapper industryMapper) {
+		this.industryMapper = industryMapper;
 	}
 
 }

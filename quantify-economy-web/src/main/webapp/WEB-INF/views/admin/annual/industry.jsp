@@ -59,47 +59,23 @@
 $(function() {	 	 
     $("#datagird").bs_grid({
  
-        ajaxFetchDataURL: "queryindussecury.co",
+        ajaxFetchDataURL: "queryindustry.co",
         row_primary_key: "id",
  
         columns: [
             {field: "id", header: "ID", visible: "no"},
             {field: "industryid", header: "分类ID", visible: "no"},
-            {field: "code", header: "证券代码"},
-            {field: "secname", header: "证券名称"},
-            {field: "insustryname", header: "分类名称"}
+            {field: "name", header: "分类名称"}
         ],
         
         sorting: [
-                  {sortingName: "证券代码", field: "code", order: "descending"},
-                  {sortingName: "证券名称", field: "secname", order: "none"},
-                  {sortingName: "分类名称", field: "insustryname", order: "none"}
+                  {sortingName: "分类名称", field: "name", order: "none"}
               ],
  
         filterOptions: {
             filters: [
                 {
-                    filterName: "证券代码", "filterType": "text", field: "code", filterLabel: "证券代码",
-                    excluded_operators: ["in", "not_in"],
-                    filter_interface: [
-                        {
-                            filter_element: "input",
-                            filter_element_attributes: {"type": "text"}
-                        }
-                    ]
-                },
-                {
-                    filterName: "证券名称", "filterType": "text", field: "secname", filterLabel: "证券名称",
-                    excluded_operators: ["in", "not_in"],
-                    filter_interface: [
-                        {
-                            filter_element: "input",
-                            filter_element_attributes: {"type": "text"}
-                        }
-                    ]
-                },
-                {
-                    filterName: "分类名称", "filterType": "text", field: "insustryname", filterLabel: "分类名称",
+                    filterName: "分类名称", "filterType": "text", field: "name", filterLabel: "分类名称",
                     excluded_operators: ["in", "not_in"],
                     filter_interface: [
                         {
